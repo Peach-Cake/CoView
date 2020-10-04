@@ -1,0 +1,11 @@
+.AccountMenu {float: right;
+  padding-left: .6rem;
+padding-right: .5rem;}
+
+hr {border: 1px solid black}
+
+header {background-color: lightgrey;}
+
+#ManagerMenuItems{padding-bottom:5rem;}
+
+.card{width:18rem;}
