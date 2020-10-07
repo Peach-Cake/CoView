@@ -1,0 +1,60 @@
+.AccountMenu {float: right;
+  padding-left: .6rem;
+padding-right: .5rem;}
+
+.font {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 16px;
+}
+
+.padding {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.search-container {
+  padding-top: 50px;
+  text-align: left;
+  padding-bottom: 20px;
+  overflow: auto;
+  display: inline-block;
+}
+
+.search-container input[type=text]{
+  width: 300px;
+
+}
+
+.search-container button {
+  padding: 3px 10px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+header {background-color: #f4f4f4;}
+
+td, th {
+  text-align: center;
+  padding: 20px;
+}
+
+table {
+  overflow-y: scroll;
+  display: block;
+  margin-right: 722px;
+}
+
+th{
+  background-color: lightblue;
+}
+
+tbody {
+  overflow: auto;
+}
+
+footer {
+  background-color: grey;
+  height: 50px;
+}
