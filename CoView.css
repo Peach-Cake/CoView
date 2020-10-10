@@ -7,3 +7,92 @@ hr {border: 1px solid black}
 header {background-color: lightgrey;}
 
 .navBreadCrumb{margin-top: -1rem;}
+
+table {
+  overflow-y: scroll;
+  display: block;
+  margin-right: 722px;
+}
+
+th{
+  background-color: lightblue;
+}
+
+tbody {
+  overflow: auto;
+}
+
+td, th {
+  text-align: center;
+  padding: 20px;
+}
+
+.search-container {
+  padding-top: 50px;
+  text-align: left;
+  padding-bottom: 20px;
+  overflow: auto;
+  display: inline-block;
+}
+
+.search-container input[type=text]{
+  width: 300px;
+
+}
+
+.search-container button {
+  padding: 3px 10px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.padding {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.filterIcon svg{ width:1em;
+height:1em;
+viewBox:0 0 16 16;
+fill:currentColor;
+xmlns:"http://www.w3.org/2000/svg"}
+
+/* The Modal (background) */
+.modal {
+ display: none; /* Hidden by default */
+ position: fixed; /* Stay in place */
+ z-index: 1; /* Sit on top */
+ left: 0;
+ top: 0;
+ width: 100%; /* Full width */
+ height: 100%; /* Full height */
+ overflow: auto; /* Enable scroll if needed */
+ background-color: rgb(0,0,0); /* Fallback color */
+ background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.filterModal-content {
+ background-color: #fefefe;
+ margin: 15% auto; /* 15% from the top and centered */
+ padding: 20px;
+ border: 1px solid #888;
+ width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+ color: #aaa;
+ float: right;
+ font-size: 28px;
+ font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+ color: black;
+ text-decoration: none;
+ cursor: pointer;
+}
