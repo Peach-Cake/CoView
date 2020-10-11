@@ -24,7 +24,36 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+//filterForm
+var filter = document.getElementById('filterForm')
+var applyFilterBtn = document.getElementById("applyFilter");
+applyFilterBtn.onclick = function() {
+  var unchecked = [];
+  var status = document.getElementsByName('patientStatus');
+  for (var i = 0; i < status.length; i++) {
+    if (status[i].checked == false) {
+      unchecked.push(status[i].labels[0].innerHTML);
+    }
+  }
+  if(unchecked.length == 5){
+    unchecked = [];
+  }
+  var table = document.getElementById("reports");
+  var rows = table.rows;
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].style.display = '';
+  }
+  for (var n = 1; n < (rows.length); n++) {
+    //var rowStatus = true;
+    for (var i = 0; i < unchecked.length; i++) {
+      if (unchecked[i] == rows[n].getElementsByTagName("TD")[2].innerHTML) {
+        //rowStatus = false;
+        rows[n].style.display = 'none';
+      }
+    }
+  }
 
+}
 //Table sorting
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

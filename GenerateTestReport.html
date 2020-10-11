@@ -51,7 +51,42 @@
 <div id="filterModal" class="modal">
   <div class="filterModal-content">
     <span class="close">&times;</span>
-    <p>test</p>
+    <form class="filterForm" id="filterForm" action="index.html" method="post">
+      <h4>Filter By:</h4>
+      <label>Patient Type:</label>
+      <input type="checkbox" id="returnee" name="patientStatus" value="returnee">
+      <label for="returnee">Returnee</label>&nbsp;
+      <input type="checkbox" id="quarantined" name="patientStatus" value="quarantined">
+      <label for="quarantined">Quarantined</label>&nbsp;
+      <input type="checkbox" id="closeContact" name="patientStatus" value="closeContact">
+      <label for="closeContact">Close Contact</label>&nbsp;
+      <input type="checkbox" id="infected" name="patientStatus" value="infected">
+      <label for="infected">Infected</label>&nbsp;
+      <input type="checkbox" id="suspected" name="patientStatus" value="suspected">
+      <label for="suspected">Suspected</label>
+      <br>
+
+      <label>Test Date:</label>
+      <input type="date" name="testDateFrom" value="">&nbsp;to
+      <input type="date" name="testDateTo" value="">
+      <br>
+
+      <label>Result Date:</label>
+      <input type="date" name="resultDateFrom" value="">&nbsp;to
+      <input type="date" name="resultDateTo" value="">
+      <br>
+
+      <label>Status: </label>&nbsp;
+      <input type="radio" id="pending" name="status" value="pending">
+      <label for="pending">Pending</label>&nbsp;
+      <input type="radio" id="complete" name="status" value="complete">
+      <label for="complete">Complete</label>&nbsp;
+      <input type="radio" id="both" name="status" value="both" checked>
+      <label for="both">Both</label>
+      <br>
+
+      <button type="button" name="applyFilter" id="applyFilter">Apply</button>
+    </form>
   </div>
 </div>
 
@@ -70,7 +105,7 @@
       <tr>
         <td>A1</td>
         <td>Jessie</td>
-        <td>Infected</td>
+        <td>Returnee</td>
         <td>11/01/2021</td>
         <td>02/02/2021</td>
         <td>Pending</td>
@@ -78,15 +113,15 @@
       <tr>
         <td>A2</td>
         <td>Cassidy</td>
-        <td>Infected</td>
+        <td>Quarantined</td>
         <td>01/02/2021</td>
         <td>01/02/2021</td>
         <td>Pending</td>
       </tr>
       <tr>
-        <td>A11</td>
+        <td>A3</td>
         <td>Butch</td>
-        <td>Infected</td>
+        <td>Close Contact</td>
         <td>04/09/2021</td>
         <td>15/09/2021</td>
         <td>Pending</td>
@@ -97,6 +132,14 @@
         <td>Infected</td>
         <td>28/04/2021</td>
         <td>03/05/2021</td>
+        <td>Pending</td>
+      </tr>
+      <tr>
+        <td>A5</td>
+        <td>Nanma</td>
+        <td>Suspected</td>
+        <td>15/06/2021</td>
+        <td>20/06/2021</td>
         <td>Pending</td>
       </tr>
     </tbody>
