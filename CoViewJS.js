@@ -111,6 +111,7 @@ searchBtn.onclick = function(){
   let s = document.getElementsByName('searchName')[0];
   console.log(s.value);
 }
+
 //Table sorting
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
