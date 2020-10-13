@@ -27,6 +27,7 @@ window.onclick = function(event) {
 //filterForm
 var filter = document.getElementById('filterForm');
 
+//returns the patient types to remove
 function getPatientTypeFilter(){
   let unchecked = [];
   let status = document.getElementsByName('patientStatus');
@@ -40,6 +41,8 @@ function getPatientTypeFilter(){
   }
   return unchecked;
 }
+
+//returns the status to keep
 function getReportStatusFilter(){
   let status = document.getElementsByName('status');
   if(status[0].checked == true){
@@ -52,29 +55,61 @@ function getReportStatusFilter(){
     return null;
   }
 }
+//gets the date filter conditons // n =0 for testDates and n=2 for resultDates
+function getDateFilter(n){
+  let startDate = document.getElementsByClassName('filterDates')[n].value;
+  let endDate = document.getElementsByClassName('filterDates')[n + 1].value;
+  return [startDate, endDate];
+}
+
+//function for the filter
 var applyFilterBtn = document.getElementById("applyFilter");
 applyFilterBtn.onclick = function() {
   let unchecked = getPatientTypeFilter();
   let status = getReportStatusFilter();
   let table = document.getElementById("reports");
   let rows = table.rows;
+  let testDates = getDateFilter(0);
+  let resultDates = getDateFilter(2);
   //unhides the hidden things so they don't remain hidden
   for (let i = 0; i < rows.length; i++) {
     rows[i].style.display = '';
   }
   //applys the filter
   for (let n = 1; n < (rows.length); n++) {
+    //filter for patient type
     let currentRow = rows[n];
     for (let i = 0; i < unchecked.length; i++) {
       if (unchecked[i] == currentRow.getElementsByTagName("TD")[2].innerHTML) {
         currentRow.style.display = 'none';
       }
-      }
-      if (status != null && status != currentRow.getElementsByTagName("TD")[5].innerHTML) {
-        currentRow.style.display = 'none';
+    }
+    //filter for status
+    if (status != null && status != currentRow.getElementsByTagName("TD")[5].innerHTML) {
+      currentRow.style.display = 'none';
+    }
+    //filter for test date
+    let currentTestDate = currentRow.getElementsByTagName("TD")[3].innerHTML;
+    let d = new Date(currentTestDate.substring(6), currentTestDate.substring(3,5) - 1, currentTestDate.substring(0,2));
+    let testDateFrom = new Date(testDates[0]);
+    let testDateTo = new Date(testDates[1]);
+    if(testDateFrom.getTime() >= d.getTime() || d.getTime() >= testDateTo.getTime()){
+      currentRow.style.display = 'none';
+    }
+    //filter for result date
+    let resultDateFrom = new Date(resultDates[0]);
+    let resultDateTo = new Date(resultDates[1]);
+    if(resultDateFrom.getTime() >= d.getTime() || d.getTime() >= resultDateTo.getTime()){
+      currentRow.style.display = 'none';
     }
   }
 
+}
+//Search
+var searchBtn = document.getElementById('searchButton');
+searchBtn.onclick = function(){
+  let s = document.getElementsByName('searchName')[0];
+  console.log(s.value);
 }
 //Table sorting
 function sortTable(n) {

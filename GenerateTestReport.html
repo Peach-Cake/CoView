@@ -32,8 +32,8 @@
     <div class="search-container">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <form action="/action_page.php">
-      Search:  <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+      Search:  <input type="text" placeholder="Search.." name="searchName">
+      <button type="button" id="searchButton"><i class="fa fa-search"></i></button>
     </form>
   </div>
   <div  class="filterIcon">
@@ -67,13 +67,13 @@
       <br>
 
       <label>Test Date:</label>
-      <input type="date" name="testDateFrom" value="">&nbsp;to
-      <input type="date" name="testDateTo" value="">
+      <input type="date" class="filterDates" name="testDateFrom" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">&nbsp;to
+      <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
       <br>
 
       <label>Result Date:</label>
-      <input type="date" name="resultDateFrom" value="">&nbsp;to
-      <input type="date" name="resultDateTo" value="">
+      <input type="date" class="filterDates" name="resultDateFrom" value="">&nbsp;to
+      <input type="date" class="filterDates" name="resultDateTo" value="">
       <br>
 
       <label>Status: </label>&nbsp;
