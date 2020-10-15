@@ -24,13 +24,13 @@ table {
   border-collapse: collapse;
 }
 
-.geeks {
-border-right:hidden;
+.hidden {
+  border-right:hidden;
 }
 
-.gfg {
-  border-collapse:separate;
-  border-spacing:0 15px;
+.border-change {
+  border-collapse: separate;
+  border-spacing: 0 15px;
 }
 
 h1 {

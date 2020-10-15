@@ -2,55 +2,151 @@
   padding-left: .6rem;
 padding-right: .5rem;}
 
-hr {border: 1px solid black}
-
-header {background-color: lightgrey;}
-
-.navBreadCrumb{margin-top: -1rem;}
-
-table {
-  overflow-y: scroll;
-  display: block;
-  margin-right: 722px;
+.settings {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 16px;
+  background-color: #f6f7f8;
 }
 
-th{
+.btn-container {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.btn-container a:hover {
+  color: blue;
+}
+
+.report-padding {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.form-container {
+  margin-right: 300px;
+  margin-left: 300px;
+  border: 1px solid grey;
+  background-color: white;
+}
+
+header {
+  padding: 10px;
+  background-color: lightblue;}
+
+table {
+  background-color: white;
+  width: 100%;
+}
+
+th {
+  padding: 15px;
+  text-align: center;
   background-color: lightblue;
 }
 
-tbody {
-  overflow: auto;
-}
-
-td, th {
+td{
+  padding: 5px 0px 5px;
   text-align: center;
-  padding: 20px;
+  border: 1px solid lightgrey;
+  border-right: hidden;
 }
 
+td:hover{
+background-color:lightgrey;
+cursor:pointer;
+}
+
+h1 {
+  padding-left: 20px;
+  color: white;
+  font-weight: bold;
+  display: inline;
+}
+
+nav {
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+}
+
+nav a:link {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  text-align: center;
+  border-radius: 8px;
+  width: 10%;
+  background-color: lightblue;
+}
 .search-container {
   padding-top: 50px;
-  text-align: left;
+  text-align: center;
   padding-bottom: 20px;
-  overflow: auto;
-  display: inline-block;
 }
 
 .search-container input[type=text]{
-  width: 300px;
-
+  width: 600px;
 }
 
 .search-container button {
-  padding: 3px 10px;
+  padding: 1px 3px;
   margin-right: 16px;
   background: #ddd;
   font-size: 17px;
-  border: none;
+  border: 1px solid grey;
   cursor: pointer;
 }
+
+.report-container {
+    height: 300px;
+    border: 2px solid lightgrey;
+    background-color: white;
+    margin-left: 180px;
+    margin-right: 180px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .padding {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.p-container {
+  width: 50%;
+  margin-left: 20px;
+  background-color: white;
+  height: 300px;
+  border: 1px solid lightgrey;
+}
+
+.pTable {
+  background-color: lightblue;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hidden {
+  border-right:hidden;
+}
+
+.border-change {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+    width: 100%;
+}
+
+#pt {
+  text-align: left;
+  padding: 10px;
+}
+
+.p-row {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid lightgrey;
 }
 
 .filterIcon svg{ width:1em;
