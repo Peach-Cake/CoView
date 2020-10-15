@@ -1,6 +1,6 @@
 .AccountMenu {
   float: right;
-  padding-top: 25px;
+  padding: 10px;
   background-color: lightblue;
 }
 
@@ -69,4 +69,9 @@ td{
 td:hover{
 background-color:lightgrey;
 cursor:pointer;
+}
+
+footer {
+  background-color: grey;
+  height: 50px;
 }
