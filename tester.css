@@ -10,11 +10,19 @@
   background-color: #f6f7f8;
 }
 
-.menu-padding {
-  margin-left: 200px;
-  margin-right: 200px;
+.btn-container {
+  text-align: center;
+  padding-top: 20px;
 }
 
+.btn-container a {
+  text-decoration: none;
+  color: black;
+}
+
+.btn-container a:hover {
+  color: blue;
+}
 .report-padding {
   padding-top: 20px;
   padding-left: 50px;
@@ -46,10 +54,6 @@
   cursor: pointer;
 }
 
-.createReport {
-  padding-top: 50px;
-}
-
 .report-container {
     height: 300px;
     border: 2px solid lightgrey;
@@ -58,12 +62,6 @@
     margin-right: 180px;
     overflow-y: scroll;
     overflow-x: hidden;
-}
-
-.createBtn {
-  width: 30px;
-  padding-top: 20px;
-  text-align: center;
 }
 
 table {
