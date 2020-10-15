@@ -73,6 +73,10 @@ nav a:link {
   text-decoration: none;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+  }
+
 button {
   border: none;
   text-align: center;
