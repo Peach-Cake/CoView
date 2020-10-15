@@ -73,6 +73,10 @@ nav a:link {
   text-decoration: none;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 button {
   border: none;
   text-align: center;

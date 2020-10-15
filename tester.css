@@ -15,11 +15,6 @@
   padding-top: 20px;
 }
 
-.btn-container a {
-  text-decoration: none;
-  color: black;
-}
-
 .btn-container a:hover {
   color: blue;
 }
@@ -67,7 +62,6 @@
 table {
   background-color: white;
   width: 100%;
-
 }
 
 th {
@@ -81,11 +75,6 @@ td{
   text-align: center;
   border: 1px solid lightgrey;
   border-right: hidden;
-}
-
-footer {
-  background-color: grey;
-  height: 50px;
 }
 
 label, textarea {
