@@ -201,3 +201,7 @@ xmlns:"http://www.w3.org/2000/svg"}
  text-decoration: none;
  cursor: pointer;
 }
+
+#ManagerMenuItems{padding-bottom:5rem;}
+
+.card{width:18rem;}
