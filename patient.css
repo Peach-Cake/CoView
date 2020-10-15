@@ -1,0 +1,72 @@
+.AccountMenu {
+  float: right;
+  padding-top: 25px;
+  background-color: lightblue;
+}
+
+.settings {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 16px;
+  background-color: #f6f7f8;
+}
+
+.p-container {
+  width: 50%;
+  margin-left: 20px;
+  background-color: white;
+  height: 300px;
+  border: 1px solid lightgrey;
+}
+
+table {
+  background-color: white;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.geeks {
+border-right:hidden;
+}
+
+.gfg {
+  border-collapse:separate;
+  border-spacing:0 15px;
+}
+
+h1 {
+  padding-left: 20px;
+  color: white;
+  font-weight: bold;
+  display: inline;
+}
+
+header {
+  padding: 10px;
+  background-color: lightblue;
+}
+
+nav {
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+
+nav a:link {
+  text-decoration: none;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+}
+
+td{
+  padding: 10px;
+  text-align: left;
+  border: 1px solid lightgrey;
+}
+
+td:hover{
+background-color:lightgrey;
+cursor:pointer;
+}

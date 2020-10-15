@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="tester.css">
+
+    <title>Create Test Report</title>
+  </head>
+
+  <body class="settings">
+    <header>
+      <h1>COVIEW</h1>
+      <div class="AccountMenu">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-header">Posistion: Tester</div>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </div>
+    </header>
+
+      <nav>
+        <a href="testerMenu.html">Home</a> |
+        <a href="createReport.html">Create Test Report</a>
+      </nav>
+
+<div class="form-container">
+      <p class="report-padding">
+        <label for="testerName">Tester: </label>
+        <br>
+        <input type="text" size="50">
+        <br><br>
+        <label for="patientName">Patient name: </label>
+        <br>
+        <input type="text" size="50">
+        <br><br>
+        <label for="username">Username: </label>
+        <br>
+        <input type="text" size="50">
+        <br><br>
+        <label for="patientType">Patient type:</label>
+        <select>
+          <option value="infected">Infected</option>
+          <option value="returnee">Returnee</option>
+          <option value="closeContact">Close contact</option>
+          <option value="quarantined">Quarantined</option>
+          <option value="suspected">Suspected</option>
+        </select><br><br>
+        <label for="symptoms">Symptoms: </label>
+        <br>
+        <textarea name="textArea" rows="7" cols="50" id="text-area"></textarea>
+        <br><br>
+        <label for="status" style="padding-right: 10px">Status: </label>
+        <input type="checkbox" name="first" value="Complete">
+        <label for="complete" style="padding-right: 20px">Complete</label>
+        <input type="checkbox" name="second" value="Pending">
+        <label for="Pending">Pending</label>
+        <br><br>
+        <label for="resultdate">Result date: </label>
+        <input type="text" placeholder="dd/mm/yyyy" size="30">
+        <br><br><br>
+
+        <button type="button" id="delete">Delete</button>
+        <button type="button" id="save">Save</button>
+      </p>
+    </div>
+      </body>
+      <br>
+      <footer></footer>
+</html>
