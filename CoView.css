@@ -149,6 +149,10 @@ button {
   border: 1px solid lightgrey;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 .filterIcon svg{ width:1em;
 height:1em;
 viewBox:0 0 16 16;
