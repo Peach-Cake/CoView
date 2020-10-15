@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="CoView.css">
+
+    <title>Patient Menu</title>
+  </head>
+
+  <body class="settings">
+    <header>
+      <h1>COVIEW</h1>
+      <nav class="AccountMenu">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-header">Posistion: Tester</div>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </nav>
+    </header>
+
+      <nav>
+        <a href="testerMenu.html">Home</a>
+      </nav>
+
+      <div class="p-container">
+        <table class="pTable">
+          <tr>
+            <th id="pt">Records</th>
+          </tr>
+      </table>
+      <table class="border-change" style="overflow-y: scroll;">
+          <tr class="hidden"><td class="p-row">Test report 11/11/2020</td></tr>
+          <tr><td class="p-row">Test report 12/11/2020</td></tr>
+          <tr><td class="p-row">Test report 13/11/2020</td></tr>
+        </table>
+          </div>
+
+          <script>
+          var elements= document.getElementsByTagName('td');
+          for(var i=0; i<elements.length;i++)
+          {
+            (elements)[i].addEventListener("click", function(){
+              alert(this.innerHTML);
+            });
+          }
+          </script>
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        </body>
+
+        <footer>
+        </footer>
+
+</html>

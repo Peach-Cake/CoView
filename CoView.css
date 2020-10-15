@@ -2,11 +2,205 @@
   padding-left: .6rem;
 padding-right: .5rem;}
 
-hr {border: 1px solid black}
+.settings {
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 16px;
+  background-color: #f6f7f8;
+}
 
-header {background-color: lightgrey;}
+.btn-container {
+  text-align: center;
+  padding-top: 20px;
+}
 
-.navBreadCrumb{margin-top: -1rem;}
+.btn-container a:hover {
+  color: blue;
+}
+
+.report-padding {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.form-container {
+  margin-right: 300px;
+  margin-left: 300px;
+  border: 1px solid grey;
+  background-color: white;
+}
+
+header {
+  padding: 10px;
+  background-color: lightblue;}
+
+table {
+  background-color: white;
+  width: 100%;
+}
+
+th {
+  padding: 15px;
+  text-align: center;
+  background-color: lightblue;
+}
+
+td{
+  padding: 5px 0px 5px;
+  text-align: center;
+  border: 1px solid lightgrey;
+  border-right: hidden;
+}
+
+td:hover{
+background-color:lightgrey;
+cursor:pointer;
+}
+
+h1 {
+  padding-left: 20px;
+  color: white;
+  font-weight: bold;
+  display: inline;
+}
+
+nav {
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-bottom: 20px;
+}
+
+nav a:link {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  text-align: center;
+  border-radius: 8px;
+  width: 10%;
+  background-color: lightblue;
+}
+.search-container {
+  padding-top: 50px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.search-container input[type=text]{
+  width: 600px;
+}
+
+.search-container button {
+  padding: 1px 3px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.report-container {
+    height: 300px;
+    border: 2px solid lightgrey;
+    background-color: white;
+    margin-left: 180px;
+    margin-right: 180px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.padding {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.p-container {
+  width: 50%;
+  margin-left: 20px;
+  background-color: white;
+  height: 300px;
+  border: 1px solid lightgrey;
+}
+
+.pTable {
+  background-color: lightblue;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hidden {
+  border-right:hidden;
+}
+
+.border-change {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+    width: 100%;
+}
+
+#pt {
+  text-align: left;
+  padding: 10px;
+}
+
+.p-row {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid lightgrey;
+}
+
+a:link {
+  text-decoration: none;
+}
+#filterButton{
+  margin-left: 180px;
+  margin-right: 180px;
+  width: 5%;
+  margin-bottom: .1rem;
+}
+.filterIcon svg{ width:1em;
+height:1em;
+viewBox:0 0 16 16;
+fill:currentColor;
+xmlns:"http://www.w3.org/2000/svg"}
+
+/* The Modal (background) */
+.modal {
+ display: none; /* Hidden by default */
+ position: fixed; /* Stay in place */
+ z-index: 1; /* Sit on top */
+ left: 0;
+ top: 0;
+ width: 100%; /* Full width */
+ height: 100%; /* Full height */
+ overflow: auto; /* Enable scroll if needed */
+ background-color: rgb(0,0,0); /* Fallback color */
+ background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.filterModal-content {
+ background-color: #fefefe;
+ margin: 15% auto; /* 15% from the top and centered */
+ padding: 20px;
+ border: 1px solid #888;
+ width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+ color: #aaa;
+ float: right;
+ font-size: 28px;
+ font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+ color: black;
+ text-decoration: none;
+ cursor: pointer;
+}
 
 #ManagerMenuItems{padding-bottom:5rem;}
 
