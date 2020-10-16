@@ -20,6 +20,7 @@ padding-right: .5rem;}
 .report-padding {
   padding-top: 20px;
   padding-left: 80px;
+
 }
 
 .form-container {
@@ -27,6 +28,13 @@ padding-right: .5rem;}
   margin-left: 300px;
   border: 1px solid grey;
   background-color: white;
+}
+
+.apt-container {
+  background-color: white;
+  height: 300px;
+  position: relative;
+  top: 50px;
 }
 
 header {
@@ -51,7 +59,7 @@ td{
   border-right: hidden;
 }
 
-td:hover{
+tr:hover{
 background-color:lightgrey;
 cursor:pointer;
 }
@@ -63,6 +71,15 @@ h1 {
   display: inline;
 }
 
+h2 {
+  font-size: 25px;
+  padding-left: 20px;
+  padding-top: 15px;
+  height: 60px;
+  background-color: lightblue;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: bold;
+}
 nav {
   padding-top: 10px;
   padding-left: 50px;
@@ -124,7 +141,8 @@ button {
 
 .p-container {
   width: 50%;
-  margin-left: 20px;
+  margin-top: 50px;
+  margin-left: 50px;
   background-color: white;
   height: 300px;
   border: 1px solid lightgrey;
@@ -143,7 +161,7 @@ button {
 .border-change {
   border-collapse: separate;
   border-spacing: 0 15px;
-    width: 100%;
+  width: 100%;
 }
 
 .buttons {
