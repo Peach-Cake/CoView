@@ -169,7 +169,12 @@ button {
 a:link {
   text-decoration: none;
 }
-
+#filterButton{
+  margin-left: 180px;
+  margin-right: 180px;
+  width: 5%;
+  margin-bottom: .1rem;
+}
 .filterIcon svg{ width:1em;
 height:1em;
 viewBox:0 0 16 16;
@@ -213,3 +218,7 @@ xmlns:"http://www.w3.org/2000/svg"}
  text-decoration: none;
  cursor: pointer;
 }
+
+#ManagerMenuItems{padding-bottom:5rem;}
+
+.card{width:18rem;}
