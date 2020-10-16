@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
+    <script src="CoViewJS.js"></script>
 
     <title>Create Test Report</title>
   </head>
@@ -31,8 +32,7 @@
       </nav>
 
 <div class="form-container">
-      <p class="report-padding">
-        <form>
+  <form id="form">
         <label for="testerName">Tester: </label>
         <br>
         <input type="text" size="50">
@@ -66,11 +66,11 @@
         <label for="resultdate">Result date: </label>
         <input type="text" placeholder="dd/mm/yyyy" size="30">
         <br><br><br>
-
-        <button type="button" id="delete">Delete</button>
-        <button type="button" id="save">Save</button>
-      </p>
   </form>
+  <div class="buttons">
+        <button type="button">Delete</button>
+        <button onclick="myFunction()">Save</button>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
