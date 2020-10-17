@@ -100,12 +100,28 @@ function applyFilter() {
 }
 //Search
 function searchId(){
-  let s = document.getElementsByName('searchName')[0];
-  console.log(s.value);
+  let s = document.getElementsByName('searchReport')[0].value;
+  let table = document.getElementById('reports')
+  let rows = table.rows;
+  for (let n = 1; n < rows.length; n++) {
+    rows[n].style.display='';
+  }
+  //console.log(s , rows[1].getElementsByTagName("TD")[1].innerHTML);
+  for (let i = 1; i < rows.length; i++) {
+    let id = rows[i].getElementsByTagName("TD")[0];
+    let name = rows[i].getElementsByTagName("TD")[1];
+    if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+      rows[i].style.display='none';
+    }
+  }
 }
 
 //Table sorting
 function sortTable(n) {
+  let pointers = document.getElementsByClassName('tableSortPointers');
+  for (let i = 0; i < pointers.length; i++) {
+    pointers[i].src = "doubleTableSorter.png";
+  }
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("reports");
   switching = true;
@@ -129,6 +145,7 @@ function sortTable(n) {
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
       if (dir == "asc") {
+        pointers[n].src = "ascTableSorter.png";
         if(n==0){
           if (parseInt(x.innerHTML.substring(1)) > parseInt(y.innerHTML.substring(1))) {
             shouldSwitch = true;
@@ -161,6 +178,7 @@ function sortTable(n) {
         }
       }
       } else if (dir == "desc") {
+        pointers[n].src = "descTableSorter.png";
         if(n==0){
           if (parseInt(x.innerHTML.substring(1)) < parseInt(y.innerHTML.substring(1))) {
             shouldSwitch = true;

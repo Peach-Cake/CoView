@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
-
+    <script type="text/javascript" src="CoViewJS.js">
+    </script>
     <title>Log in</title>
     </head>
     <header>
@@ -14,13 +15,13 @@
     <body>
       <div class="login-container">
 
-<form class="text-center border border-light p-5" action="#!">
+<form name="logInForm" class="text-center border border-light p-5" action="#!">
 
     <p class="h4 mb-4">Sign in</p>
 
-    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+    <input type="email" name="email" class="form-control mb-4" placeholder="E-mail">
 
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <input type="password" name="password" class="form-control mb-4" placeholder="Password">
 
     <div class="d-flex justify-content-around">
         <div>
@@ -35,8 +36,7 @@
         </div>
     </div>
 
-
-    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+    <button class="loginBtn" type="button"><a href="testerMenu.html">Sign in</a></button>
 
   </form>
   </div>

@@ -34,7 +34,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <form action="/action_page.php">
       Search:  <input type="text" placeholder="Test report ID" name="searchReport">
-      <button type="button" id="searchButton"><i class="fa fa-search"></i></button>
+      <button type="button" id="searchButton" onclick="searchId()"><i class="fa fa-search"></i></button>
     </form>
   </div>
   <div  class="filterIcon">
@@ -94,12 +94,12 @@
     <table id="reports">
       <thead>
       <tr>
-        <th onclick="sortTable(0)">Test ID</th>
-        <th onclick="sortTable(1)">Patient name</th>
-        <th onclick="sortTable(2)">Patient type</th>
-        <th onclick="sortTable(3)">Test date</th>
-        <th onclick="sortTable(4)">Result date</th>
-        <th onclick="sortTable(5)">Status</th>
+        <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
     <tbody>
