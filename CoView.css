@@ -94,6 +94,10 @@ a:link {
   text-decoration: none;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+  }
+
 button {
   text-align: center;
   border-radius: 10px;

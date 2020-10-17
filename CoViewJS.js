@@ -1,32 +1,25 @@
 //Filter Modal box
-// Get the modal
-var filterModal = document.getElementById("filterModal");
-
-// Get the button that opens the modal
-var filterBtn = document.getElementById("filterButton");
-
-// Get the <span> element that closes the modal
-var filterSpan = document.getElementsByClassName("close")[0];
-
 // When the user clicks on the button, open the modal
-filterBtn.onclick = function() {
+function openFilter() {
+  let filterModal = document.getElementById("filterModal");
   filterModal.style.display = "block";
+  window.addEventListener('click', outCloseFilter);
 }
 
 // When the user clicks on <span> (x), close the modal
-filterSpan.onclick = function() {
+function xCloseFilter() {
   filterModal.style.display = "none";
+  window.removeEventListener('click', outCloseFilter);
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+function outCloseFilter(event) {
   if (event.target == filterModal) {
     filterModal.style.display = "none";
   }
 }
-//filterForm
-var filter = document.getElementById('filterForm');
 
+//filterForm
 //returns the patient types to remove
 function getPatientTypeFilter(){
   let unchecked = [];
@@ -63,8 +56,8 @@ function getDateFilter(n){
 }
 
 //function for the filter
-var applyFilterBtn = document.getElementById("applyFilter");
-applyFilterBtn.onclick = function() {
+//var applyFilterBtn = document.getElementById("applyFilter");
+function applyFilter() {
   let unchecked = getPatientTypeFilter();
   let status = getReportStatusFilter();
   let table = document.getElementById("reports");
@@ -106,8 +99,7 @@ applyFilterBtn.onclick = function() {
 
 }
 //Search
-var searchBtn = document.getElementById('searchButton');
-searchBtn.onclick = function(){
+function searchId(){
   let s = document.getElementsByName('searchName')[0];
   console.log(s.value);
 }

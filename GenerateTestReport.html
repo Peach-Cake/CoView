@@ -26,7 +26,8 @@
     <main>
     <nav aria-label="breadcrumb" class="navBreadCrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
+        <li class="breadcrumb-item" aria-current="page">Home</li>
+        <li class="breadcrumb-item" aria-current="page">Generate Test Report</li>
       </ol>
     </nav>
     <div class="search-container">
@@ -37,7 +38,7 @@
     </form>
   </div>
   <div  class="filterIcon">
-    <button id="filterButton">Filter
+    <button id="filterButton" onclick="openFilter()">Filter
     <svg>
     <path fill-rule="evenodd"
     d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5
@@ -50,7 +51,7 @@
 
 <div id="filterModal" class="modal">
   <div class="filterModal-content">
-    <span class="close">&times;</span>
+    <span class="close" onclick="xCloseFilter()">&times;</span>
     <form class="filterForm" id="filterForm" action="index.html" method="post">
       <h4>Filter By:</h4>
       <label>Patient Type:</label>
@@ -85,7 +86,7 @@
       <label for="both">Both</label>
       <br>
 
-      <button type="button" name="applyFilter" id="applyFilter">Apply</button>
+      <button type="button"  onclick="applyFilter()">Apply</button>
     </form>
   </div>
 </div>
