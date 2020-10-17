@@ -19,7 +19,8 @@ padding-right: .5rem;}
 
 .report-padding {
   padding-top: 20px;
-  padding-left: 50px;
+  padding-left: 80px;
+
 }
 
 .form-container {
@@ -27,6 +28,13 @@ padding-right: .5rem;}
   margin-left: 300px;
   border: 1px solid grey;
   background-color: white;
+}
+
+.apt-container {
+  background-color: white;
+  height: 300px;
+  position: relative;
+  top: 50px;
 }
 
 header {
@@ -51,7 +59,7 @@ td{
   border-right: hidden;
 }
 
-td:hover{
+tr:hover{
 background-color:lightgrey;
 cursor:pointer;
 }
@@ -63,6 +71,15 @@ h1 {
   display: inline;
 }
 
+h2 {
+  font-size: 25px;
+  padding-left: 20px;
+  padding-top: 15px;
+  height: 60px;
+  background-color: lightblue;
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: bold;
+}
 nav {
   padding-top: 10px;
   padding-left: 50px;
@@ -73,17 +90,21 @@ nav a:link {
   text-decoration: none;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 .breadcrumb-item + .breadcrumb-item::before {
     content: ">";
   }
 
 button {
-  border: none;
   text-align: center;
-  border-radius: 8px;
-  width: 10%;
+  border-radius: 10px;
+  width: 20%;
   background-color: lightblue;
 }
+
 .search-container {
   padding-top: 50px;
   text-align: center;
@@ -113,6 +134,10 @@ button {
     overflow-x: hidden;
 }
 
+.login-container {
+  margin-left: 500px;
+  margin-right: 500px;
+}
 .padding {
   margin-left: 50px;
   margin-right: 50px;
@@ -120,7 +145,8 @@ button {
 
 .p-container {
   width: 50%;
-  margin-left: 20px;
+  margin-top: 50px;
+  margin-left: 50px;
   background-color: white;
   height: 300px;
   border: 1px solid lightgrey;
@@ -139,12 +165,21 @@ button {
 .border-change {
   border-collapse: separate;
   border-spacing: 0 15px;
-    width: 100%;
+  width: 100%;
+}
+
+.buttons {
+  padding-bottom: 50px;
+  text-align: center;
 }
 
 #pt {
   text-align: left;
   padding: 10px;
+}
+
+#form {
+  padding: 40px;
 }
 
 .p-row {
