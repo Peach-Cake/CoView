@@ -104,7 +104,9 @@ button {
   width: 20%;
   background-color: lightblue;
 }
-
+#searchButton{
+  width: 5%;
+}
 .search-container {
   padding-top: 50px;
   text-align: center;
@@ -244,3 +246,8 @@ xmlns:"http://www.w3.org/2000/svg"}
 #ManagerMenuItems{padding-bottom:5rem;}
 
 .card{width:18rem;}
+
+.tableSortPointers{
+  height:.7em;
+  width:.7em;
+}
