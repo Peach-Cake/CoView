@@ -1,32 +1,25 @@
 //Filter Modal box
-// Get the modal
-var filterModal = document.getElementById("filterModal");
-
-// Get the button that opens the modal
-var filterBtn = document.getElementById("filterButton");
-
-// Get the <span> element that closes the modal
-var filterSpan = document.getElementsByClassName("close")[0];
-
 // When the user clicks on the button, open the modal
-filterBtn.onclick = function() {
+function openFilter() {
+  let filterModal = document.getElementById("filterModal");
   filterModal.style.display = "block";
+  window.addEventListener('click', outCloseFilter);
 }
 
 // When the user clicks on <span> (x), close the modal
-filterSpan.onclick = function() {
+function xCloseFilter() {
   filterModal.style.display = "none";
+  window.removeEventListener('click', outCloseFilter);
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+function outCloseFilter(event) {
   if (event.target == filterModal) {
     filterModal.style.display = "none";
   }
 }
-//filterForm
-var filter = document.getElementById('filterForm');
 
+//filterForm
 //returns the patient types to remove
 function getPatientTypeFilter(){
   let unchecked = [];
@@ -63,8 +56,8 @@ function getDateFilter(n){
 }
 
 //function for the filter
-var applyFilterBtn = document.getElementById("applyFilter");
-applyFilterBtn.onclick = function() {
+//var applyFilterBtn = document.getElementById("applyFilter");
+function applyFilter() {
   let unchecked = getPatientTypeFilter();
   let status = getReportStatusFilter();
   let table = document.getElementById("reports");
@@ -106,14 +99,29 @@ applyFilterBtn.onclick = function() {
 
 }
 //Search
-var searchBtn = document.getElementById('searchButton');
-searchBtn.onclick = function(){
-  let s = document.getElementsByName('searchName')[0];
-  console.log(s.value);
+function searchId(){
+  let s = document.getElementsByName('searchReport')[0].value;
+  let table = document.getElementById('reports')
+  let rows = table.rows;
+  for (let n = 1; n < rows.length; n++) {
+    rows[n].style.display='';
+  }
+  //console.log(s , rows[1].getElementsByTagName("TD")[1].innerHTML);
+  for (let i = 1; i < rows.length; i++) {
+    let id = rows[i].getElementsByTagName("TD")[0];
+    let name = rows[i].getElementsByTagName("TD")[1];
+    if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+      rows[i].style.display='none';
+    }
+  }
 }
 
 //Table sorting
 function sortTable(n) {
+  let pointers = document.getElementsByClassName('tableSortPointers');
+  for (let i = 0; i < pointers.length; i++) {
+    pointers[i].src = "doubleTableSorter.png";
+  }
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("reports");
   switching = true;
@@ -137,6 +145,7 @@ function sortTable(n) {
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
       if (dir == "asc") {
+        pointers[n].src = "ascTableSorter.png";
         if(n==0){
           if (parseInt(x.innerHTML.substring(1)) > parseInt(y.innerHTML.substring(1))) {
             shouldSwitch = true;
@@ -169,6 +178,7 @@ function sortTable(n) {
         }
       }
       } else if (dir == "desc") {
+        pointers[n].src = "descTableSorter.png";
         if(n==0){
           if (parseInt(x.innerHTML.substring(1)) < parseInt(y.innerHTML.substring(1))) {
             shouldSwitch = true;

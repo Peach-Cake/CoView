@@ -100,6 +100,10 @@ a:link {
   text-decoration: none;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+  }
+
 button {
   text-align: center;
   height: 40px;
@@ -114,7 +118,9 @@ button:active{
   border: 3px solid lightblue;
   border-radius: 6px;
 }
-
+#searchButton{
+  width: 5%;
+}
 .search-container {
   padding-top: 50px;
   text-align: center;
@@ -285,3 +291,8 @@ xmlns:"http://www.w3.org/2000/svg"}
 #ManagerMenuItems{padding-bottom:5rem;}
 
 .card{width:18rem;}
+
+.tableSortPointers{
+  height:.7em;
+  width:.7em;
+}

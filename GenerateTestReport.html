@@ -26,18 +26,19 @@
     <main>
     <nav aria-label="breadcrumb" class="navBreadCrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
+        <li class="breadcrumb-item" aria-current="page">Home</li>
+        <li class="breadcrumb-item" aria-current="page">Generate Test Report</li>
       </ol>
     </nav>
     <div class="search-container">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <form action="/action_page.php">
       Search:  <input type="text" placeholder="Test report ID" name="searchReport">
-      <button type="button" id="searchButton"><i class="fa fa-search"></i></button>
+      <button type="button" id="searchButton" onclick="searchId()"><i class="fa fa-search"></i></button>
     </form>
   </div>
   <div  class="filterIcon">
-    <button id="filterButton">Filter
+    <button id="filterButton" onclick="openFilter()">Filter
     <svg>
     <path fill-rule="evenodd"
     d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5
@@ -50,7 +51,7 @@
 
 <div id="filterModal" class="modal">
   <div class="filterModal-content">
-    <span class="close">&times;</span>
+    <span class="close" onclick="xCloseFilter()">&times;</span>
     <form class="filterForm" id="filterForm" action="index.html" method="post">
       <h4>Filter By:</h4>
       <label>Patient Type:</label>
@@ -85,7 +86,7 @@
       <label for="both">Both</label>
       <br>
 
-      <button type="button" name="applyFilter" id="applyFilter">Apply</button>
+      <button type="button"  onclick="applyFilter()">Apply</button>
     </form>
   </div>
 </div>
@@ -93,12 +94,12 @@
     <table id="reports">
       <thead>
       <tr>
-        <th onclick="sortTable(0)">Test ID</th>
-        <th onclick="sortTable(1)">Patient name</th>
-        <th onclick="sortTable(2)">Patient type</th>
-        <th onclick="sortTable(3)">Test date</th>
-        <th onclick="sortTable(4)">Result date</th>
-        <th onclick="sortTable(5)">Status</th>
+        <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
     <tbody>
