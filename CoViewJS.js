@@ -115,18 +115,7 @@ function searchId(){
     }
   }
 }
-function sortByIDasc(i){
-  table = document.getElementById("reports");
-  rows = table.rows;
-  let shouldSwitch = false;
-  let x = rows[i].getElementsByTagName("TD")[0];
-  let y = rows[i + 1].getElementsByTagName("TD")[0];
-  if (parseInt(x.innerHTML.substring(1)) > parseInt(y.innerHTML.substring(1))) {
-    shouldSwitch = true;
-    return shouldSwitch;
-  }
-  return false;
-}
+
 //Table sorting
 function sortTable(n) {
   let pointers = document.getElementsByClassName('tableSortPointers');
@@ -180,12 +169,6 @@ function sortTable(n) {
             shouldSwitch = true;
             break;
           }
-          else if(parseInt(x.innerHTML.substring(6)) == parseInt(y.innerHTML.substring(6))
-          && parseInt(x.innerHTML.substring(3,5)) == parseInt(y.innerHTML.substring(3,5))
-        && parseInt(x.innerHTML.substring(0,2)) == parseInt(y.innerHTML.substring(0,2))) {
-            shouldSwitch = sortByIDasc(i);
-            break;
-          }
         }
         else{
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
@@ -193,7 +176,6 @@ function sortTable(n) {
           shouldSwitch = true;
           break;
         }
-        
       }
       } else if (dir == "desc") {
         pointers[n].src = "descTableSorter.png";
@@ -220,12 +202,6 @@ function sortTable(n) {
             shouldSwitch = true;
             break;
           }
-          else if(parseInt(x.innerHTML.substring(6)) == parseInt(y.innerHTML.substring(6))
-          && parseInt(x.innerHTML.substring(3,5)) == parseInt(y.innerHTML.substring(3,5))
-        && parseInt(x.innerHTML.substring(0,2)) == parseInt(y.innerHTML.substring(0,2))) {
-            shouldSwitch = sortByIDasc(i);
-            break;
-          }
         }
         else{
         if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
@@ -233,7 +209,6 @@ function sortTable(n) {
           shouldSwitch = true;
           break;
         }
-
       }
       }
     }
