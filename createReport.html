@@ -25,13 +25,17 @@
       </nav>
     </header>
 
-      <nav>
-        <a href="testerMenu.html">Home</a> |
-        <a href="createReport.html">Create Test Report</a>
-      </nav>
+<main>
+    <nav aria-label="breadcrumb" class="navBreadCrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><a href="testerMenu.html">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page">Create Test Report</li>
+      </ol>
+    </nav>
 
+    
 <div class="form-container">
-  <form id="form" action="tester.php" method="post">
+  <form id="form" action="http://localhost/formphp/tester.php" method="post">
         <label for="testerName">Tester: </label>
         <br>
         <input type="text" id="tName" size="50">
@@ -66,16 +70,20 @@
         <input type="text" placeholder="dd/mm/yyyy" size="30">
         <br><br><br>
 
-  <div class="buttons">
-        <button type="button">Delete</button>
-        <button type="submit">Save</button>
-      </div>
-        </form>
+        <div class="buttons">
+          <button type="button">Delete</button>
+          <button type="submit">Save</button>
+        </div>
+      </form>
     </div>
+
+    <script type="text/javascript" src="CoViewJS.js"></script>
+  </main>
+
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       </body>
       <br>
-      <footer></footer>
 </html>

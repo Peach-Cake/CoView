@@ -122,9 +122,8 @@ button:active{
   width: 5%;
 }
 .search-container {
-  padding-top: 50px;
+  padding-top: 30px;
   text-align: center;
-  padding-bottom: 20px;
 }
 
 .search-container input[type=text]{
@@ -238,19 +237,55 @@ button:hover {
 a:link {
   text-decoration: none;
 }
+
 #filterButton{
   margin-left: 180px;
   margin-right: 180px;
   width: 5%;
   margin-bottom: .1rem;
 }
+
 .filterIcon svg{ width:1em;
 height:1em;
 viewBox:0 0 16 16;
 fill:currentColor;
 xmlns:"http://www.w3.org/2000/svg"}
 
+
+#filterButton1 {
+  float: right;
+  position: relative;
+  height: 31px;
+  bottom: 31px;
+  right: 200px;
+  width: 5%;
+}
+
+.filterIcon1 svg{
+  width:1em;
+  height:1em;
+  viewBox: 0 0 16 16;
+  fill:currentColor;
+  xmlns:"http://www.w3.org/2000/svg"}
 /* The Modal (background) */
+
+#filterButton2 {
+  position: relative;
+  float: right;
+  height: 31px;
+  top: 19px;
+  right: 710px;
+  width: 5%;
+}
+
+.filterIcon2 svg{
+  width:1em;
+  height:1em;
+  viewBox: 0 0 16 16;
+  fill:currentColor;
+  xmlns:"http://www.w3.org/2000/svg"}
+/* The Modal (background) */
+
 .modal {
  display: none; /* Hidden by default */
  position: fixed; /* Stay in place */
