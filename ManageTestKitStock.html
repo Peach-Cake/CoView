@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <title>Manage Test Kit Stock</title>
+  </head>
+  <body class="settings">
+    <header>
+      <h1>COVIEW</h1>
+      <nav class="AccountMenu">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-header">Posistion: Manager</div>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </nav>
+      </header>
+
+      <nav aria-label="breadcrumb" class="navBreadCrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Manage Test Kit Stock</li>
+        </ol>
+      </nav>
+      <div class="form-container">
+        <form id="form" action="" method="post" name="tkForm">
+          <label>Is it New Test Kit?</label>
+          <br>
+          <input type="radio" name="tkNew" value="yes" id="tkNewYes" checked onchange="neTestKitForm()">
+          <label for="tkNewYes">Yes</label>
+          <input type="radio" name="tkNew" value="no" id="tkNewNo" onchange="neTestKitForm()">
+          <label for="tkNewNo">No</label>
+          <br><br>
+          <div class="testKitNew">
+            <label for="tknName">Test Kit Name: </label>
+            <br>
+            <input type="text" name="tknName" id="tknName" size="50">
+            <br><br>
+            <label for="tknStock">Arrived Stock: </label>
+            <br>
+            <input type="text" name="tknStock" id="tknStock" size="3">
+            <br><br><br><br><br>
+
+          </div>
+          <div class="testKitExists" style="display:none">
+            <label for="tkeName">Test Kit Name: </label>
+            <br>
+            <select name="tkeName" id="tkeName"></select>
+            <br><br>
+            <b id="tkeAvailableStock">Available Stock: </b>
+            <br><br>
+            <label for="tknStock">Arrived Stock: </label>
+            <br>
+            <input type="text" name="tknStock" id="tknStock" size="3">
+            <br><br>
+            <b id="tkeNewStock">New Stock: </b>
+          </div>
+
+          <br><br><br>
+          <div class="buttons">
+            <button type="button">Delete</button>
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+      <script type="text/javascript" src="CoViewJS.js">
+      </script>
+      <script type="text/javascript">
+        neTestKitForm()
+      </script>
+    </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</html>
