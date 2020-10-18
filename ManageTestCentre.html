@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <title>Manage Test Centre</title>
+  </head>
+  <body class="settings">
+    <header>
+      <h1>COVIEW</h1>
+      <nav class="AccountMenu">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-header">Posistion: Manager</div>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Logout</a>
+        </div>
+      </nav>
+      </header>
+
+      <nav aria-label="breadcrumb" class="navBreadCrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Create Test Centre</li>
+        </ol>
+      </nav>
+      <div class="form-container">
+        <form id="form" action="" method="post" name="tcForm">
+              <label for="tcName">Tester Centre Name: </label>
+              <br>
+              <input type="text" name="tcName" id="tcName" size="50">
+              <br><br>
+              <label for="tcAddress1">Test Centre Address Line 1: </label>
+              <br>
+              <input type="text" name="tcAddress1" id="tcAddress1"size="50">
+              <br><br>
+              <label for="tcAddress2">Test Centre Address Line 2: </label>
+              <br>
+              <input type="text" name="tcAddress2" id="tcAddress2"size="50">
+              <br><br>
+              <label for="state" >State: </label>
+              <select name="state" id="state">
+                <option value="johor">Johor</option>
+                <option value="kedah">Kedah</option>
+                <option value="kelantan">Kelantan</option>
+                <option value="kualaLumpur">W.P Kuala Lumpur</option>
+                <option value="melaka">Melaka</option>
+                <option value="negeriSembilan">Negeri Sembilan</option>
+                <option value="pahang">Pahang</option>
+                <option value="penang">Penang</option>
+                <option value="perak">Perak</option>
+                <option value="perlis">Perlis</option>
+                <option value="sabah">Sabah</option>
+                <option value="sarawak">Sarawak</option>
+                <option value="terrengganu">Terrengganu</option>
+              </select><br><br>
+              <label for="postcode">Postcode: </label>
+              <input type="text" name="postcode" id="postcode" size="5"></input>
+              <br><br><br>
+              <div class="buttons">
+                <button type="button">Delete</button>
+                <button type="submit">Save</button>
+              </div>
+            </form>
+          </div>
+          <script type="text/javascript" src="CoViewJS.js">
+          </script>
+        </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</html>

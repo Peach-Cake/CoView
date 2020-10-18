@@ -229,3 +229,17 @@ function sortTable(n) {
     }
   }
 }
+
+function neTestKitForm(){
+  tkValue = document.getElementsByName('tkNew');
+  newTk = document.getElementsByClassName('testKitNew')[0];
+  existsTk = document.getElementsByClassName('testKitExists')[0];
+  if(tkValue[0].checked == true){
+    newTk.style.display = '';
+    existsTk.style.display = "none";
+  }
+  if(tkValue[1].checked == true){
+    newTk.style.display = "none";
+    existsTk.style.display = '';
+  }
+}
