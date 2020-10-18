@@ -292,6 +292,13 @@ xmlns:"http://www.w3.org/2000/svg"}
 
 .card{width:18rem;}
 
+.card-img-top{
+  height: 37%;
+  width:50%;
+  margin-left: 25%;
+  margin-top: 5%;
+}
+
 .tableSortPointers{
   height:.7em;
   width:.7em;
