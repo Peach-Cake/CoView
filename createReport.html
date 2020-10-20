@@ -33,28 +33,32 @@
       </ol>
     </nav>
 
-    
+
 <div class="form-container">
   <form id="form" action="http://localhost/formphp/tester.php" method="post">
         <label for="testerName">Tester: </label>
         <br>
-        <input type="text" id="tName" size="50">
+        <input type="text" name="tName" size="50">
         <br><br>
         <label for="patientName">Patient name: </label>
         <br>
-        <input type="text" id="pName"size="50">
+        <input type="text" name="pName"size="50">
         <br><br>
         <label for="username">Username: </label>
         <br>
-        <input type="text" id="username"size="50">
+        <input type="text" name="username"size="50">
+        <br><br>
+        <label for="password">Password: </label>
+        <br>
+        <input type="password" name="password" size="50">
         <br><br>
         <label for="patientType" >Patient type:</label>
         <select>
-          <option value="infected">Infected</option>
-          <option value="returnee">Returnee</option>
-          <option value="closeContact">Close contact</option>
-          <option value="quarantined">Quarantined</option>
-          <option value="suspected">Suspected</option>
+          <option value="infected" name="infected">Infected</option>
+          <option value="returnee" name="returnee">Returnee</option>
+          <option value="closeContact" name="closeContact">Close contact</option>
+          <option value="quarantined" name="quarantined">Quarantined</option>
+          <option value="suspected" name="suspected">Suspected</option>
         </select><br><br>
         <label for="symptoms">Symptoms: </label>
         <br>
@@ -67,7 +71,7 @@
         <label for="Pending">Pending</label>
         <br><br>
         <label for="resultdate">Result date: </label>
-        <input type="text" placeholder="dd/mm/yyyy" size="30">
+        <input type="date" name="date" size="30">
         <br><br><br>
 
         <div class="buttons">
