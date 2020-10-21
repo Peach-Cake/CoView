@@ -1,3 +1,21 @@
+function addReport() {
+
+  var patientName = document.getElementByName("pName").value;
+  var patientType = document.getElementByName("patientType").value;
+  var testDate = document.getElementByName("testDate").value;
+  var resultDate = document.getElementByName("resultDate").value;
+  var complete = document.getElementByName("complete").value;
+  var pending = document.getElementByName("pending").value;
+  var table = document.getElementByID("reports").getElementsByTagName("tbody");
+  var cell1;
+  var cell2;
+  var cell3;
+  var cell4;
+  var cell5;
+  var cell6;
+}
+
+
 var btn = document.getElementById("openModal");
 
 var modal = document.getElementById("reportModal");
@@ -17,6 +35,8 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 //Filter Modal box
 // When the user clicks on the button, open the modal
 function openFilter() {
