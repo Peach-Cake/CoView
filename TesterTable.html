@@ -29,7 +29,8 @@
   <main>
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page">Home</li>
+          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Register Tester</li>
         </ol>
       </nav>
 
@@ -46,7 +47,7 @@
                     <label for="tName">Tester Name: </label>
                     <br>
                     <input type="text" name="tName" id="tName" size="50" required>
-                    <br><br>
+                    <br><small class="errorNotifications"></small><br>
                     <label for="tUsername">Tester Username: </label>
                     <br>
                     <input type="text" name="tUsername" id="tUsername"size="50" required>
@@ -58,7 +59,7 @@
                     <label for="tPassword">Password: </label>
                     <br>
                     <input type="password" name="tPassword" id="tPassword" size="50" required></input>
-                    <br><br>
+                    <br><small class="errorNotifications"></small><br>
                     <label for="tCnPassword">Confirm Password: </label>
                     <br>
                     <input type="password" name="tCnPassword" id="tCnPassword" size="50" required></input>
@@ -85,11 +86,11 @@
         </table>
       </div>
       <div class="btn-container">
-      <button type="button" onclick="openModal()"><img src="plus.png" alt="register tester"
+      <button type="button" onclick="openModal(0)"><img src="plus.png" alt="register tester"
         style="width: 25px; padding-right: 2px;">Register Tester</button>
       </div>
 
-      
+
         <script type="text/javascript" src="CoViewJS.js"></script>
 
 

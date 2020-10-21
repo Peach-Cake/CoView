@@ -364,3 +364,7 @@ xmlns:"http://www.w3.org/2000/svg"}
   height:.7em;
   width:.7em;
 }
+.errorNotifications{
+  color: red;
+  float: left;
+}

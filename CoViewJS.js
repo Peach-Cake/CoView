@@ -1,4 +1,4 @@
-var btn = document.getElementById("openModal");
+/*var btn = document.getElementById("openModal");
 
 var modal = document.getElementById("reportModal");
 
@@ -16,11 +16,11 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+}*/
 //Filter Modal box
 // When the user clicks on the button, open the modal
-function openModal() {
-  let modal = document.getElementById("modal");
+function openModal(n) {
+  let modal = document.getElementsByClassName("modal")[n];
   modal.style.display = "block";
   window.addEventListener('click', outCloseFilter);
 }
@@ -277,8 +277,11 @@ function regTester(){
   let email = data[3].value;
   let password = data[4].value;
   let cpassword = data[5].value;
+  let notifications = document.getElementsByClassName('errorNotifications');
   if(validateUsername(username) == true){
   if(password == cpassword){
+    notifications[0].style.display = 'none';
+    notifications[1].style.display = 'none';
     let row = table.insertRow(table.rows.length);
     for (var i = 0; i < 3; i++) {
       let cell = row.insertCell(i);
@@ -286,9 +289,15 @@ function regTester(){
     }
   }
   else {
-    window.alert("Password in confirm does not match password");
-  }}else {
-    window.alert("Username already taken!");
+    notifications[0].style.display = 'none';
+    notifications[1].style.display = '';
+    notifications[1].innerHTML = "Password in confirm does not match password";
+  }
+}
+  else {
+    notifications[1].style.display = 'none';
+    notifications[0].style.display = '';
+    notifications[0].innerHTML = "Username already taken!";
   }
 }
 function validateUsername(username){
@@ -300,4 +309,38 @@ function validateUsername(username){
     }
   }
   return true;
+}
+function login(){
+  event.preventDefault();
+  let form = document.getElementsByName("logInForm")[0];
+  console.log(form);
+  let notification = document.getElementsByTagName('small');
+  let user = document.getElementsByTagName('input');
+  let username = user[0].value;
+  let password = user[1].value;
+  if(username.toUpperCase() != "MANAGER" &&
+  username.toUpperCase() != "TESTER" && username.toUpperCase() != "PATIENT"){
+    notification[1].style.display = 'none';
+    notification[0].style.display = '';
+    notification[0].innerHTML = "Username does not exist";
+  }
+  else if(password != "password"){
+    notification[0].style.display = 'none';
+    notification[1].style.display = '';
+    notification[1].innerHTML = "Incorrect Password";
+  }
+  else{
+    if(username.toUpperCase() == "MANAGER"){
+      form.action = "ManagerMenu.html";
+      form.submit();
+    }
+    else if(username.toUpperCase() == "TESTER"){
+      form.action = "testerMenu.html";
+      form.submit();
+    }
+    if(username.toUpperCase() == "PATIENT"){
+      form.action = "patient.html";
+      form.submit();
+    }
+  }
 }
