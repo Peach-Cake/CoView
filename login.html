@@ -15,12 +15,12 @@
     <body>
       <div class="login-container">
 
-<form name="logInForm" class="text-center border border-light p-5" action="#!">
+<form name="logInForm" class="text-center border border-light p-5" onsubmit="login()" action="#">
 
     <p class="h4 mb-4">Sign in</p>
-
-    <input type="email" name="email" class="form-control mb-4" placeholder="E-mail">
-
+    <small class="errorNotifications"></small>
+    <input type="text" name="email" class="form-control mb-4" placeholder="E-mail">
+    <small class="errorNotifications"></small>
     <input type="password" name="password" class="form-control mb-4" placeholder="Password">
 
     <div class="d-flex justify-content-around">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <button class="loginBtn" type="button"><a href="testerMenu.html">Sign in</a></button>
+    <button class="loginBtn" type="submit">Sign in</button>
 
   </form>
   </div>

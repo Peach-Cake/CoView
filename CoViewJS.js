@@ -1,3 +1,28 @@
+function addReport() {
+
+  var patientName = document.getElementByName("pName").value;
+  var patientType = document.getElementByName("patientType").value;
+  var testDate = document.getElementByName("testDate").value;
+  var resultDate = document.getElementByName("resultDate").value;
+  var complete = document.getElementByName("complete").value;
+  var pending = document.getElementByName("pending").value;
+  var table = document.getElementByID("reports").getElementsByTagName("tbody");
+  var cell1;
+  var cell2;
+  var cell3;
+  var cell4;
+  var cell5;
+  var cell6;
+
+  var row = table.insertRow(0);
+  cell1.innerHTML = patientName;
+  cell1.innerHTML = patientType;
+  cell1.innerHTML = testDate;
+  cell1.innerHTML = resultDate
+  cell1.innerHTML = "none";
+}
+
+
 var btn = document.getElementById("openModal");
 
 var modal = document.getElementById("reportModal");
@@ -17,24 +42,26 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+
 //Filter Modal box
 // When the user clicks on the button, open the modal
-function openModal() {
-  let modal = document.getElementById("modal");
-  modal.style.display = "block";
+function openFilter() {
+  let filterModal = document.getElementById("filterModal");
+  filterModal.style.display = "block";
   window.addEventListener('click', outCloseFilter);
 }
 
 // When the user clicks on <span> (x), close the modal
 function xCloseFilter() {
-  modal.style.display = "none";
+  filterModal.style.display = "none";
   window.removeEventListener('click', outCloseFilter);
 }
 
 // When the user clicks anywhere outside of the modal, close it
 function outCloseFilter(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == filterModal) {
+    filterModal.style.display = "none";
   }
 }
 
@@ -131,11 +158,6 @@ function searchId(){
     let name = rows[i].getElementsByTagName("TD")[1];
     if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
       rows[i].style.display='none';
-    }
-  }
-  if(s == ''){
-    for (let n = 1; n < rows.length; n++) {
-      rows[n].style.display='';
     }
   }
 }
@@ -266,38 +288,4 @@ function neTestKitForm(){
     newTk.style.display = "none";
     existsTk.style.display = '';
   }
-}
-
-function regTester(){
-  event.preventDefault();
-  let data = document.getElementsByTagName('input');
-  let table = document.getElementsByTagName('tbody')[0];
-  let username = data[1].value;
-  let name = data[2].value;
-  let email = data[3].value;
-  let password = data[4].value;
-  let cpassword = data[5].value;
-  if(validateUsername(username) == true){
-  if(password == cpassword){
-    let row = table.insertRow(table.rows.length);
-    for (var i = 0; i < 3; i++) {
-      let cell = row.insertCell(i);
-      cell.innerHTML = data[i+1].value;
-    }
-  }
-  else {
-    window.alert("Password in confirm does not match password");
-  }}else {
-    window.alert("Username already taken!");
-  }
-}
-function validateUsername(username){
-  let table = document.getElementsByTagName('tbody')[0];
-  let row = table.rows;
-  for (var i = 0; i < row.length; i++) {
-    if(row[i].getElementsByTagName('td')[0].innerHTML==username){
-      return false;
-    }
-  }
-  return true;
 }
