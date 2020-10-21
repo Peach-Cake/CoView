@@ -29,16 +29,18 @@
           <li class="breadcrumb-item" aria-current="page">Manage Test Kit Stock</li>
         </ol>
       </nav>
-      <div class="form-container">
-        <form id="form" action="" method="post" name="tkForm">
-          <label>Is it New Test Kit?</label>
+      <div class="tkform-container">
+        <label>Is it New Test Kit?</label>
+        <br>
+        <input type="radio" name="tkNew" value="yes" id="tkNewYes" checked onchange="neTestKitForm()">
+        <label for="tkNewYes">Yes</label>
+        <input type="radio" name="tkNew" value="no" id="tkNewNo" onchange="neTestKitForm()">
+        <label for="tkNewNo">No</label>
+        <br><br>
+        <div class="testKitNew">
+        <form id="tknform" action="" method="post" name="tknForm" onsubmit="addTestKit()">
+          <small class="errorNotifications"></small>
           <br>
-          <input type="radio" name="tkNew" value="yes" id="tkNewYes" checked onchange="neTestKitForm()">
-          <label for="tkNewYes">Yes</label>
-          <input type="radio" name="tkNew" value="no" id="tkNewNo" onchange="neTestKitForm()">
-          <label for="tkNewNo">No</label>
-          <br><br>
-          <div class="testKitNew">
             <label for="tknName">Test Kit Name: </label>
             <br>
             <input type="text" name="tknName" id="tknName" size="50">
@@ -47,12 +49,20 @@
             <br>
             <input type="text" name="tknStock" id="tknStock" size="3">
             <br><br><br><br><br>
+            <div class="buttons">
+              <button type="button">Delete</button>
+              <button type="submit">Save</button>
+            </div>
 
           </div>
           <div class="testKitExists" style="display:none">
+            <form id="tkeform" action="" method="post" name="tkeForm">
             <label for="tkeName">Test Kit Name: </label>
             <br>
-            <select name="tkeName" id="tkeName"></select>
+            <select name="tkeName" id="tkeName">
+              <option value="TestKit1">TestKit1</option>
+              <option value="TestKit2">TestKit2</option>
+            </select>
             <br><br>
             <b id="tkeAvailableStock">Available Stock: </b>
             <br><br>
@@ -61,7 +71,7 @@
             <input type="text" name="tknStock" id="tknStock" size="3">
             <br><br>
             <b id="tkeNewStock">New Stock: </b>
-          </div>
+
 
           <br><br><br>
           <div class="buttons">
@@ -69,6 +79,7 @@
             <button type="submit">Save</button>
           </div>
         </form>
+        </div>
       </div>
       <script type="text/javascript" src="CoViewJS.js">
       </script>

@@ -36,6 +36,14 @@
   margin: auto;
 }
 
+.tkform-container {
+  border: 1px solid grey;
+  background-color: white;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2%;
+}
+
 .apt-container {
   background-color: white;
   height: 300px;

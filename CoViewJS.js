@@ -366,3 +366,28 @@ function login(){
     }
   }
 }
+function addTestKit(){
+  event.preventDefault();
+  name = document.getElementsByName('tknName')[0].value;
+  list = document.getElementsByName('tkeName')[0];
+  options = list.options;
+  let notifications = document.getElementsByTagName('small');
+  let exists = false;
+  for (var i = 0; i < options.length; i++) {
+    if(name.toUpperCase() == options[i].value.toUpperCase()){
+      exists = true;
+      break;
+    }
+  }
+  if(exists == false){
+    notifications[0].style.display = 'none';
+    let newtk = document.createElement('option');
+    newtk.value = name;
+    newtk.innerHTML = name;
+    list.add(newtk, options.length);
+  }
+  else {
+    notifications[0].style.display = '';
+    notifications[0].innerHTML = 'Test Kit already exists!';
+  }
+}
