@@ -92,24 +92,118 @@
           </div>
         </div>
         <div class="report-container">
-        <table id="report-table">
+        <table id="reports">
           <thead>
           <tr>
-            <th>Test ID</th>
-            <th>Patient name</th>
-            <th>Patient type</th>
-            <th>Test date</th>
-            <th>Result date</th>
-            <th>Status</th>
+            <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>A1</td>
+            <td>John</td>
+            <td>Infected</td>
+            <td>11/12/2021</td>
+            <td>11/14/2021</td>
+            <td>Pending</td>
+          </tr>
+          <tr>
+            <td>A2</td>
+            <td>James</td>
+            <td>Suspected</td>
+            <td>11/11/2021</td>
+            <td>11/14/2021</td>
+            <td>Complete</td>
+          </tr>
+          <tr>
+            <td>A3</td>
+            <td>Adam</td>
+            <td>Infected</td>
+            <td>11/17/2021</td>
+            <td>11/21/2021</td>
+            <td>Pending</td>
+          </tr>
+          <tr>
+            <td>A4</td>
+            <td>Luke</td>
+            <td>Returnee</td>
+            <td>11/30/2021</td>
+            <td>12/5/2021</td>
+            <td>Complete</td>
+          </tr>
+          <tr>
+            <td>A5</td>
+            <td>Peter</td>
+            <td>Quarantined</td>
+            <td>11/15/2021</td>
+            <td>11/19/2021</td>
+            <td>Pending</td>
+          </tr>
         </tbody>
         </table>
       </div>
       <div class="btn-container">
-      <a href="createReport.html"><img src="plus.png" alt="create report"
-        style="width: 25px; padding-right: 2px;">Create report</a>
+      <button id="openModal">Create report</button>
+      </div>
+
+      <div id="reportModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+        <div class="form-container">
+          <form id="form" action="http://localhost/formphp/tester.php" method="post">
+                <label for="testerName">Tester: </label>
+                <br>
+                <input type="text" name="tName" size="50">
+                <br><br>
+                <label for="patientName">Patient name: </label>
+                <br>
+                <input type="text" name="pName" size="50">
+                <br><br>
+                <label for="username">Username: </label>
+                <br>
+                <input type="text" name="username" size="50">
+                <br><br>
+                <label for="password">Password: </label>
+                <br>
+                <input type="password" name="password" size="50">
+                <br><br>
+                <label for="patientType" >Patient type:</label>
+                <select name="patientType">
+                  <option value="infected" name="infected">Infected</option>
+                  <option value="returnee" name="returnee">Returnee</option>
+                  <option value="closeContact" name="closeContact">Close contact</option>
+                  <option value="quarantined" name="quarantined">Quarantined</option>
+                  <option value="suspected" name="suspected">Suspected</option>
+                </select><br><br>
+                <label for="symptoms">Symptoms: </label>
+                <br>
+                <textarea name="textArea" rows="7" cols="50" id="text-area"></textarea>
+                <br><br>
+                <label for="status" style="padding-right: 10px">Status: </label>
+                <input type="checkbox" name="complete" value="Complete">
+                <label for="complete" style="padding-right: 20px">Complete</label>
+                <input type="checkbox" name="pending" value="Pending">
+                <label for="Pending">Pending</label>
+                <br><br>
+                <label for="resultdate">Result date: </label>
+                <input type="date" name="resultDate" size="30">
+                <br><br><br>
+                <label for="testDate">Test date: </label>
+                <input type="date" name="testDate" size="30">
+                <br><br><br>
+
+                <div class="buttons">
+                  <button type="button">Delete</button>
+                  <input type="submit" id="submitBtn" value="Save"></input>
+                </div>
+              </form>
+            </div>
+            </div>
       </div>
 
       <div>

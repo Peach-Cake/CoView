@@ -1,6 +1,7 @@
 .AccountMenu {float: right;
   padding-left: .6rem;
-padding-right: .5rem;}
+  padding-right: .5rem;
+}
 
 .aligning {
   font-family: Arial;
@@ -117,10 +118,26 @@ button {
   color: white;
 }
 
+#submitBtn {
+  text-align: center;
+  height: 40px;
+  width: 20%;
+  border-radius: 6px;
+  border: none;
+  background-color: #3eb6c1;
+  color: white;
+}
+
+#submitBtn:hover {
+  background-color: #2e878f;
+  }
+}
+
 button:active{
   border: 3px solid lightblue;
   border-radius: 6px;
 }
+
 #searchButton{
   width: 5%;
 }
