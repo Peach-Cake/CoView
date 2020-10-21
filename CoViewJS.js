@@ -1,49 +1,3 @@
-function addReport() {
-
-  var patientName = document.getElementByName("pName").value;
-  var patientType = document.getElementByName("patientType").value;
-  var testDate = document.getElementByName("testDate").value;
-  var resultDate = document.getElementByName("resultDate").value;
-  var complete = document.getElementByName("complete").value;
-  var pending = document.getElementByName("pending").value;
-  var table = document.getElementByID("reports").getElementsByTagName("tbody");
-  var cell1;
-  var cell2;
-  var cell3;
-  var cell4;
-  var cell5;
-  var cell6;
-
-  var row = table.insertRow(0);
-  cell1.innerHTML = patientName;
-  cell1.innerHTML = patientType;
-  cell1.innerHTML = testDate;
-  cell1.innerHTML = resultDate
-  cell1.innerHTML = "none";
-}
-
-
-/*var btn = document.getElementById("openModal");
-
-var modal = document.getElementById("reportModal");
-
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}*/
-
-
 //Filter Modal box
 // When the user clicks on the button, open the modal
 function openModal(n) {
@@ -53,7 +7,8 @@ function openModal(n) {
 }
 
 // When the user clicks on <span> (x), close the modal
-function xCloseFilter() {
+function xCloseFilter(n) {
+  let modal = document.getElementsByClassName("modal")[n];
   modal.style.display = "none";
   window.removeEventListener('click', outCloseFilter);
 }
@@ -366,3 +321,43 @@ function login(){
     }
   }
 }
+
+/*function addReport() {
+  event.preventDefault();
+  var count;
+  count = 1;
+
+  var list = document.getElementById("list");
+  let tab = document.getElementById("reports");
+  let testID = count;
+  let patientName = document.getElementById("patientName").value;
+  let patientType = list.value;
+  let resultDate = document.getElementById("patientName").value;
+  let testDate = document.getElementById("testDate").value;
+  let status1 = document.getElementById("box1");
+  let status2 = document.getElementById("box2");
+  if (status1.checked == true){
+    var status;
+    status = status1.value;
+  }
+  else {
+    status = status2.value;
+  }
+
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    cell1.innerHTML = count;
+    cell2.innerHTML = patientName;
+    cell3.innerHTML = patientType;
+    cell4.innerHTML = resultDate;
+    cell5.innerHTML = testDate;
+    cell6.innerHTML = status;
+  }
+
+  }
+}
+*/
