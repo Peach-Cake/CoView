@@ -23,7 +23,7 @@ function addReport() {
 }
 
 
-var btn = document.getElementById("openModal");
+/*var btn = document.getElementById("openModal");
 
 var modal = document.getElementById("reportModal");
 
@@ -41,27 +41,27 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+}*/
 
 
 //Filter Modal box
 // When the user clicks on the button, open the modal
-function openFilter() {
-  let filterModal = document.getElementById("filterModal");
-  filterModal.style.display = "block";
+function openModal(n) {
+  let modal = document.getElementsByClassName("modal")[n];
+  modal.style.display = "block";
   window.addEventListener('click', outCloseFilter);
 }
 
 // When the user clicks on <span> (x), close the modal
 function xCloseFilter() {
-  filterModal.style.display = "none";
+  modal.style.display = "none";
   window.removeEventListener('click', outCloseFilter);
 }
 
 // When the user clicks anywhere outside of the modal, close it
 function outCloseFilter(event) {
-  if (event.target == filterModal) {
-    filterModal.style.display = "none";
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
 }
 
@@ -287,5 +287,82 @@ function neTestKitForm(){
   if(tkValue[1].checked == true){
     newTk.style.display = "none";
     existsTk.style.display = '';
+  }
+}
+
+function regTester(){
+  event.preventDefault();
+  let data = document.getElementsByTagName('input');
+  let table = document.getElementsByTagName('tbody')[0];
+  let username = data[1].value;
+  let name = data[2].value;
+  let email = data[3].value;
+  let password = data[4].value;
+  let cpassword = data[5].value;
+  let notifications = document.getElementsByClassName('errorNotifications');
+  if(validateUsername(username) == true){
+  if(password == cpassword){
+    notifications[0].style.display = 'none';
+    notifications[1].style.display = 'none';
+    let row = table.insertRow(table.rows.length);
+    for (var i = 0; i < 3; i++) {
+      let cell = row.insertCell(i);
+      cell.innerHTML = data[i+1].value;
+    }
+  }
+  else {
+    notifications[0].style.display = 'none';
+    notifications[1].style.display = '';
+    notifications[1].innerHTML = "Password in confirm does not match password";
+  }
+}
+  else {
+    notifications[1].style.display = 'none';
+    notifications[0].style.display = '';
+    notifications[0].innerHTML = "Username already taken!";
+  }
+}
+function validateUsername(username){
+  let table = document.getElementsByTagName('tbody')[0];
+  let row = table.rows;
+  for (var i = 0; i < row.length; i++) {
+    if(row[i].getElementsByTagName('td')[0].innerHTML==username){
+      return false;
+    }
+  }
+  return true;
+}
+
+function login(){
+  event.preventDefault();
+  let form = document.getElementsByName("logInForm")[0];
+  let notification = document.getElementsByTagName('small');
+  let user = document.getElementsByTagName('input');
+  let username = user[0].value;
+  let password = user[1].value;
+  if(username.toUpperCase() != "MANAGER" &&
+  username.toUpperCase() != "TESTER" && username.toUpperCase() != "PATIENT"){
+    notification[1].style.display = 'none';
+    notification[0].style.display = '';
+    notification[0].innerHTML = "Username does not exist";
+  }
+  else if(password != "password"){
+    notification[0].style.display = 'none';
+    notification[1].style.display = '';
+    notification[1].innerHTML = "Incorrect Password";
+  }
+  else{
+    if(username.toUpperCase() == "MANAGER"){
+      form.action = "ManagerMenu.html";
+      form.submit();
+    }
+    else if(username.toUpperCase() == "TESTER"){
+      form.action = "testerMenu.html";
+      form.submit();
+    }
+    if(username.toUpperCase() == "PATIENT"){
+      form.action = "patient.html";
+      form.submit();
+    }
   }
 }
