@@ -13,6 +13,13 @@ function addReport() {
   var cell4;
   var cell5;
   var cell6;
+
+  var row = table.insertRow(0);
+  cell1.innerHTML = patientName;
+  cell1.innerHTML = patientType;
+  cell1.innerHTML = testDate;
+  cell1.innerHTML = resultDate
+  cell1.innerHTML = "none";
 }
 
 

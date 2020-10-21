@@ -343,7 +343,7 @@ xmlns:"http://www.w3.org/2000/svg"}
 }
 
 /* Modal Content/Box */
-.filterModal-content {
+.filterModal-content,.testerModal-content {
  background-color: #fefefe;
  margin: 15% auto; /* 15% from the top and centered */
  padding: 20px;
@@ -380,4 +380,8 @@ xmlns:"http://www.w3.org/2000/svg"}
 .tableSortPointers{
   height:.7em;
   width:.7em;
+}
+.errorNotifications{
+  color: red;
+  float: left;
 }
