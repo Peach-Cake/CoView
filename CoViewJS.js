@@ -101,13 +101,12 @@ function applyFilter() {
       currentRow.style.display = 'none';
     }
   }
-
+xCloseFilter(0);
 }
 //Search
-function searchId(){
-  let s = document.getElementsByName('searchReport')[0].value;
-  let table = document.getElementById('reports');
-  console.log(s);
+function search(){
+  let s = document.getElementsByTagName('input')[0].value;
+  let table = document.getElementsByTagName('table')[0];
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
@@ -272,6 +271,7 @@ function regTester(){
       let cell = row.insertCell(i);
       cell.innerHTML = data[i+1].value;
     }
+    xCloseFilter(0);
   }
   else {
     notifications[0].style.display = 'none';
