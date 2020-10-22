@@ -15,8 +15,12 @@ function xCloseFilter(n) {
 
 // When the user clicks anywhere outside of the modal, close it
 function outCloseFilter(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  let modal = document.getElementsByClassName("modal");
+  if (event.target == modal[0]) {
+    modal[0].style.display = "none";
+  }
+  else if(event.target == modal[1]) {
+    modal[1].style.display = "none";
   }
 }
 
@@ -424,4 +428,3 @@ function updateStock(tkList){
   tkList[newStock[0]].stock = parseInt(newStock[1]);
   showStock(tkList);
 }
-

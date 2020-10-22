@@ -33,18 +33,18 @@
         <form id="form" action="" method="post" name="tcForm">
               <label for="tcName">Tester Centre Name: </label>
               <br>
-              <input type="text" name="tcName" id="tcName" size="50">
+              <input type="text" name="tcName" id="tcName" size="50" required>
               <br><br>
               <label for="tcAddress1">Test Centre Address Line 1: </label>
               <br>
-              <input type="text" name="tcAddress1" id="tcAddress1"size="50">
+              <input type="text" name="tcAddress1" id="tcAddress1"size="50" required>
               <br><br>
               <label for="tcAddress2">Test Centre Address Line 2: </label>
               <br>
-              <input type="text" name="tcAddress2" id="tcAddress2"size="50">
+              <input type="text" name="tcAddress2" id="tcAddress2"size="50" required>
               <br><br>
               <label for="state" >State: </label>
-              <select name="state" id="state">
+              <select name="state" id="state" required>
                 <option value="johor">Johor</option>
                 <option value="kedah">Kedah</option>
                 <option value="kelantan">Kelantan</option>
@@ -60,7 +60,7 @@
                 <option value="terrengganu">Terrengganu</option>
               </select><br><br>
               <label for="postcode">Postcode: </label>
-              <input type="text" name="postcode" id="postcode" size="5"></input>
+              <input type="text" name="postcode" id="postcode" size="5" required></input>
               <br><br><br>
               <div class="buttons">
                 <button type="button">Delete</button>
