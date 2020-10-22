@@ -25,26 +25,26 @@
 
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page">Home</li>
           <li class="breadcrumb-item" aria-current="page">Create Test Centre</li>
         </ol>
       </nav>
-      <div class="form-container">
-        <form id="form" action="" method="post" name="tcForm">
+      <div class="tkform-container">
+        <form id="form" action="" method="post" name="tcForm" onsubmit="addTestCentre()">
               <label for="tcName">Tester Centre Name: </label>
               <br>
-              <input type="text" name="tcName" id="tcName" size="50">
+              <input type="text" name="tcName" id="tcName" size="50" required>
               <br><br>
               <label for="tcAddress1">Test Centre Address Line 1: </label>
               <br>
-              <input type="text" name="tcAddress1" id="tcAddress1"size="50">
+              <input type="text" name="tcAddress1" id="tcAddress1"size="50" required>
               <br><br>
               <label for="tcAddress2">Test Centre Address Line 2: </label>
               <br>
-              <input type="text" name="tcAddress2" id="tcAddress2"size="50">
+              <input type="text" name="tcAddress2" id="tcAddress2"size="50" required>
               <br><br>
               <label for="state" >State: </label>
-              <select name="state" id="state">
+              <select name="state" id="state" required>
                 <option value="johor">Johor</option>
                 <option value="kedah">Kedah</option>
                 <option value="kelantan">Kelantan</option>
@@ -60,15 +60,17 @@
                 <option value="terrengganu">Terrengganu</option>
               </select><br><br>
               <label for="postcode">Postcode: </label>
-              <input type="text" name="postcode" id="postcode" size="5"></input>
+              <input type="text" name="postcode" id="postcode" size="5" pattern="[0-9]{5}" required></input>
               <br><br><br>
               <div class="buttons">
-                <button type="button">Delete</button>
                 <button type="submit">Save</button>
               </div>
             </form>
           </div>
           <script type="text/javascript" src="CoViewJS.js">
+          </script>
+          <script type="text/javascript">
+            ifTcRegistered();
           </script>
         </body>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

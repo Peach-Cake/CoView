@@ -15,8 +15,12 @@ function xCloseFilter(n) {
 
 // When the user clicks anywhere outside of the modal, close it
 function outCloseFilter(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  let modal = document.getElementsByClassName("modal");
+  if (event.target == modal[0]) {
+    modal[0].style.display = "none";
+  }
+  else if(event.target == modal[1]) {
+    modal[1].style.display = "none";
   }
 }
 
@@ -102,7 +106,8 @@ function applyFilter() {
 //Search
 function searchId(){
   let s = document.getElementsByName('searchReport')[0].value;
-  let table = document.getElementById('reports')
+  let table = document.getElementById('reports');
+  console.log(s);
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
@@ -111,7 +116,10 @@ function searchId(){
   for (let i = 1; i < rows.length; i++) {
     let id = rows[i].getElementsByTagName("TD")[0];
     let name = rows[i].getElementsByTagName("TD")[1];
-    if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+    if(s == ''){
+      rows[i].style.display='';
+    }
+    else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
       rows[i].style.display='none';
     }
   }
@@ -308,7 +316,11 @@ function login(){
   }
   else{
     if(username.toUpperCase() == "MANAGER"){
-      form.action = "ManagerMenu.html";
+      if(sessionStorage.getItem("isReg")== 1){
+      form.action = "ManagerMenu.html";}
+      else{
+        form.action = "ManageTestCentre.html"
+      }
       form.submit();
     }
     else if(username.toUpperCase() == "TESTER"){
@@ -357,6 +369,7 @@ function addReport() {
     cell4.innerHTML = resultDate.substring(8,10) + "/" + resultDate.substring(5,7) + "/" + resultDate.substring(0,4);
     cell5.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
     cell6.innerHTML = status;
+    alert("Patient added");
   }
 
 function initTkList(){
@@ -424,4 +437,14 @@ function updateStock(tkList){
   tkList[newStock[0]].stock = parseInt(newStock[1]);
   showStock(tkList);
 }
-
+function addTestCentre(){
+  event.preventDefault();
+  form.action = "ManagerMenu.html";
+  sessionStorage.setItem("isReg", 1)
+  form.submit();
+}
+function ifTcRegistered(){
+  if(sessionStorage.getItem("isReg")== 1){
+  window.alert("Test Centre already registered!");
+  window.location.href = "ManagerMenu.html";}
+}
