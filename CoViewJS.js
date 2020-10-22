@@ -106,7 +106,8 @@ function applyFilter() {
 //Search
 function searchId(){
   let s = document.getElementsByName('searchReport')[0].value;
-  let table = document.getElementById('reports')
+  let table = document.getElementById('reports');
+  console.log(s);
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
@@ -115,7 +116,10 @@ function searchId(){
   for (let i = 1; i < rows.length; i++) {
     let id = rows[i].getElementsByTagName("TD")[0];
     let name = rows[i].getElementsByTagName("TD")[1];
-    if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+    if(s == ''){
+      rows[i].style.display='';
+    }
+    else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
       rows[i].style.display='none';
     }
   }
@@ -312,7 +316,7 @@ function login(){
   }
   else{
     if(username.toUpperCase() == "MANAGER"){
-      form.action = "ManagerMenu.html";
+      form.action = "ManageTestCentre.html";
       form.submit();
     }
     else if(username.toUpperCase() == "TESTER"){
@@ -427,4 +431,15 @@ function updateStock(tkList){
   let newStock = showNewStock(tkList);
   tkList[newStock[0]].stock = parseInt(newStock[1]);
   showStock(tkList);
+}
+function addTestCentre(){
+  event.preventDefault();
+  form.action = "ManagerMenu.html";
+  sessionStorage.setItem("isReg", 1)
+  form.submit();
+}
+function ifTcRegistered(){
+  if(sessionStorage.getItem("isReg")== 1){
+  window.alert("Test Centre already registered!");
+  window.location.href = "ManagerMenu.html";}
 }
