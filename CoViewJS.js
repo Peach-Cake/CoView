@@ -316,7 +316,11 @@ function login(){
   }
   else{
     if(username.toUpperCase() == "MANAGER"){
-      form.action = "ManageTestCentre.html";
+      if(sessionStorage.getItem("isReg")== 1){
+      form.action = "ManagerMenu.html";}
+      else{
+        form.action = "ManageTestCentre.html"
+      }
       form.submit();
     }
     else if(username.toUpperCase() == "TESTER"){
