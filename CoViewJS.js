@@ -356,4 +356,5 @@ function addReport() {
     cell4.innerHTML = resultDate.substring(8,10) + "/" + resultDate.substring(5,7) + "/" + resultDate.substring(0,4);
     cell5.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
     cell6.innerHTML = status;
+    alert("Patient added");
   }
