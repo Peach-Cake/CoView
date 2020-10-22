@@ -322,18 +322,17 @@ function login(){
   }
 }
 
-/*function addReport() {
+function addReport() {
   event.preventDefault();
   var count;
-  count = 1;
 
-  var list = document.getElementById("list");
+  var list = document.getElementById("patientType");
   let tab = document.getElementById("reports");
   let testID = count;
-  let patientName = document.getElementById("patientName").value;
+  let patientName = document.getElementsByName("patientName")[0].value;
   let patientType = list.value;
-  let resultDate = document.getElementById("patientName").value;
-  let testDate = document.getElementById("testDate").value;
+  let resultDate = document.getElementsByName("resultDate")[0].value;
+  let testDate = document.getElementsByName("testDate")[0].value;
   let status1 = document.getElementById("box1");
   let status2 = document.getElementById("box2");
   if (status1.checked == true){
@@ -343,7 +342,8 @@ function login(){
   else {
     status = status2.value;
   }
-
+  count = 'A' + tab.rows.length;
+  let row = tab.insertRow(tab.rows.length);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
@@ -357,7 +357,3 @@ function login(){
     cell5.innerHTML = testDate;
     cell6.innerHTML = status;
   }
-
-  }
-}
-*/
