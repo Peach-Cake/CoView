@@ -15,8 +15,12 @@ function xCloseFilter(n) {
 
 // When the user clicks anywhere outside of the modal, close it
 function outCloseFilter(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  let modal = document.getElementsByClassName("modal");
+  if (event.target == modal[0]) {
+    modal[0].style.display = "none";
+  }
+  else if(event.target == modal[1]) {
+    modal[1].style.display = "none";
   }
 }
 
@@ -102,7 +106,8 @@ function applyFilter() {
 //Search
 function searchId(){
   let s = document.getElementsByName('searchReport')[0].value;
-  let table = document.getElementById('reports')
+  let table = document.getElementById('reports');
+  console.log(s);
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
@@ -111,7 +116,10 @@ function searchId(){
   for (let i = 1; i < rows.length; i++) {
     let id = rows[i].getElementsByTagName("TD")[0];
     let name = rows[i].getElementsByTagName("TD")[1];
-    if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+    if(s == ''){
+      rows[i].style.display='';
+    }
+    else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
       rows[i].style.display='none';
     }
   }
@@ -308,7 +316,11 @@ function login(){
   }
   else{
     if(username.toUpperCase() == "MANAGER"){
-      form.action = "ManagerMenu.html";
+      if(sessionStorage.getItem("isReg")== 1){
+      form.action = "ManagerMenu.html";}
+      else{
+        form.action = "ManageTestCentre.html"
+      }
       form.submit();
     }
     else if(username.toUpperCase() == "TESTER"){
@@ -321,6 +333,7 @@ function login(){
     }
   }
 }
+
 
 function addReport() {
   event.preventDefault();
@@ -358,3 +371,80 @@ function addReport() {
     cell6.innerHTML = status;
     alert("Patient added");
   }
+
+function initTkList(){
+  let tk1 = {name:"TestKit1", stock:2};
+  let tk2 = {name:"TestKit2", stock:5}
+  var tkList = [tk1, tk2];
+  showStock(tkList);
+  return tkList;
+}
+function addTestKit(tkList){
+  event.preventDefault();
+  let name = document.getElementsByName('tknName')[0].value;
+  let stock = document.getElementsByName('tknStock')[0].value;
+  let list = document.getElementsByName('tkeName')[0];
+  let options = list.options;
+  let notifications = document.getElementsByTagName('small');
+  let exists = false;
+  for (var i = 0; i < options.length; i++) {
+    if(name.toUpperCase() == options[i].value.toUpperCase()){
+      exists = true;
+      break;
+    }
+  }
+  if(exists == false){
+    notifications[0].style.display = 'none';
+    let newtk = document.createElement('option');
+    newtk.value = name;
+    newtk.innerHTML = name;
+    list.add(newtk, options.length);
+    let tk3 = {name:name, stock:stock}
+    tkList.push(tk3);
+  }
+  else {
+    notifications[0].style.display = '';
+    notifications[0].innerHTML = 'Test Kit already exists!';
+  }
+}
+function showStock(tkList){
+  let aStock = document.getElementById('tkeAvailableStock');
+  let nStock = document.getElementById('tkeNewStock');
+  let tk = document.getElementById('tkeName').value;
+  for (var i = 0; i < tkList.length; i++) {
+    if (tkList[i].name == tk) {
+      aStock.innerHTML = "Available Stock: "+ tkList[i].stock;
+      break;
+    }
+  }
+  showNewStock(tkList);
+}
+function showNewStock(tkList){
+  let nStock = document.getElementById('tkeNewStock');
+  let add = document.getElementById('tkeStock').value;
+  let tk = document.getElementById('tkeName').value;
+  for (var i = 0; i < tkList.length; i++) {
+    if (tkList[i].name == tk) {
+      nStock.innerHTML = "Arrived Stock: "+ (parseInt(tkList[i].stock) + parseInt(add));
+      return [i, (parseInt(tkList[i].stock) + parseInt(add))];
+    }
+  }
+}
+
+function updateStock(tkList){
+  event.preventDefault();
+  let newStock = showNewStock(tkList);
+  tkList[newStock[0]].stock = parseInt(newStock[1]);
+  showStock(tkList);
+}
+function addTestCentre(){
+  event.preventDefault();
+  form.action = "ManagerMenu.html";
+  sessionStorage.setItem("isReg", 1)
+  form.submit();
+}
+function ifTcRegistered(){
+  if(sessionStorage.getItem("isReg")== 1){
+  window.alert("Test Centre already registered!");
+  window.location.href = "ManagerMenu.html";}
+}

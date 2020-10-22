@@ -36,6 +36,14 @@
   margin: auto;
 }
 
+.tkform-container {
+  border: 1px solid grey;
+  background-color: white;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2%;
+}
+
 .apt-container {
   background-color: white;
   height: 300px;
@@ -368,7 +376,7 @@ xmlns:"http://www.w3.org/2000/svg"}
 
 #ManagerMenuItems{padding-bottom:5rem;}
 
-.card{width:18rem;}
+.card{width:18rem; height: 13rem;}
 
 .card-img-top{
   height: 37%;
