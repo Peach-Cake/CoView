@@ -6,6 +6,13 @@ function openModal(n) {
   window.addEventListener('click', outCloseFilter);
 }
 
+function openUpdateModal(n) {
+  let modal = document.getElementsByClassName("modal")[2];
+  modal.style.display = "block";
+  window.addEventListener('click', outCloseFilter);
+  sessionStorage.setItem("updateButton", n);
+}
+
 // When the user clicks on <span> (x), close the modal
 function xCloseFilter(n) {
   let modal = document.getElementsByClassName("modal")[n];
@@ -21,6 +28,12 @@ function outCloseFilter(event) {
   }
   else if(event.target == modal[1]) {
     modal[1].style.display = "none";
+  }
+  else if(event.target == modal[2]) {
+    modal[2].style.display = "none";
+  }
+  else if(event.target == modal[3]) {
+    modal[3].style.display = "none";
   }
 }
 
@@ -101,18 +114,17 @@ function applyFilter() {
       currentRow.style.display = 'none';
     }
   }
-
+xCloseFilter(0);
 }
 //Search
-function searchId(){
-  let s = document.getElementsByName('searchReport')[0].value;
-  let table = document.getElementById('reports');
-  console.log(s);
+function search(){
+  let s = document.getElementsByTagName('input')[0].value;
+  let table = document.getElementsByTagName('table')[0];
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
   }
-  //console.log(s , rows[1].getElementsByTagName("TD")[1].innerHTML);
+
   for (let i = 1; i < rows.length; i++) {
     let id = rows[i].getElementsByTagName("TD")[0];
     let name = rows[i].getElementsByTagName("TD")[1];
@@ -168,13 +180,11 @@ function sortTable(n) {
           }
           else if (parseInt(x.innerHTML.substring(6)) == parseInt(y.innerHTML.substring(6))
           && parseInt(x.innerHTML.substring(3,5)) > parseInt(y.innerHTML.substring(3,5))) {
-            //console.log("months",x,y, parseInt(x.innerHTML.substring(3,5)) > parseInt(y.innerHTML.substring(3,5)));
             shouldSwitch = true;
             break;
           }
           else if (parseInt(x.innerHTML.substring(3,5)) == parseInt(y.innerHTML.substring(3,5))
           && parseInt(x.innerHTML.substring(0,2)) > parseInt(y.innerHTML.substring(0,2))) {
-            //console.log("days",x,y, parseInt(x.innerHTML.substring(3,5)) > parseInt(y.innerHTML.substring(3,5)));
             shouldSwitch = true;
             break;
           }
@@ -201,13 +211,11 @@ function sortTable(n) {
           }
           else if (parseInt(x.innerHTML.substring(6)) == parseInt(y.innerHTML.substring(6))
           && parseInt(x.innerHTML.substring(3,5)) < parseInt(y.innerHTML.substring(3,5))) {
-            //console.log("months",x,y, parseInt(x.innerHTML.substring(3,5)) > parseInt(y.innerHTML.substring(3,5)));
             shouldSwitch = true;
             break;
           }
           else if (parseInt(x.innerHTML.substring(3,5)) == parseInt(y.innerHTML.substring(3,5))
           && parseInt(x.innerHTML.substring(0,2)) < parseInt(y.innerHTML.substring(0,2))) {
-            //console.log("days",x,y, parseInt(x.innerHTML.substring(3,5)) > parseInt(y.innerHTML.substring(3,5)));
             shouldSwitch = true;
             break;
           }
@@ -272,6 +280,7 @@ function regTester(){
       let cell = row.insertCell(i);
       cell.innerHTML = data[i+1].value;
     }
+    xCloseFilter(0);
   }
   else {
     notifications[0].style.display = 'none';
@@ -339,9 +348,14 @@ function addReport() {
   event.preventDefault();
   var count;
   var status;
-  status = "Pending";
-  var list = document.getElementById("patientType");
   let tab = document.getElementById("reports");
+  status = "Pending";
+  resultDate = "00/00/0000";
+  let button = document.createElement("button");
+  button.innerHTML = "Update";
+  button.style.width = "auto";
+  button.onclick = function(){openUpdateModal(tab.rows.length-2);};
+  var list = document.getElementById("patientType");
   let testID = count;
   let patientName = document.getElementsByName("patientName")[0].value;
   let patientType = list.value;
@@ -354,11 +368,15 @@ function addReport() {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
     cell1.innerHTML = count;
     cell2.innerHTML = patientName;
     cell3.innerHTML = patientType;
     cell4.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
-    cell5.innerHTML = status;
+    cell5.innerHTML = resultDate;
+    cell6.innerHTML = status;
+    cell7.appendChild(button);
     alert("Patient added");
     xCloseFilter(1);
     form.reset();
@@ -441,7 +459,7 @@ function ifTcRegistered(){
   window.location.href = "ManagerMenu.html";}
 }
 
-function updateReport(){
+/*function updateReport(){
   var found;
   let s = document.getElementsByName('searchReport')[0].value;
   let table = document.getElementById('reports');
@@ -466,4 +484,14 @@ function updateReport(){
 
     }
   }
+}*/
+function updateReport(){
+  event.preventDefault();
+  let n = parseInt(sessionStorage.getItem("updateButton"));
+  let d = new Date();
+  updateBtns = document.getElementsByClassName('updateBtn');
+  table = document.getElementsByTagName('table')[0];
+  rows = table.rows;
+  rows[n+1].getElementsByTagName('td')[5].innerHTML = "Complete";
+  rows[n+1].getElementsByTagName('td')[4].innerHTML = d.toLocaleDateString();
 }

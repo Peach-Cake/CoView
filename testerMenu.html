@@ -18,7 +18,6 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
           <div class="dropdown-header">Position: Tester</div>
-          <a class="dropdown-item" href="#">Edit profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="login.html">Log out</a>
         </div>
@@ -37,7 +36,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <form action="/action_page.php">
         Search:  <input type="text" placeholder="Test report ID" name="searchReport">
-        <button type="button" id="viewBtn" onclick="updateReport()">View</button>
+        <button type="button" id="viewBtn" onclick="search()">View</button>
       </form>
     </div>
 
@@ -97,44 +96,56 @@
             <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody onclick="openModal(3)">
           <tr>
             <td>A1</td>
             <td>John</td>
             <td>Infected</td>
             <td>21/02/2021</td>
+            <td>00/00/0000</td>
             <td>Pending</td>
+            <td><button type="button" class="updateBtn" onclick="openUpdateModal(0)">Update</button></td>
           </tr>
           <tr>
             <td>A2</td>
             <td>Harry</td>
             <td>Quarantined</td>
             <td>05/06/2021</td>
+            <td>15/06/2021</td>
             <td>Complete</td>
+            <td><button type="button" class="updateBtn" onclick="openUpdateModal(1)">Update</button></td>
           </tr>
           <tr>
             <td>A3</td>
             <td>Butch</td>
             <td>Close Contact</td>
             <td>04/09/2021</td>
+            <td>00/00/0000</td>
             <td>Pending</td>
+            <td><button type="button" class="updateBtn" onclick="openUpdateModal(2)">Update</button></td>
           </tr>
           <tr>
             <td>A4</td>
             <td>James</td>
             <td>Infected</td>
             <td>28/04/2021</td>
+            <td>00/00/0000</td>
             <td>Pending</td>
+            <td><button type="button" class="updateBtn" onclick="openUpdateModal(3)">Update</button></td>
           </tr>
           <tr>
             <td>A5</td>
             <td>Nanma</td>
             <td>Suspected</td>
             <td>15/06/2021</td>
+            <td>04/07/2021</td>
             <td>Complete</td>
+            <td><button type="button" class="updateBtn" onclick="openUpdateModal(4)">Update</button></td>
           </tr>
         </tbody>
         </table>
@@ -144,8 +155,8 @@
       </div>
 
       <div id="reportModal" class="modal">
-        <span class="close" onclick="xCloseFilter(1)">&times;</span>
-        <div class="modal-content">
+        <div class="report-modal-content">
+          <span class="close" onclick="xCloseFilter(1)">&times;</span>
         <div class="form-container">
           <form id="form" onsubmit="addReport()">
                 <label for="testerName">Tester: </label>
@@ -188,7 +199,34 @@
             </div>
             </div>
       </div>
+      <div id="updateModal" class="modal">
+        <div class="update-modal-content">
+          <span class="close" onclick="xCloseFilter(2)">&times;</span>
+        <div class="form-container1">
+          <form id="updateForm" onsubmit="updateReport()">
+                <label for="testerName">Symptoms: </label>
+                <br>
+                <textarea name="results" rows="5" cols="70" required></textarea>
+                <br><br><br>
 
+                <div class="buttons">
+                  <button type="button" onclick="xCloseFilter(2)">Cancel</button>
+                  <button type="submit">Save</button>
+                </div>
+              </form>
+            </div>
+            </div>
+      </div>
+      <div id="resultsModal" class="modal">
+        <div class="update-modal-content">
+          <span class="close" onclick="xCloseFilter(3)">&times;</span>
+        <div class="form-container1">
+          <b>Results: Appears to be Covid-Negative, but not completely certain.</b>
+          <br><br>
+          <b>Symptoms: Coughing, Sore Throat, Fever.</b>
+            </div>
+            </div>
+      </div>
 
       <div>
         <script type="text/javascript" src="CoViewJS.js"></script>
