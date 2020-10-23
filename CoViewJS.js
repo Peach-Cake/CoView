@@ -441,17 +441,29 @@ function ifTcRegistered(){
   window.location.href = "ManagerMenu.html";}
 }
 
-function viewReport(){
-  var testID = document.getElementByName("search");
-  var tab1 = document.getElementById("reports");
-  var x;
-  var y;
-  var values = [];
-  for(i = 0; i < table; i++){
-    var tab2 = document.getElementById("reports").rows[i].length;
-    for(y = 0; y < tab2; y++){
-      var z = document.getElementById("reports").rows[i].cells.item(y).innerHTML;
-      values[i] = z;
+function updateReport(){
+  var found;
+  let s = document.getElementsByName('searchReport')[0].value;
+  let table = document.getElementById('reports');
+  console.log(s);
+  let rows = table.rows;
+  for (let n = 1; n < rows.length; n++) {
+    rows[n].style.display='';
+  }
+  //console.log(s , rows[1].getElementsByTagName("TD")[1].innerHTML);
+  for (let i = 1; i < rows.length; i++) {
+    let id = rows[i].getElementsByTagName("TD")[0];
+    let name = rows[i].getElementsByTagName("TD")[1];
+    if(s == ''){
+      rows[i].style.display='';
+    }
+    else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+      rows[i].style.display='none';
+    }
+    else {
+      openModal(1);
+
+
     }
   }
 }

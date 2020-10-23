@@ -193,7 +193,7 @@ button:active{
   padding: 20px;
   margin: auto;
   border: 1px solid #888;
-  width: 100%;
+  width: 50%;
 }
 
 
@@ -204,22 +204,6 @@ button:active{
   background-color: white;
   height: 300px;
   border: 1px solid lightgrey;
-}
-
-.pTable {
-  background-color: lightblue;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.hidden {
-  border-right:hidden;
-}
-
-.border-change {
-  border-collapse: separate;
-  border-spacing: 0 15px;
-  width: 100%;
 }
 
 .buttons {
@@ -264,13 +248,6 @@ button:hover {
 
 .loginBtn a {
   color: white;
-}
-
-.p-row {
-  padding: 12px;
-  text-align: left;
-  border: 1px solid lightgrey;
-  border-radius: 4px;
 }
 
 a:link {
