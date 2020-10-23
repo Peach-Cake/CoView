@@ -338,23 +338,15 @@ function login(){
 function addReport() {
   event.preventDefault();
   var count;
-
+  var status;
+  status = "Pending";
   var list = document.getElementById("patientType");
   let tab = document.getElementById("reports");
   let testID = count;
   let patientName = document.getElementsByName("patientName")[0].value;
   let patientType = list.value;
-  let resultDate = document.getElementsByName("resultDate")[0].value;
   let testDate = document.getElementsByName("testDate")[0].value;
-  let status1 = document.getElementById("box1");
-  let status2 = document.getElementById("box2");
-  if (status1.checked == true){
-    var status;
-    status = status1.value;
-  }
-  else {
-    status = status2.value;
-  }
+
   count = 'A' + tab.rows.length;
   let row = tab.insertRow(tab.rows.length);
     var cell1 = row.insertCell(0);
@@ -362,14 +354,14 @@ function addReport() {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(5);
     cell1.innerHTML = count;
     cell2.innerHTML = patientName;
     cell3.innerHTML = patientType;
-    cell4.innerHTML = resultDate.substring(8,10) + "/" + resultDate.substring(5,7) + "/" + resultDate.substring(0,4);
-    cell5.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
-    cell6.innerHTML = status;
+    cell4.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
+    cell5.innerHTML = status;
     alert("Patient added");
+    xCloseFilter(1);
+    form.reset();
   }
 
 function initTkList(){
@@ -447,4 +439,31 @@ function ifTcRegistered(){
   if(sessionStorage.getItem("isReg")== 1){
   window.alert("Test Centre already registered!");
   window.location.href = "ManagerMenu.html";}
+}
+
+function updateReport(){
+  var found;
+  let s = document.getElementsByName('searchReport')[0].value;
+  let table = document.getElementById('reports');
+  console.log(s);
+  let rows = table.rows;
+  for (let n = 1; n < rows.length; n++) {
+    rows[n].style.display='';
+  }
+  //console.log(s , rows[1].getElementsByTagName("TD")[1].innerHTML);
+  for (let i = 1; i < rows.length; i++) {
+    let id = rows[i].getElementsByTagName("TD")[0];
+    let name = rows[i].getElementsByTagName("TD")[1];
+    if(s == ''){
+      rows[i].style.display='';
+    }
+    else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
+      rows[i].style.display='none';
+    }
+    else {
+      openModal(1);
+
+
+    }
+  }
 }
