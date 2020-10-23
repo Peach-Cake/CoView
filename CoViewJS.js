@@ -338,23 +338,15 @@ function login(){
 function addReport() {
   event.preventDefault();
   var count;
-
+  var status;
+  status = "Pending";
   var list = document.getElementById("patientType");
   let tab = document.getElementById("reports");
   let testID = count;
   let patientName = document.getElementsByName("patientName")[0].value;
   let patientType = list.value;
-  let resultDate = document.getElementsByName("resultDate")[0].value;
   let testDate = document.getElementsByName("testDate")[0].value;
-  let status1 = document.getElementById("box1");
-  let status2 = document.getElementById("box2");
-  if (status1.checked == true){
-    var status;
-    status = status1.value;
-  }
-  else {
-    status = status2.value;
-  }
+
   count = 'A' + tab.rows.length;
   let row = tab.insertRow(tab.rows.length);
     var cell1 = row.insertCell(0);
@@ -362,14 +354,14 @@ function addReport() {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(5);
     cell1.innerHTML = count;
     cell2.innerHTML = patientName;
     cell3.innerHTML = patientType;
-    cell4.innerHTML = resultDate.substring(8,10) + "/" + resultDate.substring(5,7) + "/" + resultDate.substring(0,4);
-    cell5.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
-    cell6.innerHTML = status;
+    cell4.innerHTML = testDate.substring(8,10) + "/" + testDate.substring(5,7) + "/" + testDate.substring(0,4);
+    cell5.innerHTML = status;
     alert("Patient added");
+    xCloseFilter(1);
+    form.reset();
   }
 
 function initTkList(){
@@ -447,4 +439,19 @@ function ifTcRegistered(){
   if(sessionStorage.getItem("isReg")== 1){
   window.alert("Test Centre already registered!");
   window.location.href = "ManagerMenu.html";}
+}
+
+function viewReport(){
+  var testID = document.getElementByName("search");
+  var tab1 = document.getElementById("reports");
+  var x;
+  var y;
+  var values = [];
+  for(i = 0; i < table; i++){
+    var tab2 = document.getElementById("reports").rows[i].length;
+    for(y = 0; y < tab2; y++){
+      var z = document.getElementById("reports").rows[i].cells.item(y).innerHTML;
+      values[i] = z;
+    }
+  }
 }

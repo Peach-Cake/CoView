@@ -73,11 +73,6 @@
               <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
               <br>
 
-              <label>Result Date:</label>
-              <input type="date" class="filterDates" name="resultDateFrom" value="">&nbsp;to
-              <input type="date" class="filterDates" name="resultDateTo" value="">
-              <br>
-
               <label>Status: </label>&nbsp;
               <input type="radio" id="pending" name="status" value="pending">
               <label for="pending">Pending</label>&nbsp;
@@ -99,7 +94,6 @@
             <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
             <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
           </tr>
         </thead>
@@ -109,7 +103,6 @@
             <td>John</td>
             <td>Infected</td>
             <td>21/02/2021</td>
-            <td>24/02/2021</td>
             <td>Pending</td>
           </tr>
           <tr>
@@ -117,7 +110,6 @@
             <td>Harry</td>
             <td>Quarantined</td>
             <td>05/06/2021</td>
-            <td>09/06/2021</td>
             <td>Complete</td>
           </tr>
           <tr>
@@ -125,7 +117,6 @@
             <td>Butch</td>
             <td>Close Contact</td>
             <td>04/09/2021</td>
-            <td>15/09/2021</td>
             <td>Pending</td>
           </tr>
           <tr>
@@ -133,7 +124,6 @@
             <td>James</td>
             <td>Infected</td>
             <td>28/04/2021</td>
-            <td>03/05/2021</td>
             <td>Pending</td>
           </tr>
           <tr>
@@ -141,7 +131,6 @@
             <td>Nanma</td>
             <td>Suspected</td>
             <td>15/06/2021</td>
-            <td>20/06/2021</td>
             <td>Complete</td>
           </tr>
         </tbody>
@@ -158,40 +147,39 @@
           <form id="form" onsubmit="addReport()">
                 <label for="testerName">Tester: </label>
                 <br>
-                <input type="text" name="testerName" size="50">
+                <input type="text" name="testerName" size="50" required>
                 <br><br>
                 <label for="patientName">Patient name: </label>
                 <br>
-                <input type="text" name="patientName" size="50">
+                <input type="text" name="patientName" size="50" required>
+                <br><br>
+                <label for="username">Username: </label>
+                <br>
+                <input type="text" name="username" size="50" required>
+                <br><br>
+                <label for="password">Password: </label>
+                <br>
+                <input type="password" name="password" size="50" required>
                 <br><br>
                 <label for="patientType">Patient type:</label>
                 <select id="patientType">
-                  <option value="infected" name="infected">Infected</option>
-                  <option value="returnee" name="returnee">Returnee</option>
-                  <option value="closeContact" name="closeContact">Close contact</option>
-                  <option value="quarantined" name="quarantined">Quarantined</option>
-                  <option value="suspected" name="suspected">Suspected</option>
+                  <option value="Infected" name="infected">Infected</option>
+                  <option value="Returnee" name="returnee">Returnee</option>
+                  <option value="Close Contact" name="closeContact">Close contact</option>
+                  <option value="Quarantined" name="quarantined">Quarantined</option>
+                  <option value="Suspected" name="suspected">Suspected</option>
                 </select><br><br>
                 <label for="symptoms">Symptoms: </label>
                 <br>
-                <input type="text" name="symptoms" size="50">
+                <input type="text" name="symptoms" size="50" required>
                 <br><br>
-                <label for="status" style="padding-right: 10px">Status: </label>
-                <input type="checkbox" id="box1" value="Complete">
-                <label for="complete" style="padding-right: 20px">Complete</label>
-                <input type="checkbox" id="box2" value="Pending">
-                <label for="Pending">Pending</label>
-                <br><br>
-                <label for="resultdate">Result date: </label>
-                <input type="date" name="resultDate" size="30">
-                <br><br><br>
                 <label for="testDate">Test date: </label>
-                <input type="date" name="testDate" size="30">
+                <input type="date" name="testDate" size="30" required>
                 <br><br><br>
 
                 <div class="buttons">
                   <button type="button" onclick="xCloseFilter(1)">Delete</button>
-                  <button type="submit" onclick="addReport()">Save</button>
+                  <button type="submit">Save</button>
                 </div>
               </form>
             </div>
