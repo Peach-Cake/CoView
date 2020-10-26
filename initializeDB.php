@@ -1,0 +1,127 @@
+<?php
+$conn = new mysqli("localhost", "root", "");
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error . "<br>");
+}
+
+// Create database
+$sql = "CREATE DATABASE CoViewDB";
+if ($conn->query($sql) === TRUE) {
+  echo "Database created successfully<br>";
+} else {
+  echo "Error creating database: " . $conn->error . "<br>";
+}
+$conn->close();
+
+//createTables
+$conn = new mysqli("localhost", "root", "", "CoViewDB");
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error . "<br");
+}
+
+//TestCentre
+$sql = "CREATE TABLE TestCentre (
+  CentreID INT(5) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
+  CentreName VARCHAR(20) NOT NULL UNIQUE,
+  AddressLine1 VARCHAR(30) NOT NULL,
+  AddressLine2 VARCHAR(30) NOT NULL,
+  State VARCHAR(20) NOT NULL,
+  Postcode int(5) NOT NULL
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table TestCentre created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+//User
+$sql = "CREATE TABLE User (
+ID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
+Username VARCHAR(20) NOT NULL UNIQUE,
+Password VARCHAR(20) NOT NULL,
+Name VARCHAR(50) NOT NULL,
+Email VARCHAR(60) NOT NULL,
+UserType CHAR(7) NOT NULL
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table User created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
+//Officer
+$sql = "CREATE TABLE Officer (
+UserID BIGINT(10) UNSIGNED UNIQUE,
+Position VARCHAR(8) NOT NULL,
+RegisteredCentreID INT(5) UNSIGNED,
+FOREIGN KEY (UserID) REFERENCES User(ID),
+FOREIGN KEY (RegisteredCentreID) REFERENCES TestCentre(CentreID)
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table Officer created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
+//Patient
+$sql = "CREATE TABLE Patient (
+UserID BIGINT(10) UNSIGNED UNIQUE,
+PatientType VARCHAR(15) NOT NULL,
+Symptoms VARCHAR(100) NOT NULL,
+FOREIGN KEY (UserID) REFERENCES User(ID)
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table Patient created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
+//TestKit
+$sql = "CREATE TABLE TestKit (
+KitID INT(5) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
+TestKitName VARCHAR(20) NOT NULL UNIQUE
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table TestKit created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
+//TestCentreKitStock
+$sql = "CREATE TABLE TestCentreKitStock (
+TestCentreID INT(5) UNSIGNED NOT NULL,
+TestKitID INT(5) UNSIGNED NOT NULL,
+AvalaibleStock INT(3) NOT NULL,
+FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
+FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID)
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table TestCentreKitStock created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
+//TestCentreKitStock
+$sql = "CREATE TABLE CovidTest (
+TestID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
+OfficerUserID BIGINT(10) UNSIGNED NOT NULL,
+PatientUserID BIGINT(10) UNSIGNED NOT NULL,
+TestDate CHAR(10) NOT NULL,
+Result VARCHAR(60) DEFAULT 'Test results not ready yet',
+ResultDate CHAR(10) DEFAULT '00/00/0000',
+Status VARCHAR(10) NOT NULL DEFAULT 'Pending',
+TestKitID INT(5) UNSIGNED NOT NULL,
+TestCentreID INT(5) UNSIGNED NOT NULL,
+FOREIGN KEY (OfficerUserID) REFERENCES User(ID),
+FOREIGN KEY (PatientUserID) REFERENCES User(ID),
+FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
+FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID)
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table CovidTest created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+$conn->close();
+ ?>
