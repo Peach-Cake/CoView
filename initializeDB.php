@@ -41,7 +41,7 @@ ID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
 Username VARCHAR(20) NOT NULL UNIQUE,
 Password VARCHAR(20) NOT NULL,
 Name VARCHAR(50) NOT NULL,
-Email VARCHAR(60) NOT NULL,
+Email VARCHAR(60) NOT NULL UNIQUE,
 UserType CHAR(7) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
@@ -92,7 +92,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE TestCentreKitStock (
 TestCentreID INT(5) UNSIGNED NOT NULL,
 TestKitID INT(5) UNSIGNED NOT NULL,
-AvalaibleStock INT(3) NOT NULL,
+AvalaibleStock INT(3) UNSIGNED NOT NULL,
 FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
 FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID),
 UNIQUE INDEX CentreKit(TestCentreID, TestKitID)
@@ -128,16 +128,13 @@ $sql = "SELECT * FROM User";
 $result = $conn->query($sql);
 if($result -> num_rows == 0){
   //insertTableData
+  //TestCentre
   $sql = "INSERT INTO TestCentre(CentreName, AddressLine1, AddressLine2, State, Postcode)
   VALUES ('Centre1', '6 Jln Setuadungun 9', 'Bkt Damansara', 'Johor', 23401);";
   $sql .= "INSERT INTO TestCentre(CentreName, AddressLine1, AddressLine2, State, Postcode)
   VALUES ('Centre2', '4 Jln Bestari 2', 'Taman Tun', 'Pahang', 23331);";
-  /*if ($conn->multi_query($sql) === TRUE) {
-    echo "New records created successfully<br>";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
-  }*/
 
+  //User,Officer,Patient
   $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
   VALUES ('Manager', 'password', 'Man Ager', 'manager@manager.com', 'Officer');";
   $sql .= "INSERT INTO Officer(UserID, Position, RegisteredCentreID)
@@ -150,33 +147,29 @@ if($result -> num_rows == 0){
   VALUES ('Patient', 'password', 'Pae Tient', 'patient@patient.com', 'Patient');";
   $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
   VALUES (3, 'Infected', 'Coughing and Tiredness');";
+
+  //TestKit
+  $sql .= "INSERT INTO TestKit(TestKitName)
+  VALUES ('TestKit1');";
+  $sql .= "INSERT INTO TestKit(TestKitName)
+  VALUES ('TestKit2');";
+
+  //TestCentreKitStock
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  VALUES (1,1,2);";
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  VALUES (1,2,5);";
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  VALUES (2,1,4);";
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  VALUES (2,2,8);";
+
+  //add Data to tables
   if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully<br>";
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
   }
-  /*$sql = "INSERT INTO TestKit(TestKitName)
-  VALUES ('TestKit1');";
-  $sql .= "INSERT INTO TestKit(TestKitName)
-  VALUES ('TestKit2');";
-  if ($conn->multi_query($sql) === TRUE) {
-    echo "New records created successfully<br>";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
-  }*/
-  /*$sql = "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
-  VALUES (1,1,2);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
-  VALUES (1,2,5);";*/
-  /*$sql = "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
-  VALUES (5,1,4);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
-  VALUES (5,2,8);";
-  if ($conn->multi_query($sql) === TRUE) {
-    echo "New records created successfully<br>";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
-  }*/
 }
 else{
   echo "Data already initialized!<br>";

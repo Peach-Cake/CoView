@@ -80,6 +80,21 @@
           </tr>
         </thead>
         <tbody>
+          <?php
+          $conn = new mysqli("localhost", "root", "", "CoViewDB");
+          $sql = "SELECT Username, Name , Email FROM user
+          WHERE ID in (SELECT UserID FROM officer WHERE RegisteredCentreID=1 AND Position = 'Tester')";
+          $result = $conn->query($sql);
+          if (mysqli_num_rows($result) > 0) {
+          while($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row["Username"]. "</td>";
+            echo "<td>" . $row["Name"]. "</td> ";
+            echo "<td>" . $row["Email"]. "</td>";
+            echo "</tr>";
+          }}//else{echo "test";}
+          $conn->close();
+           ?>
         </tbody>
         </table>
       </div>

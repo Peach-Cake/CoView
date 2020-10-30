@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="CoView.css">
     <script type="text/javascript" src="CoViewJS.js">
     </script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
     <title>Log in</title>
     </head>
     <header>
@@ -15,11 +16,11 @@
     <body>
       <div class="login-container">
 
-<form name="logInForm" class="text-center border border-light p-5" onsubmit="login()">
+<form name="logInForm" id="logInForm" method="post" class="text-center border border-light p-5" action="http://localhost/login.php">
 
     <p class="h4 mb-4">Sign in</p>
     <small class="errorNotifications"></small>
-    <input type="text" name="email" class="form-control mb-4" placeholder="E-mail">
+    <input type="text" name="email" class="form-control mb-4" placeholder="E-mail or Username">
     <small class="errorNotifications"></small>
     <input type="password" name="password" class="form-control mb-4" placeholder="Password">
 
