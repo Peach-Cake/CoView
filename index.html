@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="CoView.css"></link>
     <script type="text/javascript" src="CoViewJS.js">
     </script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <script type="text/javascript">
+     newLogin();
+   </script>
     <title>Log in</title>
     </head>
     <header>
@@ -16,19 +20,19 @@
     <body>
       <div class="login-container">
 
-<form name="logInForm" id="logInForm" method="post" class="text-center border border-light p-5" action="http://localhost/login.php">
+<form name="logInForm" id="logInForm" method="post" class="text-center border border-light p-5" action="" >
 
     <p class="h4 mb-4">Sign in</p>
     <small class="errorNotifications"></small>
-    <input type="text" name="email" class="form-control mb-4" placeholder="E-mail or Username">
+    <input type="text" name="email" class="form-control mb-4" placeholder="E-mail or Username"></input>
     <small class="errorNotifications"></small>
-    <input type="password" name="password" class="form-control mb-4" placeholder="Password">
+    <input type="password" name="password" class="form-control mb-4" placeholder="Password"></input>
 
     <div class="d-flex justify-content-around">
         <div>
 
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember"></input>
                 <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
             </div>
         </div>

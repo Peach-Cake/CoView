@@ -305,6 +305,7 @@ function validateUsername(username){
   return true;
 }
 
+//delete
 function login(){
   event.preventDefault();
   let form = document.getElementsByName("logInForm")[0];
@@ -494,4 +495,66 @@ function updateReport(){
   rows = table.rows;
   rows[n+1].getElementsByTagName('td')[5].innerHTML = "Complete";
   rows[n+1].getElementsByTagName('td')[4].innerHTML = d.toLocaleDateString();
+}
+
+/*function newLogin(){
+  //event.preventDefault();
+  $(function() {
+       // bind 'myForm' and provide a simple callback function
+       $('#logInForm').ajaxForm(function() {
+         //event.preventDefault();
+         $("#logInForm").ajaxSubmit({url: 'login.php', type: 'post'})
+           alert("Thank you for your comment!");
+       });
+     });
+     let xhttp = new XMLHttpRequest();
+     let form = document.getElementById('logInForm');
+
+     xhttp.onreadystatechange = function(){
+       if(xhttp.responseText == "Manager"){
+         //let form = document.getElementById('logInForm');
+         console.log(xhttp.responseText);
+         form.action = "ManagerMenu.html";
+         //form.submit();
+     }
+   }
+
+     console.log(xhttp.responseText);
+     xhttp.open("GET", "http://localhost/login.php?r=", true);
+     xhttp.send();
+}*/
+function newLogin(){
+  $(function () {
+
+        $('#logInForm').on('submit', function (e) {
+
+          e.preventDefault();
+          //var data = $('#logInForm').serialize();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/login.php',
+            data: $('#logInForm').serialize(),
+            success: function (userType) {
+              //alert('form was submitted');
+              //console.log(this.data);
+              //console.log(datas);
+              if(userType == "Manager"){
+                window.location.href = "http://localhost/ManagerMenu.php";
+              }
+              if(userType == "Not Found"){
+                let notification = document.getElementsByTagName('small')[0];
+                notification.style.display = '';
+                notification.innerHTML = "Username or Password Incorrect!";
+              }
+            },
+            error: function(datas){
+              alert('form error');
+              console.log(this.data);
+              console.log(datas);
+            }
+          });
+
+        });
+
+      });
 }

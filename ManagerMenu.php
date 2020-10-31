@@ -1,3 +1,8 @@
+<?php
+header("Access-Control-Allow-Origin: *");
+//header('Content-type: application/json');
+session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -5,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
-
     <title>Manager Menu</title>
   </head>
 
@@ -14,7 +18,10 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            //session_start();
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <div class="aligning">
