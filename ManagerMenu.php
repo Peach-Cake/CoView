@@ -29,6 +29,7 @@ header("Access-Control-Allow-Origin: *");
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <div class="aligning">
             <div class="dropdown-header">Position: Manager</div>
+            <div class="dropdown-header"></div>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="index.html">Logout</a>
             </div>
@@ -69,7 +70,7 @@ header("Access-Control-Allow-Origin: *");
 
         <div class="col-md"  id="ManagerMenuItems">
             <div class="card">
-              <a href="TesterTable.html">
+              <a href="http://localhost/TesterTable.php">
               <img class="card-img-top" src="testerIcon.png" alt="RegisterTester">
               <div class="card-body">
                 <h5 class="card-title">Register Tester</h5>

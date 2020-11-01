@@ -32,8 +32,22 @@ if (mysqli_num_rows($result) > 0) {
       header("Location: testerMenu.html");
     }
     if($row2["Position"]=="Manager"){
-      //header("Location: http://localhost/ManagerMenu.php");
-      //$_SESSION["secure"] = true;
+      $sqlMan = "SELECT RegisteredCentreID FROM officer
+      WHERE UserID = '$id';";
+      $resultMan = $conn->query($sqlMan);
+      $rowMan = mysqli_fetch_assoc($resultMan);
+      if (isset($rowMan["RegisteredCentreID"])) {
+          $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
+          $_SESSION["LoggedIn"] = $user;
+          echo "Manager";
+          exit;
+      }else {
+          $_SESSION["TestCentreID"] = '0';
+          $_SESSION["LoggedIn"] = $user;
+          echo "NewManager";
+          exit;
+      }
+
       $_SESSION["LoggedIn"] = $user;
       echo "Manager";
     }

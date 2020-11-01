@@ -1,3 +1,7 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,7 +16,9 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
