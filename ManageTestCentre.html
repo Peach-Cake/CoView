@@ -15,10 +15,11 @@
             Account
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="dropdown-header">Posistion: Manager</div>
-          <a class="dropdown-item" href="#">Edit Profile</a>
+          <div class="aligning">
+          <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="login.html">Logout</a>
+          <a class="dropdown-item" href="index.html">Logout</a>
+          </div>
         </div>
       </nav>
       </header>
@@ -30,7 +31,7 @@
         </ol>
       </nav>
       <div class="tkform-container">
-        <form id="form" action="" method="post" name="tcForm" onsubmit="addTestCentre()">
+        <form id="form" name="tcForm" onsubmit="addTestCentre()">
               <label for="tcName">Tester Centre Name: </label>
               <br>
               <input type="text" name="tcName" id="tcName" size="50" required>

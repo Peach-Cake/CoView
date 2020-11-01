@@ -1,3 +1,12 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+//header('Content-type: application/json');
+//$cookieParams = session_get_cookie_params();
+//$cookieParams['secure'] = true;
+//session_set_cookie_params($cookieParams);
+//session_start();
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -5,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
-
     <title>Manager Menu</title>
   </head>
 
@@ -14,13 +22,16 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="dropdown-header">Posistion: Manager</div>
-          <a class="dropdown-item" href="#">Edit Profile</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="login.html">Logout</a>
+            <div class="aligning">
+            <div class="dropdown-header">Position: Manager</div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="index.html">Logout</a>
+            </div>
         </div>
       </nav>
     </header>
@@ -37,9 +48,8 @@
             <a href="GenerateTestReport.html">
             <img class="card-img-top" src="reportIcon.png" alt="ViewTestReports">
             <div class="card-body">
-              <h5 class="card-title">View Test Reports</h5>
+              <h5 class="card-title">Generate Test Reports</h5>
               <p class="card-text">View the Test Reports done at the test centre.</p>
-              <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
             </div>
             </a>
           </div>
@@ -52,7 +62,6 @@
             <div class="card-body">
               <h5 class="card-title">Manage Test Centre</h5>
               <p class="card-text">Register Newly approved Testing Centres.</p>
-              <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
             </div>
             </a>
           </div>
@@ -65,7 +74,6 @@
               <div class="card-body">
                 <h5 class="card-title">Register Tester</h5>
                 <p class="card-text">Register Newly Joined Testers.</p>
-                <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
               </div>
               </a>
             </div>
@@ -78,7 +86,6 @@
               <div class="card-body">
                 <h5 class="card-title">Manage Test Kit Stock</h5>
                 <p class="card-text">Add newly arrived test kit stock to the system.</p>
-                <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
               </div>
               </a>
             </div>

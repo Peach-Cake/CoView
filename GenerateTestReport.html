@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
-    <title>View Test Report</title>
+    <title>Generate Test Report</title>
   </head>
   <body  class="settings">
     <header>
@@ -15,10 +15,11 @@
             Account
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="dropdown-header">Posistion: Manager</div>
-          <a class="dropdown-item" href="#">Edit Profile</a>
+          <div class="aligning">
+          <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="login.html">Logout</a>
+          <a class="dropdown-item" href="index.html">Logout</a>
+          </div>
         </div>
       </nav>
 
@@ -102,7 +103,7 @@
         <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody onclick="openModal(1)">
       <tr>
         <td>A1</td>
         <td>Jessie</td>
@@ -145,6 +146,16 @@
       </tr>
     </tbody>
     </table>
+  </div>
+  <div id="resultsModal" class="modal">
+    <div class="update-modal-content">
+      <span class="close" onclick="xCloseFilter(1)">&times;</span>
+    <div class="form-container1">
+      <b>Results: Appears to be Covid-Negative, but not completely certain.</b>
+      <br>
+      <b>Symptoms: Coughing, Sore Throat, Fever.</b>
+        </div>
+        </div>
   </div>
     <script type="text/javascript" src="CoViewJS.js">
     </script>
