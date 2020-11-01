@@ -39,7 +39,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE User (
 ID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
 Username VARCHAR(20) NOT NULL UNIQUE,
-Password VARCHAR(20) NOT NULL,
+Password VARCHAR(255) NOT NULL,
 Name VARCHAR(50) NOT NULL,
 Email VARCHAR(60) NOT NULL UNIQUE,
 UserType CHAR(7) NOT NULL
@@ -126,7 +126,7 @@ if ($conn->query($sql) === TRUE) {
 }
 $sql = "SELECT * FROM User";
 $result = $conn->query($sql);
-if($result -> num_rows == 0){
+if(mysqli_num_rows($result) == 0){
   //insertTableData
   //TestCentre
   $sql = "INSERT INTO TestCentre(CentreName, AddressLine1, AddressLine2, State, Postcode)
@@ -135,16 +135,17 @@ if($result -> num_rows == 0){
   VALUES ('Centre2', '4 Jln Bestari 2', 'Taman Tun', 'Pahang', 23331);";
 
   //User,Officer,Patient
+  $password = password_hash('password', PASSWORD_DEFAULT);
   $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
-  VALUES ('Manager', 'password', 'Man Ager', 'manager@manager.com', 'Officer');";
+  VALUES ('Manager', '$password', 'Man Ager', 'manager@manager.com', 'Officer');";
   $sql .= "INSERT INTO Officer(UserID, Position, RegisteredCentreID)
   VALUES (1, 'Manager', 1);";
   $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
-  VALUES ('Tester', 'password', 'Tes Ter', 'tester@tester.com', 'Officer');";
+  VALUES ('Tester', '$password', 'Tes Ter', 'tester@tester.com', 'Officer');";
   $sql .= "INSERT INTO Officer(UserID, Position, RegisteredCentreID)
   VALUES (2, 'Tester', 1);";
   $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
-  VALUES ('Patient', 'password', 'Pae Tient', 'patient@patient.com', 'Patient');";
+  VALUES ('Patient', '$password', 'Pae Tient', 'patient@patient.com', 'Patient');";
   $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
   VALUES (3, 'Infected', 'Coughing and Tiredness');";
 

@@ -1,19 +1,26 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 session_start();
+header("Access-Control-Allow-Origin: *");
+//$cookieParams = session_get_cookie_params();
+//$cookieParams['secure'] = true;
+//echo $cookieParams['secure'];
+//exit;
+//session_set_cookie_params($cookieParams);
+//session_start();
 //header('Content-type: application/json');
 //this is temp as we try to make php work without redirect
 //$username = $_PHP['email'];
 //$password= $_PHP['password'];
 $params = array();
 $username = $_POST["email"];
-$password = $_POST["password"];
+
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
 $sql = "SELECT ID, Username, Password, Email, UserType FROM user
-WHERE (Username = '$username' OR Email = '$username') AND Password = '$password';";
+WHERE (Username = '$username' OR Email = '$username');";
 $result = $conn->query($sql);
 if (mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
+  if(password_verify($_POST["password"], $row["Password"])==true){
   $id = $row["ID"];
   $user = $row["Username"];
   if($row["UserType"]=="Officer"){
@@ -26,9 +33,9 @@ if (mysqli_num_rows($result) > 0) {
     }
     if($row2["Position"]=="Manager"){
       //header("Location: http://localhost/ManagerMenu.php");
+      //$_SESSION["secure"] = true;
       $_SESSION["LoggedIn"] = $user;
       echo "Manager";
-      //exit;
     }
   }
   if($row["UserType"]=="Patient"){
@@ -36,6 +43,9 @@ if (mysqli_num_rows($result) > 0) {
   }
 }
 else{
+  echo "Not Found";
+}
+}else{
   echo "Not Found";
 }
 $conn->close();

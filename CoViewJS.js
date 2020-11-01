@@ -536,8 +536,8 @@ function newLogin(){
             data: $('#logInForm').serialize(),
             success: function (userType) {
               //alert('form was submitted');
-              //console.log(this.data);
-              //console.log(datas);
+              console.log(this.data);
+              console.log(userType);
               if(userType == "Manager"){
                 window.location.href = "http://localhost/ManagerMenu.php";
               }

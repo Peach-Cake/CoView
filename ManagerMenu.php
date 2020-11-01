@@ -1,7 +1,11 @@
 <?php
+session_start();
 header("Access-Control-Allow-Origin: *");
 //header('Content-type: application/json');
-session_start();
+//$cookieParams = session_get_cookie_params();
+//$cookieParams['secure'] = true;
+//session_set_cookie_params($cookieParams);
+//session_start();
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -19,7 +23,6 @@ session_start();
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
-            //session_start();
             echo $_SESSION["LoggedIn"];
             ?>
           </a>
