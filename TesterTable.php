@@ -57,7 +57,7 @@ header("Access-Control-Allow-Origin: *");
                     <label for="tUsername">Tester Username: </label>
                     <br>
                     <input type="text" name="tUsername" id="tUsername"size="50" required></input>
-                    <br><br>
+                    <br><small class="errorNotifications"></small><br>
                     <label for="tEmail">Tester Email: </label>
                     <br>
                     <input type="email" name="tEmail" id="tEmail" size="50" required></input>

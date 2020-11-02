@@ -546,7 +546,7 @@ function registerTester(){
 
           e.preventDefault();
           //var data = $('#logInForm').serialize();
-          console.log($('#testerForm').serialize());
+          let notifications = document.getElementsByClassName('errorNotifications');
           $.ajax({
             type: 'POST',
             url: 'http://localhost/RegisterTester.php',
@@ -557,6 +557,26 @@ function registerTester(){
               console.log(testerAdded);
               if (testerAdded == "Added") {
                 window.alert("tester added");
+                xCloseFilter(0);
+                location.reload();
+              }
+              if (testerAdded == "Password") {
+                notifications[0].style.display = 'none';
+                notifications[1].style.display = 'none';
+                notifications[2].style.display = '';
+                notifications[2].innerHTML = "Passwords do not match!";
+              }
+              if (testerAdded == "Username") {
+                notifications[0].style.display = '';
+                notifications[1].style.display = 'none';
+                notifications[2].style.display = 'none';
+                notifications[0].innerHTML = "Username already taken!";
+              }
+              if (testerAdded == "Email") {
+                notifications[0].style.display = 'none';
+                notifications[1].style.display = '';
+                notifications[2].style.display = 'none';
+                notifications[1].innerHTML = "Email already registered!";
               }
             },
             error: function(datas){
