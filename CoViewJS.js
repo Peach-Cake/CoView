@@ -590,3 +590,99 @@ function registerTester(){
 
       });
 }
+function nameChange(){
+  $(function () {
+        $('#tkeName').on('change', function (e) {
+          getStock();
+        });
+      });
+}
+function numChange(){
+  $(function () {
+        $('#tkeStock').on('change', function (e) {
+          getStock();
+        });
+      });
+}
+function getStock(){
+  let tkID = {id: $('#tkeName').val()};
+  let aStock = document.getElementById('tkeAvailableStock');
+  let addStock = document.getElementById('tkeStock').value;
+  let newStock = document.getElementById('tkeNewStock');
+  console.log($('#tkeName').val());
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/GetStock.php',
+    data: tkID,
+    success: function (stock) {
+      aStock.innerHTML = "Available Stock: "+ stock;
+      newStock.innerHTML = "New Stock: "+ (parseInt(stock) + parseInt(addStock));
+    },
+    error: function(){
+      alert('error');
+    }
+  });
+}
+
+function updateStock(){
+  $(function () {
+
+        $('#tkeform').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/UpdateStock.php',
+            data: $('#tkeform').serialize(),
+            success: function (nstock) {
+              if(nstock == "Update"){
+                alert('form updated');
+                getStock();
+              }
+              else{
+                alert(nstock);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
+
+function addStock(){
+  $(function () {
+        let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#tknform').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/AddStock.php',
+            data: $('#tknform').serialize(),
+            success: function (nstock) {
+              if(nstock == "AddedAdded"){
+                alert('Test Kit Added');
+                error.style.display = 'none';
+                location.reload();
+              }
+              if(nstock == "Exists"){
+                error.innerHTML="This Test Kit is already in the system";
+                error.style.display = '';
+              }
+              else{
+                console.log(nstock);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}

@@ -82,7 +82,7 @@ header("Access-Control-Allow-Origin: *");
 
         <div class="col-md"  id="ManagerMenuItems">
             <div class="card">
-              <a href="ManageTestKitStock.html">
+              <a href="http://localhost/ManageTestKitStock.php">
               <img class="card-img-top" src="testKitIcon.png" alt="ManageTestKitStock">
               <div class="card-body">
                 <h5 class="card-title">Manage Test Kit Stock</h5>
