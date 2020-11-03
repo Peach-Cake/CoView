@@ -720,3 +720,28 @@ function addTestCentre(){
       });
 
 }
+
+function getReportDetails(){
+  $(function () {
+
+        $('#reports tr').on('click', function (e) {
+          let data = {tid:$(this).find('td:first').text()};
+          let rep = document.getElementById('tResults');
+          //e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/GetReportDetails.php',
+            data: data,
+            success: function (results) {
+              rep.innerHTML = results;
+              openModal(1);
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}

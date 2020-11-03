@@ -1,11 +1,13 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
-//header('Content-type: application/json');
-//$cookieParams = session_get_cookie_params();
-//$cookieParams['secure'] = true;
-//session_set_cookie_params($cookieParams);
-//session_start();
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -31,7 +33,7 @@ header("Access-Control-Allow-Origin: *");
             <div class="dropdown-header">Position: Manager</div>
             <div class="dropdown-header"></div>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="index.html">Logout</a>
+            <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
             </div>
         </div>
       </nav>
