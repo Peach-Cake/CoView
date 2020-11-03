@@ -148,6 +148,14 @@ if(mysqli_num_rows($result) == 0){
   VALUES ('Patient', '$password', 'Pae Tient', 'patient@patient.com', 'Patient');";
   $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
   VALUES (3, 'Infected', 'Coughing and Tiredness');";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Manager2', '$password', 'Man Agertoo', 'manager2@manager.com', 'Officer');";
+  $sql .= "INSERT INTO Officer(UserID, Position, RegisteredCentreID)
+  VALUES (4, 'Manager', 2);";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Manager3', '$password', 'Man Agertree', 'manager3@manager.com', 'Officer');";
+  $sql .= "INSERT INTO Officer(UserID, Position)
+  VALUES (5, 'Manager');";
 
   //TestKit
   $sql .= "INSERT INTO TestKit(TestKitName)
@@ -165,6 +173,8 @@ if(mysqli_num_rows($result) == 0){
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (2,2,8);";
 
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
+  VALUES(2,3,'12/02/2020',1,1);";
   //add Data to tables
   if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully<br>";

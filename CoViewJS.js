@@ -686,3 +686,37 @@ function addStock(){
       });
 
 }
+
+function addTestCentre(){
+  $(function () {
+        let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#tcForm').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/AddTestCentre.php',
+            data: $('#tcForm').serialize(),
+            success: function (tc) {
+              if(tc == "AddedAdded"){
+                alert('Test Centre now registered to your account.');
+                error.style.display = 'none';
+                window.location.href = 'http://localhost/ManagerMenu.php';
+              }
+              if(tc == "Exists"){
+                error.innerHTML="Test Centre with that name already exists";
+                error.style.display = '';
+              }
+              else{
+                console.log(tc);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}

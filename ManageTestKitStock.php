@@ -18,7 +18,6 @@ header("Access-Control-Allow-Origin: *");
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
             echo $_SESSION["LoggedIn"];
-            echo $_SESSION["TestCentreID"];
             ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,7 +32,7 @@ header("Access-Control-Allow-Origin: *");
 
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Manage Test Kit Stock</li>
         </ol>
       </nav>
@@ -55,7 +54,7 @@ header("Access-Control-Allow-Origin: *");
             <br><br>
             <label for="tknStock">Arrived Stock: </label>
             <br>
-            <input type="number" name="tknStock" id="tknStock" size="3" required>
+            <input type="number" name="tknStock" id="tknStock" size="3" min="1" required>
             <br><br><br><br><br>
             <div class="buttons">
               <button type="submit">Save</button>

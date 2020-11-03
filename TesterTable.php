@@ -35,7 +35,7 @@ header("Access-Control-Allow-Origin: *");
   <main>
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Register Tester</li>
         </ol>
       </nav>
@@ -88,9 +88,10 @@ header("Access-Control-Allow-Origin: *");
         </thead>
         <tbody>
           <?php
+          $tcID = $_SESSION['TestCentreID'];
           $conn = new mysqli("localhost", "root", "", "CoViewDB");
           $sql = "SELECT Username, Name , Email FROM user
-          WHERE ID in (SELECT UserID FROM officer WHERE RegisteredCentreID=1 AND Position = 'Tester')";
+          WHERE ID in (SELECT UserID FROM officer WHERE RegisteredCentreID='$tcID' AND Position = 'Tester')";
           $result = $conn->query($sql);
           if (mysqli_num_rows($result) > 0) {
           while($row = mysqli_fetch_assoc($result)) {

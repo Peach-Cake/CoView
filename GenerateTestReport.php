@@ -1,3 +1,7 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,7 +16,9 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+             ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
@@ -104,46 +110,27 @@
       </tr>
     </thead>
     <tbody onclick="openModal(1)">
-      <tr>
-        <td>A1</td>
-        <td>Jessie</td>
-        <td>Returnee</td>
-        <td>11/01/2021</td>
-        <td>02/02/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A2</td>
-        <td>Cassidy</td>
-        <td>Quarantined</td>
-        <td>01/02/2021</td>
-        <td>01/02/2021</td>
-        <td>Complete</td>
-      </tr>
-      <tr>
-        <td>A3</td>
-        <td>Butch</td>
-        <td>Close Contact</td>
-        <td>04/09/2021</td>
-        <td>15/09/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A4</td>
-        <td>James</td>
-        <td>Infected</td>
-        <td>28/04/2021</td>
-        <td>03/05/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A5</td>
-        <td>Nanma</td>
-        <td>Suspected</td>
-        <td>15/06/2021</td>
-        <td>20/06/2021</td>
-        <td>Complete</td>
-      </tr>
+      <?php
+      $centreID = $_SESSION["TestCentreID"];
+      $conn = new mysqli("localhost", "root", "", "CoViewDB");
+      $sql = "SELECT covidtest.TestID,user.Name,patient.PatientType,covidtest.TestDate,covidtest.ResultDate,covidtest.Status
+      FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
+      INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID';";
+      $result = $conn->query($sql);
+      if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>".$row['TestID']."</td>";
+        echo "<td>".$row['Name']."</td>";
+        echo "<td>".$row['PatientType']."</td>";
+        echo "<td>".$row['TestDate']."</td>";
+        echo "<td>".$row['ResultDate']."</td>";
+        echo "<td>".$row['Status']."</td>";
+        echo "</tr>";
+      }}
+      $conn->close();
+       ?>
+
     </tbody>
     </table>
   </div>

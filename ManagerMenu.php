@@ -46,7 +46,7 @@ header("Access-Control-Allow-Origin: *");
 
         <div class="col-md" id="ManagerMenuItems">
           <div class="card">
-            <a href="GenerateTestReport.html">
+            <a href="http://localhost/GenerateTestReport.php">
             <img class="card-img-top" src="reportIcon.png" alt="ViewTestReports">
             <div class="card-body">
               <h5 class="card-title">Generate Test Reports</h5>
@@ -58,7 +58,7 @@ header("Access-Control-Allow-Origin: *");
 
         <div class="col-md" id="ManagerMenuItems">
           <div class="card">
-            <a href="ManageTestCentre.html">
+            <a href="http://localhost/ManageTestCentre.php">
             <img class="card-img-top" src="testCentreIcon.png" alt="ManageTestCentre">
             <div class="card-body">
               <h5 class="card-title">Manage Test Centre</h5>
