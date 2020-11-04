@@ -29,7 +29,7 @@ session_start()
     </header>
 
       <div class="form-container">
-          <form id="form">
+          <form id="form" action="insertData.php" method="post">
                 <label for="testerName"><b>Tester: </b></label>
                 <br>
                 <input type="text" name="testerName" size="50" required>
@@ -42,12 +42,17 @@ session_start()
                 <br>
                 <input type="text" name="username" size="50" required>
                 <br><br>
+                <label for="email"><b>Email: </b></label>
+                <br>
+                <input type="email" name="email" size="50" required>
+                <br><br>
+
                 <label for="password"><b>Password: </b></label>
                 <br>
                 <input type="password" name="password" size="50" required>
                 <br><br>
                 <label for="patientType"><b>Patient type:</b></label>
-                <select id="patientType">
+                <select name="patientType">
                   <option value="Infected" name="infected">Infected</option>
                   <option value="Returnee" name="returnee">Returnee</option>
                   <option value="Close Contact" name="closeContact">Close contact</option>
@@ -65,6 +70,7 @@ session_start()
                 <div class="buttons">
                   <button class="SDBtn" type="button">Delete</button>
                   <button class="SDBtn" type="submit">Save</button>
+
                 </div>
               </form>
             </div>
