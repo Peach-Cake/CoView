@@ -1,3 +1,14 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,13 +23,15 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+             ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
           <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Logout</a>
+          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
           </div>
         </div>
       </nav>
@@ -27,7 +40,7 @@
     <main>
     <nav aria-label="breadcrumb" class="navBreadCrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
         <li class="breadcrumb-item" aria-current="page">Generate Test Report</li>
       </ol>
     </nav>
@@ -103,47 +116,28 @@
         <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
-    <tbody onclick="openModal(1)">
-      <tr>
-        <td>A1</td>
-        <td>Jessie</td>
-        <td>Returnee</td>
-        <td>11/01/2021</td>
-        <td>02/02/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A2</td>
-        <td>Cassidy</td>
-        <td>Quarantined</td>
-        <td>01/02/2021</td>
-        <td>01/02/2021</td>
-        <td>Complete</td>
-      </tr>
-      <tr>
-        <td>A3</td>
-        <td>Butch</td>
-        <td>Close Contact</td>
-        <td>04/09/2021</td>
-        <td>15/09/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A4</td>
-        <td>James</td>
-        <td>Infected</td>
-        <td>28/04/2021</td>
-        <td>03/05/2021</td>
-        <td>Pending</td>
-      </tr>
-      <tr>
-        <td>A5</td>
-        <td>Nanma</td>
-        <td>Suspected</td>
-        <td>15/06/2021</td>
-        <td>20/06/2021</td>
-        <td>Complete</td>
-      </tr>
+    <tbody>
+      <?php
+      $centreID = $_SESSION["TestCentreID"];
+      $conn = new mysqli("localhost", "root", "", "CoViewDB");
+      $sql = "SELECT covidtest.TestID,user.Name,patient.PatientType,covidtest.TestDate,covidtest.ResultDate,covidtest.Status
+      FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
+      INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID';";
+      $result = $conn->query($sql);
+      if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>".$row['TestID']."</td>";
+        echo "<td>".$row['Name']."</td>";
+        echo "<td>".$row['PatientType']."</td>";
+        echo "<td>".$row['TestDate']."</td>";
+        echo "<td>".$row['ResultDate']."</td>";
+        echo "<td>".$row['Status']."</td>";
+        echo "</tr>";
+      }}
+      $conn->close();
+       ?>
+
     </tbody>
     </table>
   </div>
@@ -151,18 +145,21 @@
     <div class="update-modal-content">
       <span class="close" onclick="xCloseFilter(1)">&times;</span>
     <div class="form-container1">
-      <b>Results: Appears to be Covid-Negative, but not completely certain.</b>
+      <b id="tResults">Results: Appears to be Covid-Negative, but not completely certain.</b>
       <br>
-      <b>Symptoms: Coughing, Sore Throat, Fever.</b>
+      <!--<b id="pSymptoms">Symptoms: Coughing, Sore Throat, Fever.</b>-->
         </div>
         </div>
   </div>
-    <script type="text/javascript" src="CoViewJS.js">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="CoViewJS.js"></script>
+    <script type="text/javascript">
+      getReportDetails();
     </script>
   </main>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 </html>

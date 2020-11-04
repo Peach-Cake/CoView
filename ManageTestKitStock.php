@@ -1,3 +1,14 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,13 +23,15 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
           <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Logout</a>
+          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
           </div>
         </div>
       </nav>
@@ -26,7 +39,7 @@
 
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Manage Test Kit Stock</li>
         </ol>
       </nav>
@@ -39,7 +52,7 @@
         <label for="tkNewNo">No</label>
         <br><br>
         <div class="testKitNew">
-        <form id="tknform" action="" method="post" name="tknForm" onsubmit="addTestKit(tkList)">
+        <form id="tknform" action="" method="post" name="tknForm" onsubmit="">
           <small class="errorNotifications"></small>
           <br>
             <label for="tknName">Test Kit Name: </label>
@@ -48,7 +61,7 @@
             <br><br>
             <label for="tknStock">Arrived Stock: </label>
             <br>
-            <input type="number" name="tknStock" id="tknStock" size="3" required>
+            <input type="number" name="tknStock" id="tknStock" size="3" min="1" required>
             <br><br><br><br><br>
             <div class="buttons">
               <button type="submit">Save</button>
@@ -57,19 +70,28 @@
 
           </div>
           <div class="testKitExists" style="display:none">
-            <form id="tkeform" action="" method="post" name="tkeForm" onsubmit="updateStock(tkList)">
+            <form id="tkeform" action="" method="post" name="tkeForm" >
             <label for="tkeName">Test Kit Name: </label>
             <br>
-            <select name="tkeName" id="tkeName" onchange="showStock(tkList)" required>
-              <option value="TestKit1">TestKit1</option>
-              <option value="TestKit2">TestKit2</option>
+            <select name="tkeName" id="tkeName"  required>
+              <?php
+                $conn = new mysqli("localhost", "root", "", "CoViewDB");
+                $sql = "SELECT * FROM testkit ORDER BY KitID;";
+                $result = $conn->query($sql);
+                if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                  echo "<option value=".$row["KitID"].">".$row["KitID"]." - ". $row["TestKitName"]."</option>";
+
+                }}
+                $conn->close();
+               ?>
             </select>
             <br><br>
             <b id="tkeAvailableStock">Available Stock: </b>
             <br><br>
             <label for="tkeStock">Arrived Stock: </label>
             <br>
-            <input type="number" name="tkeStock" id="tkeStock" size="3" value="0" onchange="showNewStock(tkList)" required>
+            <input type="number" name="tkeStock" id="tkeStock" size="3" value="0" required>
             <br><br>
             <b id="tkeNewStock">New Stock: </b>
 
@@ -81,14 +103,19 @@
         </form>
         </div>
       </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script type="text/javascript" src="CoViewJS.js">
       </script>
       <script type="text/javascript">
         neTestKitForm();
-        var tkList = initTkList();
+        addStock();
+        getStock();
+        nameChange();
+        numChange();
+        updateStock();
       </script>
     </body>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </html>

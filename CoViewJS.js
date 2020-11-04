@@ -261,6 +261,7 @@ function neTestKitForm(){
   }
 }
 
+//delete
 function regTester(){
   event.preventDefault();
   let data = document.getElementsByTagName('input');
@@ -497,32 +498,6 @@ function updateReport(){
   rows[n+1].getElementsByTagName('td')[4].innerHTML = d.toLocaleDateString();
 }
 
-/*function newLogin(){
-  //event.preventDefault();
-  $(function() {
-       // bind 'myForm' and provide a simple callback function
-       $('#logInForm').ajaxForm(function() {
-         //event.preventDefault();
-         $("#logInForm").ajaxSubmit({url: 'login.php', type: 'post'})
-           alert("Thank you for your comment!");
-       });
-     });
-     let xhttp = new XMLHttpRequest();
-     let form = document.getElementById('logInForm');
-
-     xhttp.onreadystatechange = function(){
-       if(xhttp.responseText == "Manager"){
-         //let form = document.getElementById('logInForm');
-         console.log(xhttp.responseText);
-         form.action = "ManagerMenu.html";
-         //form.submit();
-     }
-   }
-
-     console.log(xhttp.responseText);
-     xhttp.open("GET", "http://localhost/login.php?r=", true);
-     xhttp.send();
-}*/
 function newLogin(){
   $(function () {
 
@@ -530,6 +505,7 @@ function newLogin(){
 
           e.preventDefault();
           //var data = $('#logInForm').serialize();
+
           $.ajax({
             type: 'POST',
             url: 'http://localhost/login.php',
@@ -538,6 +514,10 @@ function newLogin(){
               //alert('form was submitted');
               console.log(this.data);
               console.log(userType);
+              console.log($.ajax);
+              if (userType == "NewManager") {
+                window.location.href = "http://localhost/ManageTestCentre.php";
+              }
               if(userType == "Manager"){
                 window.location.href = "http://localhost/ManagerMenu.php";
               }
@@ -557,4 +537,211 @@ function newLogin(){
         });
 
       });
+}
+
+function registerTester(){
+  $(function () {
+
+        $('#testerForm').on('submit', function (e) {
+
+          e.preventDefault();
+          //var data = $('#logInForm').serialize();
+          let notifications = document.getElementsByClassName('errorNotifications');
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/RegisterTester.php',
+            data: $('#testerForm').serialize(),
+            success: function (testerAdded) {
+              //alert('form was submitted');
+              console.log(this.data);
+              console.log(testerAdded);
+              if (testerAdded == "Added") {
+                window.alert("tester added");
+                xCloseFilter(0);
+                location.reload();
+              }
+              if (testerAdded == "Password") {
+                notifications[0].style.display = 'none';
+                notifications[1].style.display = 'none';
+                notifications[2].style.display = '';
+                notifications[2].innerHTML = "Passwords do not match!";
+              }
+              if (testerAdded == "Username") {
+                notifications[0].style.display = '';
+                notifications[1].style.display = 'none';
+                notifications[2].style.display = 'none';
+                notifications[0].innerHTML = "Username already taken!";
+              }
+              if (testerAdded == "Email") {
+                notifications[0].style.display = 'none';
+                notifications[1].style.display = '';
+                notifications[2].style.display = 'none';
+                notifications[1].innerHTML = "Email already registered!";
+              }
+            },
+            error: function(datas){
+              alert('form error');
+              console.log(this.data);
+              console.log(datas);
+            }
+          });
+
+        });
+
+      });
+}
+function nameChange(){
+  $(function () {
+        $('#tkeName').on('change', function (e) {
+          getStock();
+        });
+      });
+}
+function numChange(){
+  $(function () {
+        $('#tkeStock').on('change', function (e) {
+          getStock();
+        });
+      });
+}
+function getStock(){
+  let tkID = {id: $('#tkeName').val()};
+  let aStock = document.getElementById('tkeAvailableStock');
+  let addStock = document.getElementById('tkeStock').value;
+  let newStock = document.getElementById('tkeNewStock');
+  console.log($('#tkeName').val());
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/GetStock.php',
+    data: tkID,
+    success: function (stock) {
+      aStock.innerHTML = "Available Stock: "+ stock;
+      newStock.innerHTML = "New Stock: "+ (parseInt(stock) + parseInt(addStock));
+    },
+    error: function(){
+      alert('error');
+    }
+  });
+}
+
+function updateStock(){
+  $(function () {
+
+        $('#tkeform').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/UpdateStock.php',
+            data: $('#tkeform').serialize(),
+            success: function (nstock) {
+              if(nstock == "Update"){
+                alert('form updated');
+                getStock();
+              }
+              else{
+                alert(nstock);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
+
+function addStock(){
+  $(function () {
+        let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#tknform').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/AddStock.php',
+            data: $('#tknform').serialize(),
+            success: function (nstock) {
+              if(nstock == "AddedAdded"){
+                alert('Test Kit Added');
+                error.style.display = 'none';
+                location.reload();
+              }
+              if(nstock == "Exists"){
+                error.innerHTML="This Test Kit is already in the system";
+                error.style.display = '';
+              }
+              else{
+                console.log(nstock);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
+
+function addTestCentre(){
+  $(function () {
+        let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#tcForm').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/AddTestCentre.php',
+            data: $('#tcForm').serialize(),
+            success: function (tc) {
+              if(tc == "AddedAdded"){
+                alert('Test Centre now registered to your account.');
+                error.style.display = 'none';
+                window.location.href = 'http://localhost/ManagerMenu.php';
+              }
+              if(tc == "Exists"){
+                error.innerHTML="Test Centre with that name already exists";
+                error.style.display = '';
+              }
+              else{
+                console.log(tc);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
+
+function getReportDetails(){
+  $(function () {
+
+        $('#reports tr').on('click', function (e) {
+          let data = {tid:$(this).find('td:first').text()};
+          let rep = document.getElementById('tResults');
+          //e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/GetReportDetails.php',
+            data: data,
+            success: function (results) {
+              rep.innerHTML = results;
+              openModal(1);
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
 }
