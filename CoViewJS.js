@@ -114,7 +114,7 @@ function applyFilter() {
       currentRow.style.display = 'none';
     }
   }
-xCloseFilter(0);
+document.getElementById('close').click();
 }
 //Search
 function search(){
@@ -560,7 +560,7 @@ function registerTester(){
               console.log(testerAdded);
               if (testerAdded == "Added") {
                 window.alert("tester added");
-                xCloseFilter(0);
+                $('#close').click();
                 location.reload();
               }
               if (testerAdded == "Password") {

@@ -52,36 +52,47 @@ if($_SESSION["TestCentreID"]=='0'){
           <button id="viewBtn" type="button" onclick="search()">View</button>
         </div>
 
-        <div id="modal" class="modal">
-          <div class="testerModal-content">
-            <span class="close" onclick="xCloseFilter(0)">&times;</span>
-            <div class="form-container">
-              <form id="testerForm" name="tForm" method="post" action="">
-                    <label for="tName">Tester Name: </label>
-                    <br>
-                    <input type="text" name="tName" id="tName" size="50" required></input>
-                    <br><small class="errorNotifications"></small><br>
-                    <label for="tUsername">Tester Username: </label>
-                    <br>
-                    <input type="text" name="tUsername" id="tUsername"size="50" required></input>
-                    <br><small class="errorNotifications"></small><br>
-                    <label for="tEmail">Tester Email: </label>
-                    <br>
-                    <input type="email" name="tEmail" id="tEmail" size="50" required></input>
-                    <br><br>
-                    <label for="tPassword">Password: </label>
-                    <br>
-                    <input type="password" name="tPassword" id="tPassword" size="50" required></input>
-                    <br><small class="errorNotifications"></small><br>
-                    <label for="tCnPassword">Confirm Password: </label>
-                    <br>
-                    <input type="password" name="tCnPassword" id="tCnPassword" size="50" required></input>
-                    <br><br><br>
-                    <div class="buttons">
-                      <button type="submit">Save</button>
-                    </div>
-                  </form>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Register Tester</h5>
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="testerForm" name="tForm" method="post" action="">
+                  <label for="tName">Tester Name: </label>
+                  <br>
+                  <input type="text" name="tName" id="tName" size="50" required></input>
+                  <br><small class="errorNotifications"></small><br>
+                  <label for="tUsername">Tester Username: </label>
+                  <br>
+                  <input type="text" name="tUsername" id="tUsername"size="50" required></input>
+                  <br><small class="errorNotifications"></small><br>
+                  <label for="tEmail">Tester Email: </label>
+                  <br>
+                  <input type="email" name="tEmail" id="tEmail" size="50" required></input>
+                  <br><br>
+                  <label for="tPassword">Password: </label>
+                  <br>
+                  <input type="password" name="tPassword" id="tPassword" size="50" required></input>
+                  <br><small class="errorNotifications"></small><br>
+                  <label for="tCnPassword">Confirm Password: </label>
+                  <br>
+                  <input type="password" name="tCnPassword" id="tCnPassword" size="50" required></input>
+                  <br><br><br>
+
+              <div class="modal-footer">
+                <div class="buttons">
+                  <button type="submit" class="SDBtn">Save</button>
                 </div>
+              </div>
+            </form>
+          </div>
+            </div>
           </div>
         </div>
         <div class="report-container">
@@ -114,8 +125,9 @@ if($_SESSION["TestCentreID"]=='0'){
         </table>
       </div>
       <div class="btn-container">
-      <button type="button" onclick="openModal(0)"><img src="plus.png" alt="register tester"
-        style="width: 25px; padding-right: 2px;">Register Tester</button>
+        <button type="button"  id="addBtn" data-toggle="modal" data-target="#exampleModalCenter">
+          <img src="plus.png" alt="register tester" style="width: 25px; padding-right: 2px;">Register Tester
+        </button>
       </div>
 
       </main>

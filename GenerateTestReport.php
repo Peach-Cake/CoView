@@ -51,61 +51,77 @@ if($_SESSION["TestCentreID"]=='0'){
       <button type="button" id="viewBtn" onclick="search()">View</button>
     </form>
   </div>
-  <div  class="filterIcon">
-    <button id="filterButton1" onclick="openModal(0)">Filter
-    <svg>
-    <path fill-rule="evenodd"
-    d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5
-    0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5
-    0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1
-    .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5
-    0 0 1 .128-.334L13.5 3.308V2h-11z"/>
-  </svg></button>
+
+<div  class="filterIcon">
+<button type="button" id="filterButton3" data-toggle="modal" data-target="#exampleModalCenter">
+  Filter
+  <svg>
+  <path fill-rule="evenodd"
+  d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5
+  0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5
+  0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1
+  .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5
+  0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+</svg>
+</button>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Filter By:</h4>
+        <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form class="filterForm" id="filterForm">
+            <label>Patient Type:</label>
+            <div class="pType" style="float:right; margin-right:20px">
+            <input type="checkbox" id="returnee" name="patientStatus" value="returnee">
+            <label for="returnee">Returnee</label>&nbsp;
+            <input type="checkbox" id="quarantined" name="patientStatus" value="quarantined">
+            <label for="quarantined">Quarantined</label>&nbsp;
+            <input type="checkbox" id="closeContact" name="patientStatus" value="closeContact">
+            <label for="closeContact">Close Contact</label>&nbsp;<br>
+            <input type="checkbox" id="infected" name="patientStatus" value="infected">
+            <label for="infected">Infected</label>&nbsp;
+            <input type="checkbox" id="suspected" name="patientStatus" value="suspected">
+            <label for="suspected">Suspected</label>
+          </div>
+            <br><br><br>
 
-<div id="modal" class="modal">
-  <div class="filterModal-content">
-    <span class="close" onclick="xCloseFilter(0)">&times;</span>
-    <form class="filterForm" id="filterForm">
-      <h4>Filter By:</h4>
-      <label>Patient Type:</label>
-      <input type="checkbox" id="returnee" name="patientStatus" value="returnee">
-      <label for="returnee">Returnee</label>&nbsp;
-      <input type="checkbox" id="quarantined" name="patientStatus" value="quarantined">
-      <label for="quarantined">Quarantined</label>&nbsp;
-      <input type="checkbox" id="closeContact" name="patientStatus" value="closeContact">
-      <label for="closeContact">Close Contact</label>&nbsp;
-      <input type="checkbox" id="infected" name="patientStatus" value="infected">
-      <label for="infected">Infected</label>&nbsp;
-      <input type="checkbox" id="suspected" name="patientStatus" value="suspected">
-      <label for="suspected">Suspected</label>
-      <br>
+            <label>Test Date:</label>
+            <input type="date" class="filterDates" name="testDateFrom" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">&nbsp;to
+            <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+            <br><br>
 
-      <label>Test Date:</label>
-      <input type="date" class="filterDates" name="testDateFrom" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">&nbsp;to
-      <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
-      <br>
+            <label>Result Date:</label>
+            <input type="date" class="filterDates" name="resultDateFrom" value="">&nbsp;to
+            <input type="date" class="filterDates" name="resultDateTo" value="">
+            <br><br>
 
-      <label>Result Date:</label>
-      <input type="date" class="filterDates" name="resultDateFrom" value="">&nbsp;to
-      <input type="date" class="filterDates" name="resultDateTo" value="">
-      <br>
+            <label>Status: </label>&nbsp;
+            <input type="radio" id="pending" name="status" value="pending">
+            <label for="pending">Pending</label>&nbsp;
+            <input type="radio" id="complete" name="status" value="complete">
+            <label for="complete">Complete</label>&nbsp;
+            <input type="radio" id="both" name="status" value="both" checked>
+            <label for="both">Both</label>
+            <br>
 
-      <label>Status: </label>&nbsp;
-      <input type="radio" id="pending" name="status" value="pending">
-      <label for="pending">Pending</label>&nbsp;
-      <input type="radio" id="complete" name="status" value="complete">
-      <label for="complete">Complete</label>&nbsp;
-      <input type="radio" id="both" name="status" value="both" checked>
-      <label for="both">Both</label>
-      <br>
+          </form>
 
-      <button type="button"  onclick="applyFilter()">Apply</button>
-    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="SDBtn" onclick="applyFilter()">Apply</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="report-container">
-    <table id="reports">
+    <table id="#reportTable">
       <thead>
       <tr>
         <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
