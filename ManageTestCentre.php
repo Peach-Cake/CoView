@@ -1,3 +1,14 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]!='0'){
+  echo "<script type='text/javascript'>alert('Test centre already registered!');";
+  echo "window.location.href = 'http://localhost/ManagerMenu.php';</script>";
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,13 +23,15 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
           <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Logout</a>
+          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
           </div>
         </div>
       </nav>
@@ -31,7 +44,9 @@
         </ol>
       </nav>
       <div class="tkform-container">
-        <form id="form" name="tcForm" onsubmit="addTestCentre()">
+        <form id="tcForm" name="tcForm">
+              <small class="errorNotifications"></small>
+              <br>
               <label for="tcName">Tester Centre Name: </label>
               <br>
               <input type="text" name="tcName" id="tcName" size="50" required>
@@ -68,13 +83,14 @@
               </div>
             </form>
           </div>
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
           <script type="text/javascript" src="CoViewJS.js">
           </script>
           <script type="text/javascript">
-            ifTcRegistered();
+            addTestCentre();
           </script>
         </body>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </html>

@@ -1,10 +1,22 @@
+<?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="CoView.css"></link>
+
     <title>Register Tester</title>
   </head>
   <body class="settings">
@@ -12,14 +24,16 @@
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="aligning">
           <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Log out</a>
+          <a class="dropdown-item" href="http://localhost/logout.php">Log out</a>
         </div>
       </div>
       </nav>
@@ -28,7 +42,7 @@
   <main>
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="ManagerMenu.html">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Register Tester</li>
         </ol>
       </nav>
@@ -42,18 +56,18 @@
           <div class="testerModal-content">
             <span class="close" onclick="xCloseFilter(0)">&times;</span>
             <div class="form-container">
-              <form id="form" name="tForm" onsubmit="regTester()">
+              <form id="testerForm" name="tForm" method="post" action="">
                     <label for="tName">Tester Name: </label>
                     <br>
-                    <input type="text" name="tName" id="tName" size="50" required>
+                    <input type="text" name="tName" id="tName" size="50" required></input>
                     <br><small class="errorNotifications"></small><br>
                     <label for="tUsername">Tester Username: </label>
                     <br>
-                    <input type="text" name="tUsername" id="tUsername"size="50" required>
-                    <br><br>
+                    <input type="text" name="tUsername" id="tUsername"size="50" required></input>
+                    <br><small class="errorNotifications"></small><br>
                     <label for="tEmail">Tester Email: </label>
                     <br>
-                    <input type="email" name="tEmail" id="tEmail" size="50" required>
+                    <input type="email" name="tEmail" id="tEmail" size="50" required></input>
                     <br><br>
                     <label for="tPassword">Password: </label>
                     <br>
@@ -81,9 +95,10 @@
         </thead>
         <tbody>
           <?php
+          $tcID = $_SESSION['TestCentreID'];
           $conn = new mysqli("localhost", "root", "", "CoViewDB");
           $sql = "SELECT Username, Name , Email FROM user
-          WHERE ID in (SELECT UserID FROM officer WHERE RegisteredCentreID=1 AND Position = 'Tester')";
+          WHERE ID in (SELECT UserID FROM officer WHERE RegisteredCentreID='$tcID' AND Position = 'Tester')";
           $result = $conn->query($sql);
           if (mysqli_num_rows($result) > 0) {
           while($row = mysqli_fetch_assoc($result)) {
@@ -103,14 +118,17 @@
         style="width: 25px; padding-right: 2px;">Register Tester</button>
       </div>
 
-
-        <script type="text/javascript" src="CoViewJS.js"></script>
-
-
       </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="CoViewJS.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      registerTester();
+    </script>
   </body>
 </main>
 </html>
