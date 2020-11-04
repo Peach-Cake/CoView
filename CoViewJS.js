@@ -357,7 +357,7 @@ function addReport() {
   button.innerHTML = "Update";
   button.style.width = "auto";
   button.onclick = function(){openUpdateModal(tab.rows.length-2);};
-  var list = document.getElementById("patientType");
+  var list = document.getElementByName("patientType");
   let testID = count;
   let patientName = document.getElementsByName("patientName")[0].value;
   let patientType = list.value;
@@ -520,6 +520,9 @@ function newLogin(){
               }
               if(userType == "Manager"){
                 window.location.href = "http://localhost/ManagerMenu.php";
+              }
+              if(userType == "Tester"){
+                window.location.href = "http://localhost/testerMenu.php";
               }
               if(userType == "Not Found"){
                 let notification = document.getElementsByTagName('small')[0];

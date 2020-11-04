@@ -12,12 +12,12 @@
 .settings {
   font-family: Arial,Helvetica,sans-serif;
   font-size: 16px;
-  background-color: #f6f7f8;
+  background-color: #d8dde1;
 }
 
 .btn-container {
-  text-align: center;
-  padding-top: 20px;
+  padding-left: 50px;
+  padding-top: 60px;
 }
 
 .btn-container a:hover {
@@ -31,10 +31,13 @@
 }
 
 .form-container {
-  border: 1px solid grey;
+  border: none;
   background-color: white;
-  margin: auto;
-  height: 100%;
+  position: relative;
+  margin-top: 40px;
+  margin-right: 350px;
+  margin-bottom: 40px;
+  float: right;
 }
 
 .form-container1 {
@@ -66,29 +69,38 @@
 
 header {
   padding: 10px;
-  background-color: lightblue;}
-
-table {
-  background-color: white;
-  width: 100%;
+  background-image: linear-gradient(#3eb6c1, lightblue);
 }
 
+
 th {
-  padding: 15px;
-  text-align: center;
-  background-color: lightblue;
+  background-color: #3eb6c1;
+  width: 500px;
+  color: white;
 }
 
 td{
-  padding: 5px 0px 5px;
-  text-align: center;
-  border: 1px solid lightgrey;
   border-right: hidden;
 }
 
 tr:hover{
 background-color:lightgrey;
 cursor:pointer;
+}
+
+.table {
+  position: relative;
+  background-color: white;
+  top: 50px;
+  left: 40px;
+  display: block;
+  border: 3px solid white;
+  text-align: center;
+  width: 70%;
+  float: right;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
 }
 
 h1 {
@@ -107,6 +119,7 @@ h2 {
   font-family: Arial,Helvetica,sans-serif;
   font-weight: bold;
 }
+
 nav {
   padding-top: 10px;
   padding-left: 50px;
@@ -125,12 +138,13 @@ a:link {
     content: ">";
   }
 
-button {
+.sideBtns {
   text-align: center;
-  height: 40px;
-  width: 20%;
-  border-radius: 6px;
-  border: none;
+  height: 60px;
+  width: 15%;
+  border-radius: 30px;
+  border: 4px solid white;
+  outline: none;
   background-color: #3eb6c1;
   color: white;
 }
@@ -145,45 +159,42 @@ button {
   color: white;
 }
 
-#submitBtn:hover {
-  background-color: #2e878f;
-  }
-}
-
 button:active{
-  border: 3px solid lightblue;
-  border-radius: 6px;
+  border: none;
+  outline: none;
 }
 
 #searchButton{
   width: 5%;
+
 }
 .search-container {
-  padding-top: 30px;
-  text-align: center;
+  float: right;
+  position: relative;
+  right: 400px;
+
 }
 
 .search-container input[type=text]{
-  width: 600px;
+  width: 400px;
+  height: 31px;
 }
 
 .search-container button {
-  padding: 1px 3px;
-  margin-right: 16px;
   background: #ddd;
   font-size: 17px;
-  border: 1px solid grey;
   cursor: pointer;
+  float: right;
 }
 
 .report-container {
     height: 300px;
+    width: auto;
     border: 2px solid lightgrey;
     background-color: white;
-    margin-left: 180px;
-    margin-right: 180px;
     overflow-y: scroll;
     overflow-x: hidden;
+    float: right;
 }
 
 .login-container {
@@ -229,12 +240,27 @@ button:active{
   height: 50px;
 }
 
+
+.SDBtn {
+  background-color: #3eb6c1;
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 30px;
+
+}
+
+.SDBtn:hover {
+  background-color: #2e878f;
+}
+
 #viewBtn {
   height: 31px;
+  color: white;
   border: none;
   background-color: #3eb6c1;
-  width: 150px;
-  border-radius: 4px;
+  border-left: none;
+  width: 100px;
 }
 
 #viewBtn:hover {
@@ -268,10 +294,6 @@ button:hover {
   color: white;
 }
 
-a:link {
-  text-decoration: none;
-}
-
 #filterButton{
   margin-left: 180px;
   margin-right: 180px;
@@ -287,12 +309,18 @@ xmlns:"http://www.w3.org/2000/svg"}
 
 
 #filterButton1 {
-  float: right;
-  position: relative;
+  background-color: lightblue;
+  position: absolute;
+  border: 2px solid white;
+  top: 95px;
+  right: 125px;
   height: 31px;
-  bottom: 31px;
-  right: 200px;
+  bottom: 43px;
   width: 5%;
+}
+
+#filterButton1:hover {
+  background-color:  #2e878f;
 }
 
 .filterIcon1 svg{
