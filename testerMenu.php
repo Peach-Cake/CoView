@@ -1,7 +1,13 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
-
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
  ?>
 
 <!DOCTYPE html>
@@ -18,7 +24,9 @@ header("Access-Control-Allow-Origin: *");
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+            ?>
           </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,52 +53,7 @@ header("Access-Control-Allow-Origin: *");
             <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
           </tr>
         </thead>
-        <tbody onclick="openModal(3)">
-          <tr>
-            <td>A1</td>
-            <td>John</td>
-            <td>Infected</td>
-            <td>21/02/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
-
-          </tr>
-          <tr>
-            <td>A2</td>
-            <td>Harry</td>
-            <td>Quarantined</td>
-            <td>05/06/2021</td>
-            <td>15/06/2021</td>
-            <td>Complete</td>
-
-          </tr>
-          <tr>
-            <td>A3</td>
-            <td>Butch</td>
-            <td>Close Contact</td>
-            <td>04/09/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
-
-          </tr>
-          <tr>
-            <td>A4</td>
-            <td>James</td>
-            <td>Infected</td>
-            <td>28/04/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
-
-          </tr>
-          <tr>
-            <td>A5</td>
-            <td>Nanma</td>
-            <td>Suspected</td>
-            <td>15/06/2021</td>
-            <td>04/07/2021</td>
-            <td>Complete</td>
-
-          </tr>
+        <tbody>
         </tbody>
         </table>
 </div>

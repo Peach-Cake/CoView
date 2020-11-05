@@ -1,5 +1,13 @@
 <?php
-session_start()
+session_start();
+header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
+if($_SESSION["TestCentreID"]=='0'){
+  echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
+  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+}
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -15,7 +23,9 @@ session_start()
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+              echo $_SESSION["LoggedIn"];
+            ?>
           </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -46,7 +56,6 @@ session_start()
                 <br>
                 <input type="email" name="email" size="50" required>
                 <br><br>
-
                 <label for="password"><b>Password: </b></label>
                 <br>
                 <input type="password" name="password" size="50" required>
@@ -65,8 +74,21 @@ session_start()
                 <br><br>
                 <label for="testDate"><b>Test date: </b></label>
                 <input type="date" name="testDate" size="30" required>
+                <br><br>
+                <label for="tkeName"><b>Test Kit Name: </b></label>
+                <select name="tkeName"  required>
+                  <?php
+                    $conn = new mysqli("localhost", "root", "", "CoViewDB");
+                    $sql = "SELECT * FROM testkit ORDER BY KitID;";
+                    $result = $conn->query($sql);
+                    if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value=".$row["KitID"].">".$row["KitID"]." - ". $row["TestKitName"]."</option>";
+                    }}
+                    $conn->close();
+                   ?>
+                </select>
                 <br><br><br>
-
                 <div class="buttons">
                   <button class="SDBtn" type="button">Delete</button>
                   <button class="SDBtn" type="submit">Save</button>
