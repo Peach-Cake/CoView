@@ -1,4 +1,9 @@
 <?php
+session_start();
+header("Access-Control-Allow-Origin: *");
+If(isset($_POST['submit'])) {
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
 $patientName = $_POST['patientName'];
 $tester = $_SESSION["LoggedIn"];
@@ -8,58 +13,59 @@ $email = $_POST['email'];
 $patientType = $_POST['patientType'];
 $symptoms = $_POST['symptoms'];
 $testDate = $_POST['testDate'];
-$tkename = $_POST['tkename'];
+$testKitID = $_POST['id'];
 $centreID = $_SESSION['TestCentreID'];
 
-$sql1 = "INSERT INTO User(Username, Password, Name, Email)
-VALUES ('$username', '$password', '$patientName', '$email')";
-if ($conn->query($sql1) == true){
+$sql = "INSERT INTO User(Username, Password, Name, Email, UserType)
+VALUES ('$username', '$password', '$patientName', '$email', 'Patient')";
+if ($conn->query($sql) == true){
   echo "Added successfully";
 }else{
-  echo "Failed" . $conn->error;
+  echo "Failed" . $conn->error . "<br>";
 }
 
 $last_id = $conn->insert_id;
-$sql2 = "INSERT INTO Patient(UserID, PatientType, Symptoms)
+$sql = "INSERT INTO Patient(UserID, PatientType, Symptoms)
 VALUES ('$last_id', '$patientType', '$symptoms')";
-if ($conn->query($sql2) == true){
+if ($conn->query($sql) == true){
   echo "Added successfully";
 }else{
-  echo "Failed" . $conn->error;
+  echo "Failed" . $conn->error . "<br>";
 }
 
-$sql3 = "UPDATE TestCentreKitStock
-SET AvailableStock = AvailableStock -1
-WHERE TestKitName = $tkename;";
-if ($conn->query($sql3) == true) {
-  echo "1 kit used";
-}
-else{
-  echo "No more available kits";
-}
-
-
-$sql4 = "SELECT ID FROM User WHERE Username = '$tester';";
-$result = $conn->query($sql4);
+$id = "SELECT ID FROM User WHERE Username = '$tester';";
+$result = $conn->query($id);
 if (mysqli_num_rows($result) > 0) {
   $rowget = mysqli_fetch_assoc($result);
   $testerID = $rowget["ID"];
 }
 
-$last_id = $conn->insert_id;
-$sql5 = "INSERT INTO CovidTest(
+/*$updateStock = "UPDATE TestCentreKitStock
+SET AvailableStock = AvailableStock -1
+WHERE TestKitID = '$testKitID';";
+$result = $conn->query($updateStock);
+if ($result == true) {
+  echo "Stock updated!" . $result;
+}else{
+  echo "Failed" . $conn->error . "<br>";
+}
+*/
+$insertData = "INSERT INTO CovidTest(
   OfficerUserID, PatientUserID,
   TestDate, TestKitID, TestCentreID)
-  VALUES ('$testerID', '$last_id', $testDate, '$last_id', '$centreID')";
-if ($conn->query($sql5) == true){
+  VALUES ('$testerID', '$last_id', $testDate, '$testKitID', '$centreID')";
+if ($conn->query($insertData) == true){
   echo "Added successfully";
 }else{
-  echo "Failed" . $conn->error;
+  echo "Failed" . $conn->error . "<br>";
 }
 
-
-
-
+if ($username != ''){
+  header("Location: http://localhost/testerMenu.php");
+}
+}
+$conn->close();
+}
 
 
 

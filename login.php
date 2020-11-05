@@ -64,8 +64,7 @@ if (mysqli_num_rows($result) > 0) {
     }
   }
   if($row["UserType"]=="Patient"){
-    header("Location: patient.html");
-  }
+    header("Location: patient.php");
 }
 else{
   echo "Not Found";

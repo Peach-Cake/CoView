@@ -54,6 +54,51 @@ if($_SESSION["TestCentreID"]=='0'){
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>A1</td>
+            <td>John</td>
+            <td>Infected</td>
+            <td>21/02/2021</td>
+            <td>00/00/0000</td>
+            <td>Pending</td>
+
+          </tr>
+          <tr>
+            <td>A2</td>
+            <td>Harry</td>
+            <td>Quarantined</td>
+            <td>05/06/2021</td>
+            <td>15/06/2021</td>
+            <td>Complete</td>
+
+          </tr>
+          <tr>
+            <td>A3</td>
+            <td>Butch</td>
+            <td>Close Contact</td>
+            <td>04/09/2021</td>
+            <td>00/00/0000</td>
+            <td>Pending</td>
+
+          </tr>
+          <tr>
+            <td>A4</td>
+            <td>James</td>
+            <td>Infected</td>
+            <td>28/04/2021</td>
+            <td>00/00/0000</td>
+            <td>Pending</td>
+
+          </tr>
+          <tr>
+            <td>A5</td>
+            <td>Nanma</td>
+            <td>Suspected</td>
+            <td>15/06/2021</td>
+            <td>04/07/2021</td>
+            <td>Complete</td>
+
+          </tr>
         </tbody>
         </table>
 </div>

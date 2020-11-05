@@ -25,7 +25,7 @@ $resulttc = $conn->query($sqltc);
 if (mysqli_num_rows($resulttc) > 0) {
   while($row = mysqli_fetch_assoc($resulttc)) {
     $tcID = $row["CentreID"];
-    $sqltk = "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+    $sqltk = "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
     VALUES ('$tcID','$last_id',0);";
     $conn->query($sqltk);
   }
@@ -37,7 +37,7 @@ if ($conn->query($sql2) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
 }*/
-$sql2 = "UPDATE testcentrekitstock SET AvalaibleStock = $tkStock
+$sql2 = "UPDATE testcentrekitstock SET AvailableStock = $tkStock
 WHERE TestCentreID = '$centreID' AND TestKitID = '$last_id';";
 if ($conn->query($sql2) === TRUE) {
   echo "Added";
