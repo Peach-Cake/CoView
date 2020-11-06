@@ -92,7 +92,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE TestCentreKitStock (
 TestCentreID INT(5) UNSIGNED NOT NULL,
 TestKitID INT(5) UNSIGNED NOT NULL,
-AvailableStock INT(3) UNSIGNED NOT NULL,
+AvalaibleStock INT(3) UNSIGNED NOT NULL,
 FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
 FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID),
 UNIQUE INDEX CentreKit(TestCentreID, TestKitID)
@@ -164,17 +164,21 @@ if(mysqli_num_rows($result) == 0){
   VALUES ('TestKit2');";
 
   //TestCentreKitStock
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (1,1,2);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (1,2,5);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (2,1,4);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (2,2,8);";
 
   $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
   VALUES(2,3,'12/02/2020',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
+  VALUES(2,3,'19/07/2020',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
+  VALUES(2,3,'22/01/2020',1,1);";
   //add Data to tables
   if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully<br>";

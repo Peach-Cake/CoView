@@ -782,3 +782,25 @@ function reportCreated(){
       });
 
 }
+function newFilter(e){
+  $(function () {
+        //let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#filterForm').on('submit', function (e) {
+          console.log($('#filterForm').serialize());
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/FilterTable.php',
+            data: $('#filterForm').serialize(),
+            success: function (tbody) {
+              console.log(tbody);
+              document.getElementsByTagName('tbody')[0].innerHTML = tbody;
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+}

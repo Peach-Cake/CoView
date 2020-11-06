@@ -79,15 +79,15 @@ if($_SESSION["TestCentreID"]=='0'){
           <form class="filterForm" id="filterForm">
             <label>Patient Type:</label>
             <div class="pType" style="float:right; margin-right:20px">
-            <input type="checkbox" id="returnee" name="patientStatus" value="returnee">
+            <input type="checkbox" id="returnee" name="patientStatus[]" value="returnee">
             <label for="returnee">Returnee</label>&nbsp;
-            <input type="checkbox" id="quarantined" name="patientStatus" value="quarantined">
+            <input type="checkbox" id="quarantined" name="patientStatus[]" value="quarantined">
             <label for="quarantined">Quarantined</label>&nbsp;
-            <input type="checkbox" id="closeContact" name="patientStatus" value="closeContact">
+            <input type="checkbox" id="closeContact" name="patientStatus[]" value="closeContact">
             <label for="closeContact">Close Contact</label>&nbsp;<br>
-            <input type="checkbox" id="infected" name="patientStatus" value="infected">
+            <input type="checkbox" id="infected" name="patientStatus[]" value="infected">
             <label for="infected">Infected</label>&nbsp;
-            <input type="checkbox" id="suspected" name="patientStatus" value="suspected">
+            <input type="checkbox" id="suspected" name="patientStatus[]" value="suspected">
             <label for="suspected">Suspected</label>
           </div>
             <br><br><br>
@@ -110,13 +110,13 @@ if($_SESSION["TestCentreID"]=='0'){
             <input type="radio" id="both" name="status" value="both" checked>
             <label for="both">Both</label>
             <br>
-
+            <div class="modal-footer">
+              <button type="submit" class="SDBtn" onclick="">Apply</button>
+            </div>
           </form>
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="SDBtn" onclick="applyFilter()">Apply</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -124,7 +124,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <table id="#reportTable">
       <thead>
       <tr>
-        <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+        <th onclick="newSort(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
         <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
         <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
         <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
@@ -174,6 +174,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <script type="text/javascript" src="CoViewJS.js"></script>
     <script type="text/javascript">
       getReportDetails();
+      newFilter();
     </script>
   </main>
 
