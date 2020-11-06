@@ -28,9 +28,6 @@ if (mysqli_num_rows($result) > 0) {
     WHERE UserId = '$id'";
     $result2 = $conn->query($sql2);
     $row2 = mysqli_fetch_assoc($result2);
-    if($row2["Position"]=="Tester"){
-      header("Location: testerMenu.html");
-    }
     if($row2["Position"]=="Manager"){
       $sqlMan = "SELECT RegisteredCentreID FROM officer
       WHERE UserID = '$id';";
@@ -51,10 +48,23 @@ if (mysqli_num_rows($result) > 0) {
       $_SESSION["LoggedIn"] = $user;
       echo "Manager";
     }
+    if($row2["Position"]=="Tester"){
+      $sqlMan = "SELECT RegisteredCentreID FROM officer
+      WHERE UserID = '$id';";
+      $resultMan = $conn->query($sqlMan);
+      $rowMan = mysqli_fetch_assoc($resultMan);
+      if (isset($rowMan["RegisteredCentreID"])) {
+          $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
+          $_SESSION["LoggedIn"] = $user;
+          echo "Tester";
+          exit;
+      }
+      $_SESSION["LoggedIn"] = $user;
+      echo "Tester";
+    }
   }
   if($row["UserType"]=="Patient"){
-    header("Location: patient.html");
-  }
+    header("Location: patient.php");
 }
 else{
   echo "Not Found";

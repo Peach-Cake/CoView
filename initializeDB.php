@@ -92,7 +92,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE TestCentreKitStock (
 TestCentreID INT(5) UNSIGNED NOT NULL,
 TestKitID INT(5) UNSIGNED NOT NULL,
-AvalaibleStock INT(3) UNSIGNED NOT NULL,
+AvailableStock INT(3) UNSIGNED NOT NULL,
 FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
 FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID),
 UNIQUE INDEX CentreKit(TestCentreID, TestKitID)
@@ -164,13 +164,13 @@ if(mysqli_num_rows($result) == 0){
   VALUES ('TestKit2');";
 
   //TestCentreKitStock
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
   VALUES (1,1,2);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
   VALUES (1,2,5);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
   VALUES (2,1,4);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
   VALUES (2,2,8);";
 
   $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)

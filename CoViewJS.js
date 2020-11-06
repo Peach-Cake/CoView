@@ -748,3 +748,37 @@ function getReportDetails(){
       });
 
 }
+
+function reportCreated(){
+  $(function () {
+        let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#recordForm').on('submit', function (e) {
+
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/testerMenu.php',
+            data: $('#recordForm').serialize(),
+            success: function (report) {
+              if(report == "Added"){
+                alert('Report has been added');
+                error.style.display = 'none';
+                window.location.href = 'http://localhost/testerMenu.php';
+              }
+              if(report == "Exists"){
+                error.innerHTML="Report already exists";
+                error.style.display = '';
+              }
+              else{
+                console.log(report);
+              }
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
