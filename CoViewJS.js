@@ -727,17 +727,20 @@ function addTestCentre(){
 function getReportDetails(){
   $(function () {
 
-        $('#reports tr').on('click', function (e) {
+        $('tbody tr').on('click', function (e) {
           let data = {tid:$(this).find('td:first').text()};
           let rep = document.getElementById('tResults');
-          //e.preventDefault();
+          console.log("test");
           $.ajax({
             type: 'POST',
             url: 'http://localhost/GetReportDetails.php',
             data: data,
             success: function (results) {
+              console.log(results);
               rep.innerHTML = results;
-              openModal(1);
+              //$('#reports tr').attr('data-toggle')='modal';
+              //$('#reports tr').attr('data-target')='#resultsModal';
+              //openModal(0);
             },
             error: function(){
               alert('form error');
@@ -795,6 +798,40 @@ function newFilter(e){
             success: function (tbody) {
               console.log(tbody);
               document.getElementsByTagName('tbody')[0].innerHTML = tbody;
+              getReportDetails();
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+}
+function newSort(){
+  $(function () {
+        //let error = document.getElementsByClassName('errorNotifications')[0];
+        $('table th').on('click', function (e) {
+          let sortby = $(this).attr('id');
+          let n = $(' table th').index($(this));
+
+            if($('tbody tr:first td:eq('+n+')').html()<$('tbody tr:last td:eq('+n+')').html()){
+              var dirs = 'DESC';
+            }
+            else {
+              var dirs = 'ASC';
+            }
+          
+          let data = {sort:sortby, dir:dirs};
+          //e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/SortTable.php',
+            data: data,
+            success: function (tbody) {
+              console.log(tbody);
+              document.getElementsByTagName('tbody')[0].innerHTML = tbody;
+              getReportDetails();
             },
             error: function(){
               alert('form error');

@@ -2,33 +2,72 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
-$testDateFrom = $_POST['testDateFrom'];
-$testDateTo = $_POST['testDateTo'];
-$resultDateFrom = $_POST['resultDateFrom'];
-$resultDateTo = $_POST['resultDateTo'];
+//$testDateFrom = $_POST['testDateFrom'];
+//$testDateTo = $_POST['testDateTo'];
+//$resultDateFrom = $_POST['resultDateFrom'];
+//$resultDateTo = $_POST['resultDateTo'];
 $status = $_POST['status'];
 //$filters;
 
 $centreID = $_SESSION['TestCentreID'];
-$sql = "SELECT covidtest.TestID,user.Name,patient.PatientType,covidtest.TestDate,covidtest.ResultDate,covidtest.Status
+$sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
 FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
-INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID' ";
+INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID'";
 if(isset($_POST['patientStatus'])){
   $type = $_POST['patientStatus'];
-$sql .= "AND";
-$sql .= "(";
-for ($i=0; $i < sizeOf($type); $i++) {
-  $sql .="patient.PatientType = '$type[$i]'";
-  if($i != sizeOf($type)-1){
-    $sql .= " OR ";
+  $sql .= " AND ";
+  $sql .= "(";
+  for ($i=0; $i < sizeOf($type); $i++) {
+    $sql .="patient.PatientType = '$type[$i]'";
+    if($i != sizeOf($type)-1){
+      $sql .= " OR ";
+    }
+  }
+  $sql .= ")";
+}
+if($_POST['testDateFrom']!=null||$_POST['testDateTo']!=null){
+  if($_POST['testDateTo']==null){
+    $testDateFrom = $_POST['testDateFrom'];
+    $sql .= " AND covidtest.TestDate >= '$testDateFrom'";
+  }
+  else if($_POST['testDateFrom']==null){
+    $testDateTo = $_POST['testDateTo'];
+    $sql .= " AND covidtest.TestDate <= '$testDateTo'";
+  }
+  else {
+    $testDateFrom = $_POST['testDateFrom'];
+    $testDateTo = $_POST['testDateTo'];
+    $sql .= " AND covidtest.TestDate BETWEEN '$testDateFrom'";
+    $sql .= " AND '$testDateTo'";
   }
 }
-$sql .= ")";}
-$result = $conn->query($sql);
+if($_POST['resultDateFrom']!=null||$_POST['resultDateTo']!=null){
+  if($_POST['resultDateTo']==null){
+    $testDateFrom = $_POST['resultDateFrom'];
+    $sql .= " AND covidtest.TestDate >= '$testDateFrom'";
+  }
+  else if($_POST['resultDateFrom']==null){
+    $testDateTo = $_POST['resultDateTo'];
+    $sql .= " AND covidtest.TestDate <= '$testDateTo'";
+  }
+  else {
+    $testDateFrom = $_POST['testDateFrom'];
+    $testDateTo = $_POST['testDateTo'];
+    $sql .= " AND covidtest.TestDate BETWEEN '$testDateFrom'";
+    $sql .= " AND '$testDateTo'";
+  }
+}
+if($status != "both"){
+  $sql .= " AND covidTest.status = '$status'";
+}
+$sql .= ";";
+$result1 = $conn->query($sql);
+$sql2 = "SELECT * FROM reports;";
+$result = $conn->query($sql2);
 //echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
 if (mysqli_num_rows($result) > 0) {
 while($row = mysqli_fetch_assoc($result)) {
-  echo "<tr>";
+  echo "<tr data-toggle='modal' data-target='#resultsModal'>";
   echo "<td>".$row['TestID']."</td>";
   echo "<td>".$row['Name']."</td>";
   echo "<td>".$row['PatientType']."</td>";

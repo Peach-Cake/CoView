@@ -83,7 +83,7 @@ if($_SESSION["TestCentreID"]=='0'){
             <label for="returnee">Returnee</label>&nbsp;
             <input type="checkbox" id="quarantined" name="patientStatus[]" value="quarantined">
             <label for="quarantined">Quarantined</label>&nbsp;
-            <input type="checkbox" id="closeContact" name="patientStatus[]" value="closeContact">
+            <input type="checkbox" id="closeContact" name="patientStatus[]" value="close Contact">
             <label for="closeContact">Close Contact</label>&nbsp;<br>
             <input type="checkbox" id="infected" name="patientStatus[]" value="infected">
             <label for="infected">Infected</label>&nbsp;
@@ -121,28 +121,31 @@ if($_SESSION["TestCentreID"]=='0'){
   </div>
 </div>
 <div class="report-container">
-    <table id="#reportTable">
+    <table id="reports">
       <thead>
       <tr>
-        <th onclick="newSort(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
-        <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="TestID">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+        <th id="Name">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="PatientType">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="TestDate">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="ResultDate">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="Status">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
     <tbody>
       <?php
       $centreID = $_SESSION["TestCentreID"];
       $conn = new mysqli("localhost", "root", "", "CoViewDB");
-      $sql = "SELECT covidtest.TestID,user.Name,patient.PatientType,covidtest.TestDate,covidtest.ResultDate,covidtest.Status
+      $sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
       FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
       INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID';";
-      $result = $conn->query($sql);
+      $result1 = $conn->query($sql);
+      $sql2 = "SELECT * FROM reports;";
+      $result = $conn->query($sql2);
+      //echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
       if (mysqli_num_rows($result) > 0) {
       while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
+        echo "<tr data-toggle='modal' data-target='#resultsModal'>";
         echo "<td>".$row['TestID']."</td>";
         echo "<td>".$row['Name']."</td>";
         echo "<td>".$row['PatientType']."</td>";
@@ -157,16 +160,23 @@ if($_SESSION["TestCentreID"]=='0'){
     </tbody>
     </table>
   </div>
-  <div id="resultsModal" class="modal">
-    <div class="update-modal-content">
-      <span class="close" onclick="xCloseFilter(1)">&times;</span>
-    <div class="form-container1">
-      <b id="tResults">Results: Appears to be Covid-Negative, but not completely certain.</b>
-      <br>
-      <!--<b id="pSymptoms">Symptoms: Coughing, Sore Throat, Fever.</b>-->
+
+  <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLongTitle">Test Results</h4>
+          <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <b id="tResults"></b>
+          <br>
         </div>
         </div>
-  </div>
+        </div>
+        </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -175,6 +185,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <script type="text/javascript">
       getReportDetails();
       newFilter();
+      newSort();
     </script>
   </main>
 
