@@ -814,14 +814,22 @@ function newSort(){
         $('table th').on('click', function (e) {
           let sortby = $(this).attr('id');
           let n = $(' table th').index($(this));
-
-            if($('tbody tr:first td:eq('+n+')').html()<$('tbody tr:last td:eq('+n+')').html()){
+          let others = $('table th').not(this);
+            if($(this).attr("data-dir") == 'ASC'){
               var dirs = 'DESC';
+              others.find('img').attr("src", "doubleTableSorter.png");
+              others.attr("data-dir", 'NONE');
+              $(this).find('img').attr("src", "descTableSorter.png");
+              $(this).attr("data-dir", 'DESC');
             }
             else {
               var dirs = 'ASC';
+              others.find('img').attr("src", "doubleTableSorter.png");
+              others.attr("data-dir", 'NONE');
+              $(this).find('img').attr("src", "ascTableSorter.png");
+              $(this).attr("data-dir", 'ASC');
             }
-          
+
           let data = {sort:sortby, dir:dirs};
           //e.preventDefault();
           $.ajax({

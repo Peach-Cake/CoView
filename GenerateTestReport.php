@@ -124,12 +124,12 @@ if($_SESSION["TestCentreID"]=='0'){
     <table id="reports">
       <thead>
       <tr>
-        <th id="TestID">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
-        <th id="Name">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th id="PatientType">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th id="TestDate">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th id="ResultDate">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-        <th id="Status">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="TestID" data-dir="ASC">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
+        <th id="Name" data-dir="NONE">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="PatientType" data-dir="NONE">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="TestDate" data-dir="NONE">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="ResultDate" data-dir="NONE">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+        <th id="Status" data-dir="NONE">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
       </tr>
     </thead>
     <tbody>
