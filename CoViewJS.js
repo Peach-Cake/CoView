@@ -544,18 +544,14 @@ function newLogin(){
 
 function registerTester(){
   $(function () {
-
         $('#testerForm').on('submit', function (e) {
-
           e.preventDefault();
-          //var data = $('#logInForm').serialize();
           let notifications = document.getElementsByClassName('errorNotifications');
           $.ajax({
             type: 'POST',
             url: 'http://localhost/RegisterTester.php',
             data: $('#testerForm').serialize(),
             success: function (testerAdded) {
-              //alert('form was submitted');
               console.log(this.data);
               console.log(testerAdded);
               if (testerAdded == "Added") {
@@ -629,9 +625,7 @@ function getStock(){
 
 function updateStock(){
   $(function () {
-
         $('#tkeform').on('submit', function (e) {
-
           e.preventDefault();
           $.ajax({
             type: 'POST',
@@ -639,7 +633,7 @@ function updateStock(){
             data: $('#tkeform').serialize(),
             success: function (nstock) {
               if(nstock == "Update"){
-                alert('form updated');
+                alert('Stock updated');
                 getStock();
               }
               else{
@@ -650,10 +644,8 @@ function updateStock(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function addStock(){
@@ -684,17 +676,14 @@ function addStock(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function addTestCentre(){
   $(function () {
         let error = document.getElementsByClassName('errorNotifications')[0];
         $('#tcForm').on('submit', function (e) {
-
           e.preventDefault();
           $.ajax({
             type: 'POST',
@@ -718,10 +707,8 @@ function addTestCentre(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function getReportDetails(){
@@ -810,7 +797,6 @@ function newFilter(e){
 }
 function newSort(){
   $(function () {
-        //let error = document.getElementsByClassName('errorNotifications')[0];
         $('table th').on('click', function (e) {
           let sortby = $(this).attr('id');
           let n = $(' table th').index($(this));
@@ -829,9 +815,7 @@ function newSort(){
               $(this).find('img').attr("src", "ascTableSorter.png");
               $(this).attr("data-dir", 'ASC');
             }
-
           let data = {sort:sortby, dir:dirs};
-          //e.preventDefault();
           $.ajax({
             type: 'POST',
             url: 'http://localhost/SortTable.php',
@@ -845,7 +829,6 @@ function newSort(){
               alert('form error');
             }
           });
-
         });
       });
-}
+    }
