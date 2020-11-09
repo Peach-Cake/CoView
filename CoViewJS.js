@@ -114,7 +114,7 @@ function applyFilter() {
       currentRow.style.display = 'none';
     }
   }
-xCloseFilter(0);
+document.getElementById('close').click();
 }
 //Search
 function search(){
@@ -544,23 +544,19 @@ function newLogin(){
 
 function registerTester(){
   $(function () {
-
         $('#testerForm').on('submit', function (e) {
-
           e.preventDefault();
-          //var data = $('#logInForm').serialize();
           let notifications = document.getElementsByClassName('errorNotifications');
           $.ajax({
             type: 'POST',
             url: 'http://localhost/RegisterTester.php',
             data: $('#testerForm').serialize(),
             success: function (testerAdded) {
-              //alert('form was submitted');
               console.log(this.data);
               console.log(testerAdded);
               if (testerAdded == "Added") {
                 window.alert("tester added");
-                xCloseFilter(0);
+                $('#close').click();
                 location.reload();
               }
               if (testerAdded == "Password") {
@@ -629,9 +625,7 @@ function getStock(){
 
 function updateStock(){
   $(function () {
-
         $('#tkeform').on('submit', function (e) {
-
           e.preventDefault();
           $.ajax({
             type: 'POST',
@@ -639,7 +633,7 @@ function updateStock(){
             data: $('#tkeform').serialize(),
             success: function (nstock) {
               if(nstock == "Update"){
-                alert('form updated');
+                alert('Stock updated');
                 getStock();
               }
               else{
@@ -650,10 +644,8 @@ function updateStock(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function addStock(){
@@ -684,17 +676,14 @@ function addStock(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function addTestCentre(){
   $(function () {
         let error = document.getElementsByClassName('errorNotifications')[0];
         $('#tcForm').on('submit', function (e) {
-
           e.preventDefault();
           $.ajax({
             type: 'POST',
@@ -718,26 +707,27 @@ function addTestCentre(){
               alert('form error');
             }
           });
-
         });
       });
-
 }
 
 function getReportDetails(){
   $(function () {
 
-        $('#reports tr').on('click', function (e) {
+        $('tbody tr').on('click', function (e) {
           let data = {tid:$(this).find('td:first').text()};
           let rep = document.getElementById('tResults');
-          //e.preventDefault();
+          console.log("test");
           $.ajax({
             type: 'POST',
             url: 'http://localhost/GetReportDetails.php',
             data: data,
             success: function (results) {
+              console.log(results);
               rep.innerHTML = results;
-              openModal(1);
+              //$('#reports tr').attr('data-toggle')='modal';
+              //$('#reports tr').attr('data-target')='#resultsModal';
+              //openModal(0);
             },
             error: function(){
               alert('form error');
@@ -782,3 +772,63 @@ function reportCreated(){
       });
 
 }
+function newFilter(e){
+  $(function () {
+        //let error = document.getElementsByClassName('errorNotifications')[0];
+        $('#filterForm').on('submit', function (e) {
+          console.log($('#filterForm').serialize());
+          e.preventDefault();
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/FilterTable.php',
+            data: $('#filterForm').serialize(),
+            success: function (tbody) {
+              console.log(tbody);
+              document.getElementsByTagName('tbody')[0].innerHTML = tbody;
+              getReportDetails();
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+}
+function newSort(){
+  $(function () {
+        $('table th').on('click', function (e) {
+          let sortby = $(this).attr('id');
+          let n = $(' table th').index($(this));
+          let others = $('table th').not(this);
+            if($(this).attr("data-dir") == 'ASC'){
+              var dirs = 'DESC';
+              others.find('img').attr("src", "doubleTableSorter.png");
+              others.attr("data-dir", 'NONE');
+              $(this).find('img').attr("src", "descTableSorter.png");
+              $(this).attr("data-dir", 'DESC');
+            }
+            else {
+              var dirs = 'ASC';
+              others.find('img').attr("src", "doubleTableSorter.png");
+              others.attr("data-dir", 'NONE');
+              $(this).find('img').attr("src", "ascTableSorter.png");
+              $(this).attr("data-dir", 'ASC');
+            }
+          let data = {sort:sortby, dir:dirs};
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/SortTable.php',
+            data: data,
+            success: function (tbody) {
+              console.log(tbody);
+              document.getElementsByTagName('tbody')[0].innerHTML = tbody;
+              getReportDetails();
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+        });
+      });
+    }

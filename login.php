@@ -69,7 +69,7 @@ if (mysqli_num_rows($result) > 0) {
 else{
   echo "Not Found";
 }
-}else{
+}}else{
   echo "Not Found";
 }
 $conn->close();

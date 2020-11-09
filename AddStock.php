@@ -30,13 +30,6 @@ if (mysqli_num_rows($resulttc) > 0) {
     $conn->query($sqltk);
   }
 }
-/*$sql2 = "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
-VALUES ('$centreID','$last_id','$tkStock');";
-if ($conn->query($sql2) === TRUE) {
-  echo "Added";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
-}*/
 $sql2 = "UPDATE testcentrekitstock SET AvailableStock = $tkStock
 WHERE TestCentreID = '$centreID' AND TestKitID = '$last_id';";
 if ($conn->query($sql2) === TRUE) {

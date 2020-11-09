@@ -92,7 +92,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE TestCentreKitStock (
 TestCentreID INT(5) UNSIGNED NOT NULL,
 TestKitID INT(5) UNSIGNED NOT NULL,
-AvailableStock INT(3) UNSIGNED NOT NULL,
+AvalaibleStock INT(3) UNSIGNED NOT NULL,
 FOREIGN KEY (TestCentreID) REFERENCES TestCentre(CentreID),
 FOREIGN KEY (TestKitID) REFERENCES TestKit(KitID),
 UNIQUE INDEX CentreKit(TestCentreID, TestKitID)
@@ -108,9 +108,9 @@ $sql = "CREATE TABLE CovidTest (
 TestID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
 OfficerUserID BIGINT(10) UNSIGNED NOT NULL,
 PatientUserID BIGINT(10) UNSIGNED NOT NULL,
-TestDate CHAR(10) NOT NULL,
+TestDate DATE NOT NULL,
 Result VARCHAR(60) DEFAULT 'Test results not ready yet',
-ResultDate CHAR(10) DEFAULT '00/00/0000',
+ResultDate DATE DEFAULT '0001-01-01',
 Status VARCHAR(10) NOT NULL DEFAULT 'Pending',
 TestKitID INT(5) UNSIGNED NOT NULL,
 TestCentreID INT(5) UNSIGNED NOT NULL,
@@ -156,6 +156,22 @@ if(mysqli_num_rows($result) == 0){
   VALUES ('Manager3', '$password', 'Man Agertree', 'manager3@manager.com', 'Officer');";
   $sql .= "INSERT INTO Officer(UserID, Position)
   VALUES (5, 'Manager');";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Patient2', '$password', 'Pay Chent', 'patient2@patient.com', 'Patient');";
+  $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
+  VALUES (6, 'Close Contact', 'Coughing and Tiredness');";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Patient3', '$password', 'Pei Sent', 'patient3@patient.com', 'Patient');";
+  $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
+  VALUES (7, 'Quarantined', 'Coughing and Tiredness');";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Patient4', '$password', 'Paen Fent', 'patient4@patient.com', 'Patient');";
+  $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
+  VALUES (8, 'Suspected', 'Coughing and Tiredness');";
+  $sql .= "INSERT INTO User(Username, Password, Name, Email, UserType)
+  VALUES ('Patient5', '$password', 'Pay Cent', 'patient5@patient.com', 'Patient');";
+  $sql .= "INSERT INTO Patient(UserID, PatientType, Symptoms)
+  VALUES (9, 'Returnee', 'Coughing and Tiredness');";
 
   //TestKit
   $sql .= "INSERT INTO TestKit(TestKitName)
@@ -164,17 +180,25 @@ if(mysqli_num_rows($result) == 0){
   VALUES ('TestKit2');";
 
   //TestCentreKitStock
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (1,1,2);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (1,2,5);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (2,1,4);";
-  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
+  $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvalaibleStock)
   VALUES (2,2,8);";
 
   $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
-  VALUES(2,3,'12/02/2020',1,1);";
+  VALUES(2,3,'2020-08-25',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
+  VALUES(2,6,'2020-02-05',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,Result,ResultDate,Status,TestKitID,TestCentreID)
+  VALUES(2,7,'2020-01-22','Covid-Negative Confirmed','2020-01-30','Complete',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,Result,ResultDate,Status,TestKitID,TestCentreID)
+  VALUES(2,8,'2020-04-12','Most Likely Covid-Positive','2020-04-18','Complete',1,1);";
+  $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
+  VALUES(2,9,'2020-03-17',1,1);";
   //add Data to tables
   if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully<br>";

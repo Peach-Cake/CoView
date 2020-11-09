@@ -64,7 +64,7 @@ if($_SESSION["TestCentreID"]=='0'){
             <input type="number" name="tknStock" id="tknStock" size="3" min="1" required>
             <br><br><br><br><br>
             <div class="buttons">
-              <button type="submit">Save</button>
+              <button class="SDBtn" type="submit">Save</button>
             </div>
           </form>
 
@@ -98,7 +98,7 @@ if($_SESSION["TestCentreID"]=='0'){
 
           <br><br><br>
           <div class="buttons">
-            <button type="submit">Save</button>
+            <button class="SDBtn" type="submit">Save</button>
           </div>
         </form>
         </div>
