@@ -30,78 +30,60 @@ if($_SESSION["TestCentreID"]=='0'){
           </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="aligning">
-          <div class="dropdown-header">Position: Tester</div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Log out</a>
-        </div>
+           <div class="aligning">
+           <div class="dropdown-header">Position: Tester</div>
+           <div class="dropdown-divider"></div>
+           <a class="dropdown-item" href="index.html">Log out</a>
+         </div>
       </div>
       </nav>
     </header>
 
   <main>
 
+      <?php
+      $conn = new mysqli("localhost", "root", "", "CoViewDB");
+      $query = "SELECT * FROM ReportTable";
+      $result = $conn->query($query);
+      echo "<table name='reports' style='position: relative;
+        background-color: white;
+        top: 50px;
+        left: 40px;
+        display: block;
+        border: 3px solid white;
+        text-align: center;
+        width: 70%;
+        float: right;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 500px;'>
+      <thead>
+        <tr>
+        <th>ID</th>
+        <th>Patient Name</th>
+        <th>Patient Type</th>
+        <th>Test date</th>
+        <th>Result date</th>
+        <th>Status</th>
+        </tr>
+        </head>";
 
-        <table id="reports" class="table">
-          <thead>
-          <tr>
-            <th onclick="sortTable(0)">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(1)">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(2)">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(3)">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(4)">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th onclick="sortTable(5)">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>A1</td>
-            <td>John</td>
-            <td>Infected</td>
-            <td>21/02/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
+        while($row = mysqli_fetch_array($result))
+        {
+          echo "<tbody>";
+        echo "<tr>";
+        echo "<td>" . 'T' . $row['RecordID'] . "</td>";
+        echo "<td>" . $row['PatientName'] . "</td>";
+        echo "<td>" . $row['PatientType'] . "</td>";
+        echo "<td>" . $row['TestDate'] . "</td>";
+        echo "<td>" . $row['ResultDate'] . "</td>";
+        echo "<td>" . $row['ReportStatus'] . "</td>";
+        echo "</tr>";
+        echo "</body>";
+        }
+        echo "</table>";
 
-          </tr>
-          <tr>
-            <td>A2</td>
-            <td>Harry</td>
-            <td>Quarantined</td>
-            <td>05/06/2021</td>
-            <td>15/06/2021</td>
-            <td>Complete</td>
-
-          </tr>
-          <tr>
-            <td>A3</td>
-            <td>Butch</td>
-            <td>Close Contact</td>
-            <td>04/09/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
-
-          </tr>
-          <tr>
-            <td>A4</td>
-            <td>James</td>
-            <td>Infected</td>
-            <td>28/04/2021</td>
-            <td>00/00/0000</td>
-            <td>Pending</td>
-
-          </tr>
-          <tr>
-            <td>A5</td>
-            <td>Nanma</td>
-            <td>Suspected</td>
-            <td>15/06/2021</td>
-            <td>04/07/2021</td>
-            <td>Complete</td>
-
-          </tr>
-        </tbody>
-        </table>
-</div>
+      ?>
 
 
 
@@ -162,28 +144,24 @@ if($_SESSION["TestCentreID"]=='0'){
       </div>
 
       <div class="btn-container">
-      <a href=""><button class="sideBtns">Update report</button></a>
+      <a href=""><button class="sideBtns">View report table</button></a>
       </div>
 
 
       <div class="search-container">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <form action="/action_page.php">
-          <br><br>
+
+        <form action="" method="post">
+          <br><br><br>
         Search:  <input type="text" placeholder="Test report ID" name="searchReport">
-        <button type="button" id="viewBtn">Update</button>
+        <button type="submit" id="viewBtn">Update</button>
+
       </form>
       </div>
 
-
-      <div>
-        <script type="text/javascript" src="CoViewJS.js"></script>
-      </div>
-      </main>
-
+    <script type="text/javascript" src="CoViewJS.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </body>
-</main>
+  </main>
+</body>
 </html>

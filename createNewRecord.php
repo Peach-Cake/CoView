@@ -16,7 +16,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CoView.css">
-    <title>Tester Menu</title>
+    <title>Create New Record</title>
   </head>
   <body class="settings">
     <header>
@@ -28,13 +28,14 @@ if($_SESSION["TestCentreID"]=='0'){
             ?>
           </a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="aligning">
-          <div class="dropdown-header">Position: Tester</div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Log out</a>
-        </div>
-      </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="aligning">
+              <div class="dropdown-header">Position: Tester</div>
+              <div class="dropdown-header"></div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
+              </div>
+          </div>
       </nav>
     </header>
 
@@ -90,8 +91,8 @@ if($_SESSION["TestCentreID"]=='0'){
                 </select>
                 <br><br><br>
                 <div class="buttons">
-                  <button class="SDBtn" type="button">Delete</button>
-                  <button class="SDBtn" name="submit" type="submit" onclick="">Save</button>
+                  <button class="SDBtn" type="button"><a href="testerMenu.php" style="color: white;">Delete</a></button>
+                  <button class="SDBtn" name="submit" type="submit" onclick="" style="color: white;">Save</button>
 
                 </div>
               </form>
@@ -113,7 +114,7 @@ if($_SESSION["TestCentreID"]=='0'){
             <script type="text/javascript" src="CoViewJS.js">
             </script>
             <script type="text/javascript">
-
+            reportCreated();
             </script>
 
 </html>

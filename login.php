@@ -53,14 +53,10 @@ if (mysqli_num_rows($result) > 0) {
       WHERE UserID = '$id';";
       $resultMan = $conn->query($sqlMan);
       $rowMan = mysqli_fetch_assoc($resultMan);
-      if (isset($rowMan["RegisteredCentreID"])) {
-          $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
-          $_SESSION["LoggedIn"] = $user;
-          echo "Tester";
-          exit;
-      }
+      $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
       $_SESSION["LoggedIn"] = $user;
       echo "Tester";
+      exit;
     }
   }
   if($row["UserType"]=="Patient"){
@@ -69,8 +65,9 @@ if (mysqli_num_rows($result) > 0) {
 else{
   echo "Not Found";
 }
+}
 }else{
   echo "Not Found";
 }
 $conn->close();
- ?>
+?>

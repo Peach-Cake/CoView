@@ -751,34 +751,45 @@ function getReportDetails(){
 
 function reportCreated(){
   $(function () {
-        let error = document.getElementsByClassName('errorNotifications')[0];
+
         $('#recordForm').on('submit', function (e) {
 
           e.preventDefault();
+          //var data = $('#logInForm').serialize();
+          let notifications = document.getElementsByClassName('errorNotifications');
           $.ajax({
             type: 'POST',
-            url: 'http://localhost/testerMenu.php',
+            url: 'http://localhost/RegisterTester.php',
             data: $('#recordForm').serialize(),
-            success: function (report) {
-              if(report == "Added"){
-                alert('Report has been added');
-                error.style.display = 'none';
-                window.location.href = 'http://localhost/testerMenu.php';
+            success: function (recordAdded) {
+              //alert('form was submitted');
+              console.log(this.data);
+              console.log(recordAdded);
+              if (recordAdded == "Added") {
+                window.alert("Record added");
+                location.reload();
               }
-              if(report == "Exists"){
-                error.innerHTML="Report already exists";
-                error.style.display = '';
+              if (testerAdded == "Username") {
+                notifications[0].style.display = '';
+                notifications[1].style.display = 'none';
+                notifications[2].style.display = 'none';
+                notifications[0].innerHTML = "Username already taken!";
               }
-              else{
-                console.log(report);
+              if (testerAdded == "Email") {
+                notifications[0].style.display = 'none';
+                notifications[1].style.display = '';
+                notifications[2].style.display = 'none';
+                notifications[1].innerHTML = "Email already registered!";
               }
             },
-            error: function(){
+            error: function(datas){
               alert('form error');
+              console.log(this.data);
+              console.log(datas);
             }
           });
 
         });
-      });
 
+      });
 }

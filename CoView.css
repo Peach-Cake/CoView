@@ -88,7 +88,7 @@ background-color:lightgrey;
 cursor:pointer;
 }
 
-.table {
+.treports {
   position: relative;
   background-color: white;
   top: 50px;
@@ -100,7 +100,7 @@ cursor:pointer;
   float: right;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 500px;
+  height: 300px;
 }
 
 h1 {

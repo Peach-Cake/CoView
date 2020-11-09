@@ -40,16 +40,17 @@ if (mysqli_num_rows($result) > 0) {
   $testerID = $rowget["ID"];
 }
 
-/*$updateStock = "UPDATE TestCentreKitStock
+
+$updateStock = "UPDATE TestCentreKitStock
 SET AvailableStock = AvailableStock -1
 WHERE TestKitID = '$testKitID';";
-$result = $conn->query($updateStock);
-if ($result == true) {
-  echo "Stock updated!" . $result;
+$stock = $conn->query($updateStock);
+  if ($stock == true) {
+  echo "Stock updated!" . $stock;
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
-*/
+
 $insertData = "INSERT INTO CovidTest(
   OfficerUserID, PatientUserID,
   TestDate, TestKitID, TestCentreID)
@@ -60,13 +61,22 @@ if ($conn->query($insertData) == true){
   echo "Failed" . $conn->error . "<br>";
 }
 
-if ($username != ''){
-  header("Location: http://localhost/testerMenu.php");
+$sql = "SELECT PatientName
+FROM ReportTable
+WHERE PatientName = '$patientName';";
+if ($conn->query($sql) == true){
+  echo "Report with existing patient name is still pending";
+}else
+{$insertData = "INSERT INTO ReportTable (
+  PatientName, PatientType, TestDate, ResultDate, ReportStatus)
+  VALUES ('$patientName', '$patientType', '$testDate', '00/00/0000', 'Pending')";
+  if ($conn->query($insertData) == true){
+    echo "Added successfully";
+  }else{
+    echo "Failed" . $conn->error . "<br>";
+  }}
 }
+header("Location: https://localhost/testerMenu.php");
 }
 $conn->close();
-}
-
-
-
  ?>

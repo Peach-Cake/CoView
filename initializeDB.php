@@ -35,6 +35,22 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error creating table: " . $conn->error . "<br>";
 }
+
+//report table
+$sql = "CREATE TABLE ReportTable (
+  RecordID INT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
+  PatientName VARCHAR(50) NOT NULL,
+  PatientType VARCHAR(15) NOT NULL,
+  TestDate CHAR(10),
+  ResultDate CHAR(10),
+  ReportStatus VARCHAR(10)
+)";
+if ($conn->query($sql) === TRUE) {
+  echo "Table ReportTable created successfully<br>";
+} else {
+  echo "Error creating table: " . $conn->error . "<br>";
+}
+
 //User
 $sql = "CREATE TABLE User (
 ID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
@@ -124,6 +140,7 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error creating table: " . $conn->error . "<br>";
 }
+
 $sql = "SELECT * FROM User";
 $result = $conn->query($sql);
 if(mysqli_num_rows($result) == 0){
@@ -165,9 +182,9 @@ if(mysqli_num_rows($result) == 0){
 
   //TestCentreKitStock
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (1,1,2);";
+  VALUES (1,1,10);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (1,2,5);";
+  VALUES (1,2,10);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
   VALUES (2,1,4);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
@@ -175,6 +192,7 @@ if(mysqli_num_rows($result) == 0){
 
   $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
   VALUES(2,3,'12/02/2020',1,1);";
+
   //add Data to tables
   if ($conn->multi_query($sql) === TRUE) {
     echo "New records created successfully<br>";

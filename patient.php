@@ -47,13 +47,26 @@ header("Access-Control-Allow-Origin: *");
             <th>Symptoms</th>
           </tr>
         <tbody>
-        <tr>
-          <td>Paul</td>
-          <td>Quarantined</td>
-          <td>12/02/2021</td>
-          <td>00/00/0000</td>
-          <td>Flu, coughing, breathing difficulty</td>
-        </tr>
+          <?php
+          $conn = new mysqli("localhost", "root", "", "CoViewDB");
+          $patientID = $_SESSION['LoggedIn'];
+          $query = "SELECT * FROM ReportTable
+          WHERE PatientID = '$patientID';";
+          $result = $conn->query($query);
+          while($row = mysqli_fetch_array($result))
+          {
+            echo "<tbody>";
+          echo "<tr>";
+          echo "<td>" . 'T' . $row['RecordID'] . "</td>";
+          echo "<td>" . $row['PatientName'] . "</td>";
+          echo "<td>" . $row['PatientType'] . "</td>";
+          echo "<td>" . $row['TestDate'] . "</td>";
+          echo "<td>" . $row['ResultDate'] . "</td>";
+          echo "<td>" . $row['ReportStatus'] . "</td>";
+          echo "</tr>";
+          echo "</body>";
+          }
+           ?>
       </tbody>
         </table>
           </div>
