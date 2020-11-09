@@ -79,7 +79,7 @@ if($_SESSION["TestCentreID"]!='0'){
               <input type="text" name="postcode" id="postcode" size="5" pattern="[0-9]{5}" required></input>
               <br><br><br>
               <div class="buttons">
-                <button type="submit">Save</button>
+                <button class="SDBtn" type="submit">Save</button>
               </div>
             </form>
           </div>
