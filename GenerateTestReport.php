@@ -121,7 +121,7 @@ if($_SESSION["TestCentreID"]=='0'){
   </div>
 </div>
 <div class="report-container">
-    <table id="reports">
+    <table id="reports" class="table">
       <thead>
       <tr>
         <th id="TestID" data-dir="ASC">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>

@@ -96,7 +96,7 @@ if($_SESSION["TestCentreID"]=='0'){
           </div>
         </div>
         <div class="report-container">
-        <table id="tester-table">
+        <table id="tester-table" class="table">
           <thead>
           <tr>
             <th>Username</th>
@@ -124,7 +124,7 @@ if($_SESSION["TestCentreID"]=='0'){
         </tbody>
         </table>
       </div>
-      <div class="btn-container">
+      <div class="btn-container" style="margin-left: 15%; padding-top:5px">
         <button type="button"  id="addBtn" data-toggle="modal" data-target="#exampleModalCenter">
           <img src="plus.png" alt="register tester" style="width: 25px; padding-right: 2px;">Register Tester
         </button>
