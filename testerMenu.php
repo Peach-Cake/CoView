@@ -41,10 +41,38 @@ if($_SESSION["TestCentreID"]=='0'){
 
   <main>
 
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLongTitle">Update report</h4>
+            <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="updateForm" method="post">
+                  <label id="reportResults"></label><br><br>
+                  <label for="results"><b>Update results: </b></label>
+                  <input id="results" type="text" size='50' required>
+                  <br><br><br>
+                  <label for="testDate"><b>Result date: </b></label>
+                  <input type="date" id="resultDate" size="30" required>
+
+                  <br><br><br>
+                  <div class="buttons">
+                    <button class="SDBtn" type="button">Delete</button>
+                    <button class="SDBtn" name="submit" type="submit" onclick="">Save</button>
+                  </div>
+                </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
       <?php
       $conn = new mysqli("localhost", "root", "", "CoViewDB");
-      $query = "SELECT * FROM ReportTable";
-      $result = $conn->query($query);
       echo "<table name='reports' style='position: relative;
         background-color: white;
         top: 50px;
@@ -65,24 +93,39 @@ if($_SESSION["TestCentreID"]=='0'){
         <th>Test date</th>
         <th>Result date</th>
         <th>Status</th>
+        <th></th>
         </tr>
         </head>";
+        echo "<tbody>";
+        $centreID = $_SESSION["TestCentreID"];
+        $sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,
+        patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
+        FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
+        INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID';";
+        $result1 = $conn->query($sql);
+        $sql2 = "SELECT * FROM reports;";
+        $result = $conn->query($sql2);
+        //echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
+        if (mysqli_num_rows($result) > 0) {
 
-        while($row = mysqli_fetch_array($result))
-        {
-          echo "<tbody>";
-        echo "<tr>";
-        echo "<td>" . 'T' . $row['RecordID'] . "</td>";
-        echo "<td>" . $row['PatientName'] . "</td>";
-        echo "<td>" . $row['PatientType'] . "</td>";
-        echo "<td>" . $row['TestDate'] . "</td>";
-        echo "<td>" . $row['ResultDate'] . "</td>";
-        echo "<td>" . $row['ReportStatus'] . "</td>";
-        echo "</tr>";
-        echo "</body>";
+        while($row = mysqli_fetch_assoc($result)) {
+
+          echo "<tr>";
+          echo "<td>T".$row['TestID']."</td>";
+          echo "<td>".$row['Name']."</td>";
+          echo "<td>".$row['PatientType']."</td>";
+          echo "<td>".$row['TestDate']."</td>";
+          echo "<td>".$row['ResultDate']."</td>";
+          echo "<td>".$row['Status']."</td>";
+          echo "<td><button data-toggle='modal' data-target='#updateModal'
+          style='border: none; background-color: lightblue;'>Update</button></td>";
+          echo "</tr>";
+
         }
-        echo "</table>";
-
+      }
+      echo "</tbody>";
+      echo "</table>";
+        $conn->close();
       ?>
 
 
@@ -136,9 +179,6 @@ if($_SESSION["TestCentreID"]=='0'){
           </div>
         </div>
 
-
-
-
       <div class="btn-container">
       <a href="createNewRecord.php"><button class="sideBtns">Create report</button></a>
       </div>
@@ -147,21 +187,16 @@ if($_SESSION["TestCentreID"]=='0'){
       <a href=""><button class="sideBtns">View report table</button></a>
       </div>
 
-
-      <div class="search-container">
-
-        <form action="" method="post">
-          <br><br><br>
-        Search:  <input type="text" placeholder="Test report ID" name="searchReport">
-        <button type="submit" id="viewBtn">Update</button>
-
-      </form>
-      </div>
-
     <script type="text/javascript" src="CoViewJS.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </main>
+
+  <script type="text/javascript">
+  getDetails();
+  updateReports();
+  </script>
 </body>
 </html>

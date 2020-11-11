@@ -1,9 +1,7 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
-If(isset($_POST['submit'])) {
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
 $patientName = $_POST['patientName'];
 $tester = $_SESSION["LoggedIn"];
@@ -15,11 +13,11 @@ $symptoms = $_POST['symptoms'];
 $testDate = $_POST['testDate'];
 $testKitID = $_POST['id'];
 $centreID = $_SESSION['TestCentreID'];
-
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 $sql = "INSERT INTO User(Username, Password, Name, Email, UserType)
-VALUES ('$username', '$password', '$patientName', '$email', 'Patient')";
+VALUES ('$username', '$passwordHash', '$patientName', '$email', 'Patient')";
 if ($conn->query($sql) == true){
-  echo "Added successfully";
+//  echo "Added";
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
@@ -28,7 +26,7 @@ $last_id = $conn->insert_id;
 $sql = "INSERT INTO Patient(UserID, PatientType, Symptoms)
 VALUES ('$last_id', '$patientType', '$symptoms')";
 if ($conn->query($sql) == true){
-  echo "Added successfully";
+  //echo "Added";
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
@@ -46,7 +44,7 @@ SET AvailableStock = AvailableStock -1
 WHERE TestKitID = '$testKitID';";
 $stock = $conn->query($updateStock);
   if ($stock == true) {
-  echo "Stock updated!" . $stock;
+  //echo "Stock updated!" . $stock;
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
@@ -54,29 +52,12 @@ $stock = $conn->query($updateStock);
 $insertData = "INSERT INTO CovidTest(
   OfficerUserID, PatientUserID,
   TestDate, TestKitID, TestCentreID)
-  VALUES ('$testerID', '$last_id', $testDate, '$testKitID', '$centreID')";
+  VALUES ('$testerID', '$last_id', '$testDate', '$testKitID', '$centreID')";
 if ($conn->query($insertData) == true){
-  echo "Added successfully";
+  //echo "Added";
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
 
-$sql = "SELECT PatientName
-FROM ReportTable
-WHERE PatientName = '$patientName';";
-if ($conn->query($sql) == true){
-  echo "Report with existing patient name is still pending";
-}else
-{$insertData = "INSERT INTO ReportTable (
-  PatientName, PatientType, TestDate, ResultDate, ReportStatus)
-  VALUES ('$patientName', '$patientType', '$testDate', '00/00/0000', 'Pending')";
-  if ($conn->query($insertData) == true){
-    echo "Added successfully";
-  }else{
-    echo "Failed" . $conn->error . "<br>";
-  }}
-}
-header("Location: https://localhost/testerMenu.php");
-}
 $conn->close();
  ?>

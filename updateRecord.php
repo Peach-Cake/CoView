@@ -44,11 +44,6 @@ if($_SESSION["TestCentreID"]=='0'){
 
     <div class="form-container">
         <form id="form" method="post">
-
-              <label for="testerName"><b>Tester: </b></label>
-              <br>
-              <input type="text" name="testerName" size="50" required>
-              <br><br>
               <?php
               echo "<label><b>Patient name:</b> John</label> <br><br>";
               echo "<label><b>Symptoms: </b></label> <br>";

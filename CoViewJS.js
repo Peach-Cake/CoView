@@ -119,7 +119,7 @@ document.getElementById('close').click();
 //Search
 function search(){
   let s = document.getElementsByTagName('input')[0].value;
-  let table = document.getElementsByTagName('table')[0];
+  let table = document.getElementsByTagName('reports')[0];
   let rows = table.rows;
   for (let n = 1; n < rows.length; n++) {
     rows[n].style.display='';
@@ -133,6 +133,7 @@ function search(){
     }
     else if(s.toUpperCase() !== id.innerHTML.toUpperCase() && s.toUpperCase() !== name.innerHTML.toUpperCase()){
       rows[i].style.display='none';
+
     }
   }
 }
@@ -524,6 +525,9 @@ function newLogin(){
               if(userType == "Tester"){
                 window.location.href = "http://localhost/testerMenu.php";
               }
+              if(userType == "Patient"){
+                window.location.href = "http://localhost/patient.php";
+              }
               if(userType == "Not Found"){
                 let notification = document.getElementsByTagName('small')[0];
                 notification.style.display = '';
@@ -742,36 +746,18 @@ function getReportDetails(){
 function reportCreated(){
   $(function () {
 
-        $('#recordForm').on('submit', function (e) {
-
-          e.preventDefault();
-          //var data = $('#logInForm').serialize();
-          let notifications = document.getElementsByClassName('errorNotifications');
+        $('#form').on('submit', function (e) {
           $.ajax({
             type: 'POST',
-            url: 'http://localhost/RegisterTester.php',
-            data: $('#recordForm').serialize(),
+            url: 'http://localhost/insertData.php',
+            data: $('#form').serialize(),
             success: function (recordAdded) {
-              //alert('form was submitted');
               console.log(this.data);
               console.log(recordAdded);
               if (recordAdded == "Added") {
                 window.alert("Record added");
-                location.reload();
-              }
-              if (testerAdded == "Username") {
-                notifications[0].style.display = '';
-                notifications[1].style.display = 'none';
-                notifications[2].style.display = 'none';
-                notifications[0].innerHTML = "Username already taken!";
-              }
-              if (testerAdded == "Email") {
-                notifications[0].style.display = 'none';
-                notifications[1].style.display = '';
-                notifications[2].style.display = 'none';
-                notifications[1].innerHTML = "Email already registered!";
-              }
-            },
+                window.location.href = "http://localhost/testerMenu.php";
+              }},
             error: function(datas){
               alert('form error');
               console.log(this.data);
@@ -782,6 +768,65 @@ function reportCreated(){
         });
 
       });
+}
+
+function getDetails(){
+  $(function () {
+
+        $('tbody tr button').on('click', function (e) {
+          let row = $(this).parent().parent();
+          let rowId = row.find('td:first').html();
+          let data = {tid:parseInt(rowId.substring(1))};
+          let details = document.getElementById('reportResults');
+          console.log("test");
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/getDetails.php',
+            data: data,
+            success: function (results) {
+              console.log(results);
+              console.log(data);
+              details.innerHTML = results;
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
+}
+function updateReports(){
+  $(function () {
+
+        $('#updateForm').on('submit', function (e) {
+          e.preventDefault();
+          let res = document.getElementById('results').value;
+          let resultDate = document.getElementById('resultDate').value;
+          let row = $(this).parent().parent();
+          let rowId = row.find('td:first').html();
+          let data = {
+            reportResults: res, resultDate: resultDate};
+          let details = document.getElementById('reportResults');
+          console.log("test");
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost/update.php',
+            data: data,
+            success: function (results) {
+              console.log(results);
+              alert('Report has been succesfully updated');
+              location.reload();
+            },
+            error: function(){
+              alert('form error');
+            }
+          });
+
+        });
+      });
+
 }
 function newFilter(e){
   $(function () {

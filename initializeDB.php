@@ -36,21 +36,6 @@ if ($conn->query($sql) === TRUE) {
   echo "Error creating table: " . $conn->error . "<br>";
 }
 
-//report table
-$sql = "CREATE TABLE ReportTable (
-  RecordID INT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,
-  PatientName VARCHAR(50) NOT NULL,
-  PatientType VARCHAR(15) NOT NULL,
-  TestDate CHAR(10),
-  ResultDate CHAR(10),
-  ReportStatus VARCHAR(10)
-)";
-if ($conn->query($sql) === TRUE) {
-  echo "Table ReportTable created successfully<br>";
-} else {
-  echo "Error creating table: " . $conn->error . "<br>";
-}
-
 //User
 $sql = "CREATE TABLE User (
 ID BIGINT(10) UNSIGNED UNIQUE AUTO_INCREMENT PRIMARY KEY,

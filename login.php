@@ -60,8 +60,15 @@ if (mysqli_num_rows($result) > 0) {
     }
   }
   if($row["UserType"]=="Patient"){
-    header("Location: patient.php");
-}
+    $sqlMan = "SELECT UserID FROM Patient
+    WHERE UserID = '$id';";
+    $resultMan = $conn->query($sqlMan);
+    $rowMan = mysqli_fetch_assoc($resultMan);
+    $_SESSION["Username"] = $rowMan["Username"];
+    $_SESSION["LoggedIn"] = $user;
+    echo "Patient";
+    exit;
+  }
 else{
   echo "Not Found";
 }

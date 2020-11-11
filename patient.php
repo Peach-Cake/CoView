@@ -1,6 +1,9 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
+if(isset($_SESSION["LoggedIn"])==false){
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+}
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -18,13 +21,15 @@ header("Access-Control-Allow-Origin: *");
       <h1>COVIEW</h1>
       <nav class="AccountMenu">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <?php
+            echo $_SESSION["LoggedIn"];
+             ?>
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="dropdown-header">Position: Patient</div>
           <a class="dropdown-item" href="#"></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html">Logout</a>
+          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
         </div>
       </nav>
     </header>
@@ -36,38 +41,51 @@ header("Access-Control-Allow-Origin: *");
       </ol>
     </nav>
 
+
+
       <div class="report-container">
-        <table>
+        <table style="text-align: center;">
           <thead>
           <tr>
+            <th>ID</th>
             <th>Tester name</th>
             <th>Patient type</th>
             <th>Test date</th>
             <th>Result Date</th>
             <th>Symptoms</th>
           </tr>
-        <tbody>
           <?php
           $conn = new mysqli("localhost", "root", "", "CoViewDB");
-          $patientID = $_SESSION['LoggedIn'];
-          $query = "SELECT * FROM ReportTable
-          WHERE PatientID = '$patientID';";
+          $query = "SELECT * FROM ReportTable";
           $result = $conn->query($query);
-          while($row = mysqli_fetch_array($result))
-          {
-            echo "<tbody>";
-          echo "<tr>";
-          echo "<td>" . 'T' . $row['RecordID'] . "</td>";
-          echo "<td>" . $row['PatientName'] . "</td>";
-          echo "<td>" . $row['PatientType'] . "</td>";
-          echo "<td>" . $row['TestDate'] . "</td>";
-          echo "<td>" . $row['ResultDate'] . "</td>";
-          echo "<td>" . $row['ReportStatus'] . "</td>";
-          echo "</tr>";
-          echo "</body>";
+          echo "<tbody>";
+          $sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,covidTest.status,
+          patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
+          FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
+          INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID';";
+          $result1 = $conn->query($sql);
+          $sql2 = "SELECT * FROM reports;";
+          $result = $conn->query($sql2);
+          //echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
+          if (mysqli_num_rows($result) > 0) {
+
+          while($row = mysqli_fetch_assoc($result)) {
+
+            echo "<tr>";
+            echo "<td>T".$row['TestID']."</td>";
+            echo "<td>".$row['Name']."</td>";
+            echo "<td>".$row['PatientType']."</td>";
+            echo "<td>".$row['TestDate']."</td>";
+            echo "<td>".$row['ResultDate']."</td>";
+            echo "<td>".$row['Status']."</td>";
+            echo "<td><button data-toggle='modal' data-target='#updateModal'
+            style='border: none; background-color: lightblue;'>Update</button></td>";
+            echo "</tr>";
+
           }
-           ?>
-      </tbody>
+        }
+        echo "</tbody>";
+        ?>
         </table>
           </div>
 

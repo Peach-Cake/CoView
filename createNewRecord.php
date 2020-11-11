@@ -40,11 +40,7 @@ if($_SESSION["TestCentreID"]=='0'){
     </header>
 
       <div class="form-container">
-          <form id="form" action="insertData.php" name="recordForm" method="post">
-                <label for="testerName"><b>Tester: </b></label>
-                <br>
-                <input type="text" name="testerName" size="50" required>
-                <br><br>
+          <form id="form" action="" name="recordForm" method="post">
                 <label for="patientName"><b>Patient name: </b></label>
                 <br>
                 <input type="text" name="patientName" size="50" required>
