@@ -54,7 +54,7 @@ $insertData = "INSERT INTO CovidTest(
   TestDate, TestKitID, TestCentreID)
   VALUES ('$testerID', '$last_id', '$testDate', '$testKitID', '$centreID')";
 if ($conn->query($insertData) == true){
-  //echo "Added";
+  echo "Added";
 }else{
   echo "Failed" . $conn->error . "<br>";
 }

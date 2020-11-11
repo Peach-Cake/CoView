@@ -9,10 +9,20 @@ $conn = new mysqli("localhost", "root", "", "CoViewDB");
 $status = $_POST['status'];
 //$filters;
 
-$centreID = $_SESSION['TestCentreID'];
+//$centreID = $_SESSION['TestCentreID'];
 $sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
 FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
-INNER JOIN patient ON covidtest.PatientUserID = patient.UserID) WHERE covidtest.TestCentreID='$centreID'";
+INNER JOIN patient ON covidtest.PatientUserID = patient.UserID)";
+if(isset($_SESSION['TestCentreID'])){
+if($_SESSION["type"]!="Patient"){
+  $centreID = $_SESSION['TestCentreID'];
+  $sql .= " WHERE covidtest.TestCentreID ='$centreID'";
+}}
+if(isset($_SESSION['UserID'])){
+if ($_SESSION["type"]=="Patient") {
+  $id = $_SESSION['UserID'];
+  $sql .= " WHERE covidtest.PatientUserID = '$id'";
+}}
 if(isset($_POST['patientStatus'])){
   $type = $_POST['patientStatus'];
   $sql .= " AND ";
@@ -68,12 +78,16 @@ $result = $conn->query($sql2);
 if (mysqli_num_rows($result) > 0) {
 while($row = mysqli_fetch_assoc($result)) {
   echo "<tr data-toggle='modal' data-target='#resultsModal'>";
-  echo "<td>".$row['TestID']."</td>";
+  echo "<td>T".$row['TestID']."</td>";
   echo "<td>".$row['Name']."</td>";
   echo "<td>".$row['PatientType']."</td>";
   echo "<td>".$row['TestDate']."</td>";
   echo "<td>".$row['ResultDate']."</td>";
   echo "<td>".$row['Status']."</td>";
+  if($_SESSION["type"]=="Tester"){
+    echo "<td><button data-toggle='modal' data-target='#updateModal'
+    style='border: none; background-color: lightblue;'>Update</button></td>";
+  }
   echo "</tr>";
 }}
 $conn->close();

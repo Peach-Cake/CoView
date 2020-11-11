@@ -719,7 +719,7 @@ function getReportDetails(){
   $(function () {
 
         $('tbody tr').on('click', function (e) {
-          let data = {tid:$(this).find('td:first').text()};
+          let data = {tid:$(this).find('td:first').text().substring(1)};
           let rep = document.getElementById('tResults');
           console.log("test");
           $.ajax({
@@ -747,6 +747,7 @@ function reportCreated(){
   $(function () {
 
         $('#form').on('submit', function (e) {
+          e.preventDefault();
           $.ajax({
             type: 'POST',
             url: 'http://localhost/insertData.php',
@@ -774,6 +775,9 @@ function getDetails(){
   $(function () {
 
         $('tbody tr button').on('click', function (e) {
+          //event.stopPropagation();
+          //e.stopPropogation();
+          //event.cancelBubble = true;
           let row = $(this).parent().parent();
           let rowId = row.find('td:first').html();
           let data = {tid:parseInt(rowId.substring(1))};
@@ -842,6 +846,7 @@ function newFilter(e){
               console.log(tbody);
               document.getElementsByTagName('tbody')[0].innerHTML = tbody;
               getReportDetails();
+              getDetails();
             },
             error: function(){
               alert('form error');
@@ -880,6 +885,7 @@ function newSort(){
               console.log(tbody);
               document.getElementsByTagName('tbody')[0].innerHTML = tbody;
               getReportDetails();
+              getDetails();
             },
             error: function(){
               alert('form error');

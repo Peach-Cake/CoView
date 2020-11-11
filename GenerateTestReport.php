@@ -146,7 +146,7 @@ if($_SESSION["TestCentreID"]=='0'){
       if (mysqli_num_rows($result) > 0) {
       while($row = mysqli_fetch_assoc($result)) {
         echo "<tr data-toggle='modal' data-target='#resultsModal'>";
-        echo "<td>".$row['TestID']."</td>";
+        echo "<td>T".$row['TestID']."</td>";
         echo "<td>".$row['Name']."</td>";
         echo "<td>".$row['PatientType']."</td>";
         echo "<td>".$row['TestDate']."</td>";

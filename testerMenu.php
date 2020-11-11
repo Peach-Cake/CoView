@@ -87,12 +87,12 @@ if($_SESSION["TestCentreID"]=='0'){
         height: 500px;'>
       <thead>
         <tr>
-        <th>ID</th>
-        <th>Patient Name</th>
-        <th>Patient Type</th>
-        <th>Test date</th>
-        <th>Result date</th>
-        <th>Status</th>
+        <th id='TestID' data-dir='ASC'>Test ID <img src=ascTableSorter.png class='tableSortPointers'></img></th>
+        <th id='Name' data-dir='NONE'>Patient name <img src=doubleTableSorter.png class='tableSortPointers'></img></th>
+        <th id='PatientType' data-dir='NONE'>Patient type <img src=doubleTableSorter.png class='tableSortPointers'></img></th>
+        <th id='TestDate' data-dir='NONE'>Test date <img src=doubleTableSorter.png class='tableSortPointers'></img></th>
+        <th id='ResultDate' data-dir='NONE'>Result date <img src=doubleTableSorter.png class='tableSortPointers'></img></th>
+        <th id='Status' data-dir='NONE'>Status <img src=doubleTableSorter.png class='tableSortPointers'></img></th>
         <th></th>
         </tr>
         </head>";
@@ -110,7 +110,7 @@ if($_SESSION["TestCentreID"]=='0'){
 
         while($row = mysqli_fetch_assoc($result)) {
 
-          echo "<tr>";
+          echo "<tr data-toggle='modal' data-target='#resultsModal'>";
           echo "<td>T".$row['TestID']."</td>";
           echo "<td>".$row['Name']."</td>";
           echo "<td>".$row['PatientType']."</td>";
@@ -131,7 +131,7 @@ if($_SESSION["TestCentreID"]=='0'){
 
 
     <div class="filterIcon1">
-          <button id="filterButton1" onclick="openModal(0)">Filter
+          <button id="filterButton1" data-toggle="modal" data-target="#filterModalCenter">Filter
           <svg>
           <path fill-rule="evenodd"
           d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5
@@ -142,43 +142,76 @@ if($_SESSION["TestCentreID"]=='0'){
         </svg></button>
         </div>
 
-        <div id="filterModal" class="modal">
-          <div class="filterModal-content">
-            <span class="close" onclick="xCloseFilter(0)">&times;</span>
-            <form class="filterForm" id="filterForm">
-              <h4>Filter By:</h4>
-              <label>Patient Type:</label>
-              <input type="checkbox" id="returnee" name="patientStatus" value="returnee">
-              <label for="returnee">Returnee</label>&nbsp;
-              <input type="checkbox" id="quarantined" name="patientStatus" value="quarantined">
-              <label for="quarantined">Quarantined</label>&nbsp;
-              <input type="checkbox" id="closeContact" name="patientStatus" value="closeContact">
-              <label for="closeContact">Close Contact</label>&nbsp;
-              <input type="checkbox" id="infected" name="patientStatus" value="infected">
-              <label for="infected">Infected</label>&nbsp;
-              <input type="checkbox" id="suspected" name="patientStatus" value="suspected">
-              <label for="suspected">Suspected</label>
-              <br>
+        <div class="modal fade" id="filterModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Filter By:</h4>
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form class="filterForm" id="filterForm">
+                    <label>Patient Type:</label>
+                    <div class="pType" style="float:right; margin-right:20px">
+                    <input type="checkbox" id="returnee" name="patientStatus[]" value="returnee">
+                    <label for="returnee">Returnee</label>&nbsp;
+                    <input type="checkbox" id="quarantined" name="patientStatus[]" value="quarantined">
+                    <label for="quarantined">Quarantined</label>&nbsp;
+                    <input type="checkbox" id="closeContact" name="patientStatus[]" value="close Contact">
+                    <label for="closeContact">Close Contact</label>&nbsp;<br>
+                    <input type="checkbox" id="infected" name="patientStatus[]" value="infected">
+                    <label for="infected">Infected</label>&nbsp;
+                    <input type="checkbox" id="suspected" name="patientStatus[]" value="suspected">
+                    <label for="suspected">Suspected</label>
+                  </div>
+                    <br><br><br>
 
-              <label>Test Date:</label>
-              <input type="date" class="filterDates" name="testDateFrom" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">&nbsp;to
-              <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
-              <br>
+                    <label>Test Date:</label>
+                    <input type="date" class="filterDates" name="testDateFrom" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">&nbsp;to
+                    <input type="date" class="filterDates" name="testDateTo" value="" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}">
+                    <br><br>
 
-              <label>Status: </label>&nbsp;
-              <input type="radio" id="pending" name="status" value="pending">
-              <label for="pending">Pending</label>&nbsp;
-              <input type="radio" id="complete" name="status" value="complete">
-              <label for="complete">Complete</label>&nbsp;
-              <input type="radio" id="both" name="status" value="both" checked>
-              <label for="both">Both</label>
-              <br>
+                    <label>Result Date:</label>
+                    <input type="date" class="filterDates" name="resultDateFrom" value="">&nbsp;to
+                    <input type="date" class="filterDates" name="resultDateTo" value="">
+                    <br><br>
 
-              <button type="button"  onclick="applyFilter()">Apply</button>
-            </form>
+                    <label>Status: </label>&nbsp;
+                    <input type="radio" id="pending" name="status" value="pending">
+                    <label for="pending">Pending</label>&nbsp;
+                    <input type="radio" id="complete" name="status" value="complete">
+                    <label for="complete">Complete</label>&nbsp;
+                    <input type="radio" id="both" name="status" value="both" checked>
+                    <label for="both">Both</label>
+                    <br>
+                    <div class="modal-footer">
+                      <button type="submit" class="SDBtn" onclick="">Apply</button>
+                    </div>
+                  </form>
+
+              </div>
+
+            </div>
           </div>
         </div>
-
+        <div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle">Test Results</h4>
+                <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <b id="tResults"></b>
+                <br>
+              </div>
+              </div>
+              </div>
+              </div>
       <div class="btn-container">
       <a href="createNewRecord.php"><button class="sideBtns">Create report</button></a>
       </div>
@@ -197,6 +230,9 @@ if($_SESSION["TestCentreID"]=='0'){
   <script type="text/javascript">
   getDetails();
   updateReports();
+  getReportDetails();
+  newFilter();
+  newSort();
   </script>
 </body>
 </html>

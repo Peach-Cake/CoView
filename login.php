@@ -36,11 +36,13 @@ if (mysqli_num_rows($result) > 0) {
       if (isset($rowMan["RegisteredCentreID"])) {
           $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
           $_SESSION["LoggedIn"] = $user;
+          $_SESSION["type"] = "Manager";
           echo "Manager";
           exit;
       }else {
           $_SESSION["TestCentreID"] = '0';
           $_SESSION["LoggedIn"] = $user;
+          $_SESSION["type"] = "Manager";
           echo "NewManager";
           exit;
       }
@@ -55,17 +57,15 @@ if (mysqli_num_rows($result) > 0) {
       $rowMan = mysqli_fetch_assoc($resultMan);
       $_SESSION["TestCentreID"] = $rowMan["RegisteredCentreID"];
       $_SESSION["LoggedIn"] = $user;
+      $_SESSION["type"] = "Tester";
       echo "Tester";
       exit;
     }
   }
   if($row["UserType"]=="Patient"){
-    $sqlMan = "SELECT UserID FROM Patient
-    WHERE UserID = '$id';";
-    $resultMan = $conn->query($sqlMan);
-    $rowMan = mysqli_fetch_assoc($resultMan);
-    $_SESSION["Username"] = $rowMan["Username"];
+    $_SESSION["UserId"] = $id;
     $_SESSION["LoggedIn"] = $user;
+    $_SESSION["type"] = "Patient";
     echo "Patient";
     exit;
   }
