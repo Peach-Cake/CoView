@@ -183,13 +183,13 @@ if(mysqli_num_rows($result) == 0){
 
   //TestCentreKitStock
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (1,1,2);";
+  VALUES (1,1,20);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (1,2,5);";
+  VALUES (1,2,25);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (2,1,4);";
+  VALUES (2,1,14);";
   $sql .= "INSERT INTO TestCentreKitStock(TestCentreID, TestKitID, AvailableStock)
-  VALUES (2,2,8);";
+  VALUES (2,2,18);";
 
   $sql .= "INSERT INTO CovidTest(OfficerUserID,PatientUserID,TestDate,TestKitID,TestCentreID)
   VALUES(2,3,'2020-08-25',1,1);";
