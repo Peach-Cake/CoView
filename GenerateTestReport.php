@@ -44,13 +44,13 @@ if($_SESSION["TestCentreID"]=='0'){
         <li class="breadcrumb-item" aria-current="page">Generate Test Report</li>
       </ol>
     </nav>
-    <div class="search-container">
+    <!--<div class="search-container">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <form action="/action_page.php">
       Search:  <input type="text" placeholder="Test report ID" name="searchReport">
       <button type="button" id="viewBtn" onclick="search()">View</button>
     </form>
-  </div>
+  </div>-->
 
 <div  class="filterIcon">
 <button type="button" id="filterButton3" data-toggle="modal" data-target="#exampleModalCenter">
