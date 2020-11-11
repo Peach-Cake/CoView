@@ -73,14 +73,14 @@ if($_SESSION["TestCentreID"]=='0'){
 
       <?php
       $conn = new mysqli("localhost", "root", "", "CoViewDB");
-      echo "<table name='reports' style='position: relative;
+      echo "<table name='reports'class=table style='position: relative;
         background-color: white;
         top: 50px;
         left: 40px;
         display: block;
         border: 3px solid white;
         text-align: center;
-        width: 70%;
+        width: 71%;
         float: right;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -110,7 +110,7 @@ if($_SESSION["TestCentreID"]=='0'){
 
         while($row = mysqli_fetch_assoc($result)) {
 
-          echo "<tr data-toggle='modal' data-target='#resultsModal'>";
+          echo "<tr>";
           echo "<td>T".$row['TestID']."</td>";
           echo "<td>".$row['Name']."</td>";
           echo "<td>".$row['PatientType']."</td>";

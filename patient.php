@@ -44,7 +44,7 @@ if(isset($_SESSION["LoggedIn"])==false){
 
 
       <div class="report-container">
-        <table style="text-align: center;">
+        <table style="text-align: center;" class="table">
           <thead>
           <tr>
             <th id="TestID" data-dir="ASC">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>

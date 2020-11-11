@@ -15,7 +15,9 @@ else {
 $result = $conn->query($sql);
 if (mysqli_num_rows($result) > 0) {
 while($row = mysqli_fetch_assoc($result)) {
-  echo "<tr data-toggle='modal' data-target='#resultsModal'>";
+  if($_SESSION["type"]!="Tester"){
+  echo "<tr data-toggle='modal' data-target='#resultsModal'>";}
+  else{echo "<tr>";}
   echo "<td>T".$row['TestID']."</td>";
   echo "<td>".$row['Name']."</td>";
   echo "<td>".$row['PatientType']."</td>";
