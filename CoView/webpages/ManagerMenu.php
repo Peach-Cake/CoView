@@ -2,11 +2,20 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 if(isset($_SESSION["LoggedIn"])==false){
-  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView';</script>";
+}
+else if($_SESSION["type"]!="Manager"){
+  echo "<script type='text/javascript'>alert('You do not have permission to access this page!');</script>";
+  if($_SESSION["type"]=="Tester"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/testerMenu.php';</script>";
+  }
+  if($_SESSION["type"]=="Patient"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/patient.php';</script>";
+  }
 }
 if($_SESSION["TestCentreID"]=='0'){
   echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
-  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+  echo "window.location.href = 'http://localhost/CoView/webpages/ManageTestCentre.php';</script>";
 }
  ?>
 <!DOCTYPE html>
@@ -15,7 +24,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <link rel="stylesheet" type="text/css" href="../scripts/CoView.css">
     <title>Manager Menu</title>
   </head>
 
@@ -33,7 +42,7 @@ if($_SESSION["TestCentreID"]=='0'){
             <div class="dropdown-header">Position: Manager</div>
             <div class="dropdown-header"></div>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
+            <a class="dropdown-item" href="http://localhost/CoView/scripts/logout.php">Logout</a>
             </div>
         </div>
       </nav>
@@ -48,8 +57,8 @@ if($_SESSION["TestCentreID"]=='0'){
 
         <div class="col-md" id="ManagerMenuItems">
           <div class="card">
-            <a href="http://localhost/GenerateTestReport.php">
-            <img class="card-img-top" src="reportIcon.png" alt="ViewTestReports">
+            <a href="http://localhost/CoView/webpages/GenerateTestReport.php">
+            <img class="card-img-top" src="../icons/reportIcon.png" alt="ViewTestReports">
             <div class="card-body">
               <h5 class="card-title">Generate Test Reports</h5>
               <p class="card-text">View the Test Reports done at the test centre.</p>
@@ -60,8 +69,8 @@ if($_SESSION["TestCentreID"]=='0'){
 
         <div class="col-md" id="ManagerMenuItems">
           <div class="card">
-            <a href="http://localhost/ManageTestCentre.php">
-            <img class="card-img-top" src="testCentreIcon.png" alt="ManageTestCentre">
+            <a href="http://localhost/CoView/webpages/ManageTestCentre.php">
+            <img class="card-img-top" src="../icons/testCentreIcon.png" alt="ManageTestCentre">
             <div class="card-body">
               <h5 class="card-title">Manage Test Centre</h5>
               <p class="card-text">Register Newly approved Testing Centres.</p>
@@ -72,8 +81,8 @@ if($_SESSION["TestCentreID"]=='0'){
 
         <div class="col-md"  id="ManagerMenuItems">
             <div class="card">
-              <a href="http://localhost/TesterTable.php">
-              <img class="card-img-top" src="testerIcon.png" alt="RegisterTester">
+              <a href="http://localhost/CoView/webpages/TesterTable.php">
+              <img class="card-img-top" src="../icons/testerIcon.png" alt="RegisterTester">
               <div class="card-body">
                 <h5 class="card-title">Register Tester</h5>
                 <p class="card-text">Register Newly Joined Testers.</p>
@@ -84,8 +93,8 @@ if($_SESSION["TestCentreID"]=='0'){
 
         <div class="col-md"  id="ManagerMenuItems">
             <div class="card">
-              <a href="http://localhost/ManageTestKitStock.php">
-              <img class="card-img-top" src="testKitIcon.png" alt="ManageTestKitStock">
+              <a href="http://localhost/CoView/webpages/ManageTestKitStock.php">
+              <img class="card-img-top" src="../icons/testKitIcon.png" alt="ManageTestKitStock">
               <div class="card-body">
                 <h5 class="card-title">Manage Test Kit Stock</h5>
                 <p class="card-text">Add newly arrived test kit stock to the system.</p>

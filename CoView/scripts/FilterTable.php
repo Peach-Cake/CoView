@@ -2,14 +2,8 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
-//$testDateFrom = $_POST['testDateFrom'];
-//$testDateTo = $_POST['testDateTo'];
-//$resultDateFrom = $_POST['resultDateFrom'];
-//$resultDateTo = $_POST['resultDateTo'];
 $status = $_POST['status'];
-//$filters;
 
-//$centreID = $_SESSION['TestCentreID'];
 $sql = "CREATE OR REPLACE VIEW reports AS SELECT covidtest.TestID,user.Name,patient.PatientType,DATE_FORMAT(covidtest.TestDate, '%d/%m/%Y') AS TestDate,DATE_FORMAT(covidtest.ResultDate, '%d/%m/%Y') AS ResultDate,covidtest.Status
 FROM ((covidtest INNER JOIN user ON covidtest.PatientUserID = user.ID)
 INNER JOIN patient ON covidtest.PatientUserID = patient.UserID)";

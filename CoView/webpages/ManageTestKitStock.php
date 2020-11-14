@@ -2,11 +2,20 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 if(isset($_SESSION["LoggedIn"])==false){
-  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView';</script>";
+}
+else if($_SESSION["type"]!="Manager"){
+  echo "<script type='text/javascript'>alert('You do not have permission to access this page!');</script>";
+  if($_SESSION["type"]=="Tester"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/testerMenu.php';</script>";
+  }
+  if($_SESSION["type"]=="Patient"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/patient.php';</script>";
+  }
 }
 if($_SESSION["TestCentreID"]=='0'){
   echo "<script type='text/javascript'>alert('You need to register Test Centre First!');";
-  echo "window.location.href = 'http://localhost/ManageTestCentre.php';</script>";
+  echo "window.location.href = 'http://localhost/CoView/webpages/ManageTestCentre.php';</script>";
 }
  ?>
 <!DOCTYPE html>
@@ -15,7 +24,7 @@ if($_SESSION["TestCentreID"]=='0'){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <link rel="stylesheet" type="text/css" href="../scripts/CoView.css">
     <title>Manage Test Kit Stock</title>
   </head>
   <body class="settings">
@@ -31,7 +40,7 @@ if($_SESSION["TestCentreID"]=='0'){
           <div class="aligning">
           <div class="dropdown-header">Position: Manager</div>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
+          <a class="dropdown-item" href="http://localhost/CoView/scripts/logout.php">Logout</a>
           </div>
         </div>
       </nav>
@@ -39,7 +48,7 @@ if($_SESSION["TestCentreID"]=='0'){
 
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/CoView/webpages/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Manage Test Kit Stock</li>
         </ol>
       </nav>
@@ -107,7 +116,7 @@ if($_SESSION["TestCentreID"]=='0'){
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script type="text/javascript" src="CoViewJS.js">
+      <script type="text/javascript" src="../scripts/CoViewJS.js">
       </script>
       <script type="text/javascript">
         neTestKitForm();

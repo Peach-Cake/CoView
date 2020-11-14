@@ -1,16 +1,6 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
-//$cookieParams = session_get_cookie_params();
-//$cookieParams['secure'] = true;
-//echo $cookieParams['secure'];
-//exit;
-//session_set_cookie_params($cookieParams);
-//session_start();
-//header('Content-type: application/json');
-//this is temp as we try to make php work without redirect
-//$username = $_PHP['email'];
-//$password= $_PHP['password'];
 $params = array();
 $username = $_POST["email"];
 

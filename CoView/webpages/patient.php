@@ -2,7 +2,16 @@
 session_start();
 header("Access-Control-Allow-Origin: *");
 if(isset($_SESSION["LoggedIn"])==false){
-  echo "<script type='text/javascript'>window.location.href = 'http://localhost';</script>";
+  echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView';</script>";
+}
+else if($_SESSION["type"]!="Patient"){
+  echo "<script type='text/javascript'>alert('You do not have permission to access this page!');</script>";
+  if($_SESSION["type"]=="Tester"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/testerMenu.php';</script>";
+  }
+  if($_SESSION["type"]=="Manager"){
+    echo "<script type='text/javascript'>window.location.href = 'http://localhost/CoView/webpages/ManagerMenu.php';</script>";
+  }
 }
  ?>
 <!DOCTYPE html>
@@ -11,7 +20,7 @@ if(isset($_SESSION["LoggedIn"])==false){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CoView.css">
+    <link rel="stylesheet" type="text/css" href="../scripts/CoView.css">
     <script src="CoViewJS.js"></script>
     <title>Patient Menu</title>
   </head>
@@ -29,7 +38,7 @@ if(isset($_SESSION["LoggedIn"])==false){
           <div class="dropdown-header">Position: Patient</div>
           <a class="dropdown-item" href="#"></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="http://localhost/logout.php">Logout</a>
+          <a class="dropdown-item" href="http://localhost/CoView/scripts/logout.php">Logout</a>
         </div>
       </nav>
     </header>
@@ -47,12 +56,12 @@ if(isset($_SESSION["LoggedIn"])==false){
         <table style="text-align: center;" class="table">
           <thead>
           <tr>
-            <th id="TestID" data-dir="ASC">Test ID <img src=ascTableSorter.png class="tableSortPointers"></img></th>
-            <th id="Name" data-dir="NONE">Patient name <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th id="PatientType" data-dir="NONE">Patient type <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th id="TestDate" data-dir="NONE">Test date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th id="ResultDate" data-dir="NONE">Result date <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
-            <th id="Status" data-dir="NONE">Status <img src=doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th id="TestID" data-dir="ASC">Test ID <img src=../icons/ascTableSorter.png class="tableSortPointers"></img></th>
+            <th id="Name" data-dir="NONE">Patient name <img src=../icons/doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th id="PatientType" data-dir="NONE">Patient type <img src=../icons/doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th id="TestDate" data-dir="NONE">Test date <img src=../icons/doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th id="ResultDate" data-dir="NONE">Result date <img src=../icons/doubleTableSorter.png class="tableSortPointers"></img></th>
+            <th id="Status" data-dir="NONE">Status <img src=../icons/doubleTableSorter.png class="tableSortPointers"></img></th>
           </tr>
           <?php
           $conn = new mysqli("localhost", "root", "", "CoViewDB");
@@ -110,10 +119,10 @@ if(isset($_SESSION["LoggedIn"])==false){
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script type="text/javascript" src="CoViewJS.js"></script>
+            <script type="text/javascript" src="../scripts/CoViewJS.js"></script>
           <script type="text/javascript">
             getReportDetails();
-            newSort();
+            sort();
           </script>
         </body>
 
