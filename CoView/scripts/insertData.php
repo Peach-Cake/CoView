@@ -54,10 +54,24 @@ $insertData = "INSERT INTO CovidTest(
   TestDate, TestKitID, TestCentreID)
   VALUES ('$testerID', '$last_id', '$testDate', '$testKitID', '$centreID')";
 if ($conn->query($insertData) == true){
-  echo "Added";
+  //echo "Added";
 }else{
   echo "Failed" . $conn->error . "<br>";
 }
 
+$query = "SELECT *
+FROM TestCentreKitStock
+WHERE TestCentreID = '$centreID' AND TestKitID = '$testKitID';";
+$stock = $conn->query($query);
+if (mysqli_num_rows($stock) > 0){
+  $row = mysqli_fetch_assoc($stock);
+  $numStock = $row['AvailableStock'];
+  if ($numStock > 0){
+      echo "Added";
+  }else{
+  echo "Failed";
+  exit;
+}
+}
 $conn->close();
  ?>

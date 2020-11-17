@@ -271,7 +271,12 @@ function reportCreated(){
               if (recordAdded == "Added") {
                 window.alert("Record added");
                 window.location.href = "http://localhost/CoView/webpages/testerMenu.php";
-              }},
+              }
+              if (recordAdded == "Failed"){
+                window.alert("Selected kit stock has finished");
+                window.location.href = "http://localhost/CoView/webpages/testerMenu.php";
+              }
+            },
             error: function(datas){
               alert('form error');
               console.log(this.data);
