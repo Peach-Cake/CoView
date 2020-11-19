@@ -413,3 +413,18 @@ function sort(){
         });
       });
     }
+    function initDB(){
+      $(function () {
+              $.ajax({
+                type: 'POST',
+                url: 'http://localhost/CoView/scripts/initializeDB.php',
+                success: function (tbody) {
+
+                },
+                error: function(){
+                  alert('initDB error');
+                }
+              });
+
+          });
+        }

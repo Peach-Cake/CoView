@@ -51,7 +51,7 @@ if($_SESSION["TestCentreID"]=='0'){
   <main>
       <nav aria-label="breadcrumb" class="navBreadCrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/ManagerMenu.php">Home</a></li>
+          <li class="breadcrumb-item" aria-current="page"><a href="http://localhost/CoView/webpages/ManagerMenu.php">Home</a></li>
           <li class="breadcrumb-item" aria-current="page">Register Tester</li>
         </ol>
       </nav>
@@ -110,7 +110,7 @@ if($_SESSION["TestCentreID"]=='0'){
           <tr>
             <th>Username</th>
             <th>Tester name</th>
-            <th>email</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
