@@ -16,19 +16,12 @@ function login(){
   $(function () {
 
         $('#logInForm').on('submit', function (e) {
-
           e.preventDefault();
-          //var data = $('#logInForm').serialize();
-
           $.ajax({
             type: 'POST',
             url: 'http://localhost/CoView/scripts/login.php',
             data: $('#logInForm').serialize(),
             success: function (userType) {
-              //alert('form was submitted');
-              console.log(this.data);
-              console.log(userType);
-              console.log($.ajax);
               if (userType == "NewManager") {
                 window.location.href = "http://localhost/CoView/webpages/ManageTestCentre.php";
               }
@@ -49,8 +42,6 @@ function login(){
             },
             error: function(datas){
               alert('form error');
-              console.log(this.data);
-              console.log(datas);
             }
           });
 
@@ -69,8 +60,6 @@ function registerTester(){
             url: 'http://localhost/CoView/scripts/RegisterTester.php',
             data: $('#testerForm').serialize(),
             success: function (testerAdded) {
-              console.log(this.data);
-              console.log(testerAdded);
               if (testerAdded == "Added") {
                 window.alert("tester added");
                 $('#close').click();
@@ -97,8 +86,6 @@ function registerTester(){
             },
             error: function(datas){
               alert('form error');
-              console.log(this.data);
-              console.log(datas);
             }
           });
 
@@ -169,7 +156,6 @@ function addStock(){
   $(function () {
         let error = document.getElementsByClassName('errorNotifications')[0];
         $('#tknform').on('submit', function (e) {
-
           e.preventDefault();
           $.ajax({
             type: 'POST',
@@ -230,21 +216,15 @@ function addTestCentre(){
 
 function getReportDetails(){
   $(function () {
-
         $('tbody tr').on('click', function (e) {
           let data = {tid:$(this).find('td:first').text().substring(1)};
           let rep = document.getElementById('tResults');
-          console.log("test");
           $.ajax({
             type: 'POST',
             url: 'http://localhost/CoView/scripts/GetReportDetails.php',
             data: data,
             success: function (results) {
-              console.log(results);
               rep.innerHTML = results;
-              //$('#reports tr').attr('data-toggle')='modal';
-              //$('#reports tr').attr('data-target')='#resultsModal';
-              //openModal(0);
             },
             error: function(){
               alert('form error');
@@ -266,8 +246,6 @@ function reportCreated(){
             url: 'http://localhost/CoView/scripts/insertData.php',
             data: $('#form').serialize(),
             success: function (recordAdded) {
-              console.log(this.data);
-              console.log(recordAdded);
               if (recordAdded == "Added") {
                 window.alert("Record added");
                 window.location.href = "http://localhost/CoView/webpages/testerMenu.php";
@@ -279,8 +257,6 @@ function reportCreated(){
             },
             error: function(datas){
               alert('form error');
-              console.log(this.data);
-              console.log(datas);
             }
           });
 
@@ -291,11 +267,7 @@ function reportCreated(){
 
 function getDetails(){
   $(function () {
-
         $('tbody tr button').on('click', function (e) {
-          //event.stopPropagation();
-          //e.stopPropogation();
-          //event.cancelBubble = true;
           let row = $(this).parent().parent();
           let rowId = row.find('td:first').html();
           let data = {tid:parseInt(rowId.substring(1))};
@@ -306,8 +278,6 @@ function getDetails(){
             url: 'http://localhost/CoView/scripts/getDetails.php',
             data: data,
             success: function (results) {
-              console.log(results);
-              console.log(data);
               details.innerHTML = results;
             },
             error: function(){
@@ -321,7 +291,6 @@ function getDetails(){
 }
 function updateReports(){
   $(function () {
-
         $('#updateForm').on('submit', function (e) {
           e.preventDefault();
           let res = document.getElementById('results').value;
@@ -331,13 +300,11 @@ function updateReports(){
           let data = {
             reportResults: res, resultDate: resultDate};
           let details = document.getElementById('reportResults');
-          console.log("test");
           $.ajax({
             type: 'POST',
             url: 'http://localhost/CoView/scripts/update.php',
             data: data,
             success: function (results) {
-              console.log(results);
               alert('Report has been succesfully updated');
               location.reload();
             },
@@ -354,14 +321,12 @@ function filter(e){
   $(function () {
         //let error = document.getElementsByClassName('errorNotifications')[0];
         $('#filterForm').on('submit', function (e) {
-          console.log($('#filterForm').serialize());
           e.preventDefault();
           $.ajax({
             type: 'POST',
             url: 'http://localhost/CoView/scripts/FilterTable.php',
             data: $('#filterForm').serialize(),
             success: function (tbody) {
-              console.log(tbody);
               document.getElementsByTagName('tbody')[0].innerHTML = tbody;
               getReportDetails();
               getDetails();
@@ -401,7 +366,6 @@ function sort(){
             url: 'http://localhost/CoView/scripts/SortTable.php',
             data: data,
             success: function (tbody) {
-              console.log(tbody);
               document.getElementsByTagName('tbody')[0].innerHTML = tbody;
               getReportDetails();
               getDetails();
