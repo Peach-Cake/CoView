@@ -81,11 +81,11 @@ else if($_SESSION["type"]!="Tester"){
       echo "<table name='reports'class=table style='position: relative;
         background-color: white;
         top: 50px;
-        left: 40px;
+        left: 70px;
         display: block;
         border: 3px solid white;
         text-align: center;
-        width: 71%;
+        width: 73%;
         float: right;
         overflow-y: scroll;
         overflow-x: hidden;
