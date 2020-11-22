@@ -1,9 +1,8 @@
 <?php
 session_start();
 header("Access-Control-Allow-Origin: *");
-$params = array();
-$username = $_POST["email"];
 
+$username = $_POST["email"];
 $conn = new mysqli("localhost", "root", "", "CoViewDB");
 $sql = "SELECT ID, Username, Password, Email, UserType FROM user
 WHERE (Username = '$username' OR Email = '$username');";
