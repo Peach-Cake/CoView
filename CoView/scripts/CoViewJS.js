@@ -196,7 +196,7 @@ function addTestCentre(){
               if(tc == "AddedAdded"){
                 alert('Test Centre now registered to your account.');
                 error.style.display = 'none';
-                window.location.href = 'http://localhost/ManagerMenu.php';
+                window.location.href = 'http://localhost/CoView/webpages/ManageTestCentre.php';
               }
               if(tc == "Exists"){
                 error.innerHTML="Test Centre with that name already exists";
